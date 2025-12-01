@@ -4,22 +4,27 @@ type ButtonProps = {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "transparent" | "beige";
   fullWidth?: boolean;
+  width?: "auto" | "full" | "responsive";
   iconSrc?: string;
   iconAlt?: string;
   onClick?: () => void;
   size?: "sm" | "lg";
   radius?: "full" | "md";
+
+  arrow?: boolean; // NEW → control arrow icon
 };
 
 const Button: React.FC<ButtonProps> = ({
   children,
   variant = "primary",
   fullWidth = false,
+  width,
   iconSrc,
   iconAlt = "icon",
   size = "sm",
   radius = "md",
   onClick,
+  arrow = false, // default false
 }) => {
   const baseClasses =
     "font-inter font-normal text-[16px] flex items-center justify-center gap-2 transition-colors duration-300";
@@ -28,7 +33,12 @@ const Button: React.FC<ButtonProps> = ({
 
   const radiusClasses = radius === "full" ? "rounded-full" : "rounded-[16px]";
 
-  const widthClasses = fullWidth ? "w-full" : "w-auto";
+  const widthClasses =
+    width === "full"
+      ? "w-full"
+      : width === "responsive"
+      ? "w-full md:w-auto"
+      : "w-auto";
 
   let variantClasses = "";
   switch (variant) {
@@ -38,7 +48,7 @@ const Button: React.FC<ButtonProps> = ({
       break;
     case "secondary":
       variantClasses =
-        "bg-[#D1C1A7] text-[#0A3D62] hover:bg-[#D1C1A7] hover:text-[#0A3D62]";
+        "bg-[#D1C1A7] text-[#0A3D62] hover:bg-[#FFFFFF] hover:text-[#0A3D62]";
       break;
     case "transparent":
       variantClasses =
@@ -46,7 +56,7 @@ const Button: React.FC<ButtonProps> = ({
       break;
     case "beige":
       variantClasses =
-        "bg-[#F5EFE7] text-[#0A3D62] hover:bg-[#D1C1A7] hover:text-[#0A3D62]";
+        "bg-[#D1C1A7] text-[#0A3D62] hover:bg-[#0A3D62] hover:text-[#FFFFFF]";
       break;
   }
 
@@ -55,10 +65,27 @@ const Button: React.FC<ButtonProps> = ({
       className={`${baseClasses} ${sizeClasses} ${radiusClasses} ${widthClasses} ${variantClasses}`}
       onClick={onClick}
     >
-      {iconSrc && (
-        <img src={iconSrc} alt={iconAlt} className="w-5 h-5 object-contain" />
-      )}
       {children}
+
+      {/* SVG Arrow Icon */}
+      {arrow && (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="mt-[2px]"
+        >
+          <path d="M5 12h14" />
+          <path d="M13 5l7 7-7 7" />
+        </svg>
+      )}
+
     </button>
   );
 };
