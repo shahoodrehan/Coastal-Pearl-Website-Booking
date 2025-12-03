@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
+import { useRouter } from "next/router";
 
 import Hero from "@/components/home/Hero";
 import Section from "@/components/home/Section"
@@ -9,6 +10,8 @@ import GalleryCard from "@/components/card/homeCard/GalleryCard";
 import SpacesCards from "@/components/card/homeCard/SpacesCards";
 import GuestCards from "@/components/card/homeCard/GuestCards";
 import BottomSection from "@/components/home/BottomSection";
+import { redirect } from "next/dist/server/api-utils";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +47,10 @@ export const cardsData = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const homeGallery = ["/images/g-1.jpg", "/images/g-2.jpg", "/images/g-3.jpg"];
+
+
   return (
     <>
       <Hero
@@ -93,6 +99,7 @@ export default function Home() {
             radius="full"
             width="responsive"
             arrow
+            onClick={() => router.push('/Gallery')}
           >
             View Full Gallery
           </Button>
