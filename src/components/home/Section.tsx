@@ -47,7 +47,7 @@ const Section: React.FC<SectionProps> = ({
 
   return (
     <section
-      className={`w-full flex flex-col items-center text-center px-4 md:px-8 py-24 ${className}`}
+      className={`w-full flex flex-col items-center text-center px-4 py-12 md:px-8 md:py-24 ${className}`}
       style={bgStyle}
     >
       <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full">

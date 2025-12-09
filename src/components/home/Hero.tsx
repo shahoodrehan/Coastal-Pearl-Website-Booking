@@ -17,7 +17,7 @@ function Hero({
 }: HeroProps) {
   return (
     <section
-      className="w-full flex flex-col items-center justify-center text-center bg-cover bg-center"
+      className="w-full flex flex-col pt-12 md:py-0 items-center justify-center text-center bg-cover bg-center"
       style={{
         height: height,
         backgroundImage: `
@@ -33,7 +33,7 @@ function Hero({
         {buttons && (
           <div className="mt-8 flex gap-4 justify-center flex-wrap">
             {buttons.map((btn, index) => (
-              <span key={index}>{btn}</span>
+              <div key={index}>{btn}</div>
             ))}
           </div>
         )}

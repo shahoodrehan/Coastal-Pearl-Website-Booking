@@ -14,13 +14,12 @@ function ResortSpaces() {
       <Hero
         title="Resort Spaces"
         subtitle="Discover our thoughtfully designed spaces across three magnificent floors"
-        
         backgroundImage="/images/about-hero.jpg"
       />
 
       {/* GROUND FLOOR */}
 
-      <section className="w-full bg-[var(--bg-light)] py-20">
+      <section className="w-full bg-[var(--bg-light)] py-12 md:py-20">
         <div className="w-[90%] mx-auto flex flex-col gap-12">
           {/* TOP HEADING + PARAGRAPHS */}
           <div className="w-full lg:w-[70%]">
@@ -91,7 +90,7 @@ function ResortSpaces() {
 
       {/* FIRST FLOOR */}
 
-      <section className="w-full bg-[var(--bg-beige)] py-20">
+      <section className="w-full bg-[var(--bg-beige)] py-12 md:py-20">
         <div className="w-[90%] mx-auto flex flex-col gap-12">
           <div className="w-full lg:w-[70%]">
             <div className="inline-flex bg-(--bg-light) py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">
@@ -146,7 +145,7 @@ function ResortSpaces() {
 
       {/* TOP FLOOR */}
 
-      <section className="w-full bg-[var(--bg-light)] py-20">
+      <section className="w-full bg-[var(--bg-light)] py-12 md:py-20">
         <div className="w-[90%] mx-auto flex flex-col gap-12">
           {/* TOP HEADING + PARAGRAPHS */}
           <div className="w-full lg:w-[70%]">
@@ -170,8 +169,10 @@ function ResortSpaces() {
             </div>
 
             {/* Right — IMAGE GRID */}
-            <div className="w-full lg:w-1/2 relative rounded-2xl overflow-hidden 
-                h-64 md:h-96 lg:h-[500px] p-6">
+            <div
+              className="w-full lg:w-1/2 relative rounded-2xl overflow-hidden 
+                h-64 md:h-96 lg:h-[500px] p-6"
+            >
               {/* Background Image */}
               <Image
                 src="/images/space-3.jpg"

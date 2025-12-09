@@ -81,7 +81,7 @@ export default function Navbar() {
                   className="w-6 h-6 text-white"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="currentColor"
+                  stroke={scrolled ? "#0a3d62" : "currentColor"}
                   strokeWidth="2"
                 >
                   <path
@@ -95,7 +95,7 @@ export default function Navbar() {
                   className="w-6 h-6 text-white"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="currentColor"
+                  stroke={scrolled ? "#0a3d62" : "currentColor"}
                   strokeWidth="2"
                 >
                   <path
@@ -109,7 +109,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        
         <div
           id="mobile-menu"
           className={`
@@ -143,6 +142,5 @@ export default function Navbar() {
         </div>
       </nav>
     </header>
-
   );
 }

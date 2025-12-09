@@ -1,5 +1,4 @@
 function FAQCards() {
-  
   const faqs = [
     {
       question: "How far is the resort from Karachi city?",
@@ -29,22 +28,18 @@ function FAQCards() {
   ];
 
   return (
-    
-      <div className="max-w-4xl mx-auto px-6 flex flex-col gap-6">
-
-        {/* ✅ Mapping the FAQ Array */}
-        {faqs.map((faq, idx) => (
-          <div
-            key={idx}
-            className="bg-(--bg-beige) text-(--text-dark) p-8 rounded-2xl shadow-md"
-          >
-            <h4 className="text-left mb-2">{faq.question}</h4>
-            <p className="text-2 text-left">{faq.answer}</p>
-          </div>
-        ))}
-
-      </div>
-    
+    <div className="max-w-4xl mx-auto px-0 md:px-6 flex flex-col gap-6">
+      {/* ✅ Mapping the FAQ Array */}
+      {faqs.map((faq, idx) => (
+        <div
+          key={idx}
+          className="bg-(--bg-beige) text-(--text-dark) p-8 rounded-2xl shadow-md"
+        >
+          <h4 className="text-left mb-2">{faq.question}</h4>
+          <p className="text-2 text-left">{faq.answer}</p>
+        </div>
+      ))}
+    </div>
   );
 }
 

@@ -19,7 +19,7 @@ function Activities() {
         backgroundImage="/images/about-hero.jpg"
       />
 
-      <section className="w-full flex flex-col items-center text-center bg-(--bg-light) px-4 md:px-8 py-24">
+      <section className="w-full flex flex-col items-center text-center bg-(--bg-light) px-4 md:px-8  py-12 md:py-20">
         <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full ">
           <div className="inline-flex bg-[#AEC6CF33] py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">
             Water Adventures
@@ -39,7 +39,7 @@ function Activities() {
         </div>
       </section>
 
-      <section className="w-full flex flex-col items-center text-center bg-(--bg-beige) px-4 md:px-8 py-24">
+      <section className="w-full flex flex-col items-center text-center bg-(--bg-beige) px-4 md:px-8 py-12 md:py-20">
         <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full ">
           <div className="inline-flex bg-[#AEC6CF33] py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">
             On-Shore Activities
@@ -58,7 +58,7 @@ function Activities() {
         </div>
       </section>
 
-      <section className="w-full bg-[var(--bg-light)] py-20 px-4 md:px-10">
+      <section className="w-full bg-[var(--bg-light)] py-12 md:py-20 px-4 md:px-10">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           {/* LEFT TEXT CONTENT */}
           <div>

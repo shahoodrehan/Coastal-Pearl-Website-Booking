@@ -14,17 +14,16 @@ function Packages() {
       <Hero
         title="Stay Packages"
         subtitle="Choose the perfect package for your beachside escape"
-        
         backgroundImage="/images/g-1.jpg"
       />
 
-      <section className="w-full bg-(--bg-beige) py-20">
+      <section className="w-full bg-(--bg-beige) py-12 md:py-20">
         <div className="w-[90%] mx-auto grid lg:grid-cols-2 gap-6">
           {/* LEFT PACKAGE */}
           <div className="rounded-3xl overflow-hidden shadow-2xl">
             {/* TOP BOX */}
             <div
-              className="p-10 flex flex-col items-left text-left"
+              className="p-6 md:p-10 flex flex-col text-left"
               style={{
                 background: "linear-gradient(180deg, #D1C1A7 0%, #AEC6CF 100%)",
               }}
@@ -33,27 +32,32 @@ function Packages() {
               <Image
                 src="/icons/sun.png"
                 alt="icon"
-                width={60}
-                height={60}
-                className="mb-6"
+                width={40}
+                height={40}
+                className="mb-4 md:mb-6 md:w-[60px] md:h-[60px]"
               />
 
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h3 className="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3">
                 Day Package
               </h3>
-              <p className="text-2 !text-(--text-light) mb-6">10 AM - 6 PM</p>
 
-              <p className="text-5xl text-(--text-light) font-bold ">
+              <p className="text-sm md:text-base text-[var(--text-light)] mb-4 md:mb-6">
+                10 AM - 6 PM
+              </p>
+
+              <p className="text-3xl md:text-5xl text-[var(--text-light)] font-bold">
                 PKR 50,000
               </p>
-              <p className="text-2 !text-(--text-light)">Per booking</p>
+              <p className="text-sm md:text-base text-[var(--text-light)]">
+                Per booking
+              </p>
             </div>
 
             {/* BOTTOM BOX */}
-            <div className="p-10 bg-(--bg-light) flex flex-col gap-4">
-              <h4 className="text-lg font-semibold">Includes:</h4>
+            <div className="p-6 md:p-10 bg-(--bg-light) flex flex-col gap-3 md:gap-4">
+              <h4 className="text-base md:text-lg font-semibold">Includes:</h4>
 
-              <ul className="mb-8 flex flex-col gap-3">
+              <ul className="mb-6 md:mb-8 flex flex-col gap-2 md:gap-3">
                 {[
                   "Access to all lounges",
                   "Private pool usage",
@@ -65,19 +69,18 @@ function Packages() {
                 ].map((item, index) => (
                   <li
                     key={index}
-                    className="flex items-center gap-3 text-[16px] text-[var(--text-dark)]"
+                    className="flex items-center gap-2 md:gap-3 text-sm md:text-[16px] text-[var(--text-dark)]"
                   >
                     {/* Check Icon */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
+                      viewBox="0 0 24 24"
+                      className="w-4 h-4 md:w-5 md:h-5 text-[var(--text-dark)]"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-[var(--text-dark)]"
                     >
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
@@ -94,10 +97,10 @@ function Packages() {
           </div>
 
           {/* RIGHT PACKAGE */}
-          <div className="rounded-2xl overflow-hidden border-[5px] border-[#D1C1A7] shadow-2xl bor">
+          <div className="rounded-3xl overflow-hidden shadow-2xl">
             {/* TOP BOX */}
             <div
-              className="p-10 flex flex-col items-left text-left"
+              className="p-6 flex flex-col items-start text-left"
               style={{
                 background: "linear-gradient(180deg, #0A3D62 0%, #AEC6CF 100%)",
               }}
@@ -106,27 +109,31 @@ function Packages() {
               <Image
                 src="/icons/moon.png"
                 alt="icon"
-                width={60}
-                height={60}
-                className="mb-6"
+                width={40}
+                height={40}
+                className="mb-4"
               />
 
-              <h3 className="text-xl font-semibold text-white mb-3">
+              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
                 Day Package
               </h3>
-              <p className="text-2 !text-(--text-light) mb-6">10 AM - 6 PM</p>
+              <p className="text-sm md:text-2 mb-3 text-[var(--text-light)]">
+                10 AM - 6 PM
+              </p>
 
-              <p className="text-5xl text-(--text-light) font-bold ">
+              <p className="text-2xl md:text-5xl text-[var(--text-light)] font-bold mb-1">
                 PKR 50,000
               </p>
-              <p className="text-2 !text-(--text-light)">Per booking</p>
+              <p className="text-sm md:text-2 text-[var(--text-light)]">
+                Per booking
+              </p>
             </div>
 
             {/* BOTTOM BOX */}
-            <div className="p-10 bg-(--bg-light) text-white flex flex-col gap-4">
-              <h4 className="text-lg font-semibold">Includes:</h4>
+            <div className="p-6 bg-[var(--bg-light)] flex flex-col gap-2 md:gap-4">
+              <h4 className="text-base md:text-lg font-semibold">Includes:</h4>
 
-              <ul className="mb-8 flex flex-col gap-3">
+              <ul className="flex flex-col gap-2 md:gap-3 mb-4">
                 {[
                   "Access to all lounges",
                   "Private pool usage",
@@ -138,19 +145,18 @@ function Packages() {
                 ].map((item, index) => (
                   <li
                     key={index}
-                    className="flex items-center gap-3 text-[16px] text-[var(--text-dark)]"
+                    className="flex items-center gap-2 md:gap-3 text-sm md:text-[16px] text-[var(--text-dark)]"
                   >
                     {/* Check Icon */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
+                      viewBox="0 0 24 24"
+                      className="w-4 h-4 md:w-5 md:h-5 text-[var(--text-dark)]"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="text-[var(--text-dark)]"
                     >
                       <path d="M20 6L9 17l-5-5" />
                     </svg>

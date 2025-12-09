@@ -16,7 +16,7 @@ function Testimonial() {
         backgroundImage="/images/about-hero.jpg"
       />
 
-      <section className="w-full bg-(--bg-light) py-20">
+      <section className="w-full bg-(--bg-light) py-12 md:py-20 px-4 md:px-8">
         <StatsCards />
       </section>
 
@@ -28,7 +28,7 @@ function Testimonial() {
         <CommentCards />
       </Section>
 
-      <section className="w-full bg-(--bg-dark) py-20">
+      <section className="w-full bg-(--bg-dark) py-12 md:py-20">
         <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto px-4">
           {/* Testimonial Icon */}
           <Image
@@ -68,14 +68,10 @@ function Testimonial() {
       </section>
 
       <Section
-      title="Create Your Own Story"
-      subtitle="Join hundreds of satisfied guests who have experienced the magic of The Coastal Pearl"
+        title="Create Your Own Story"
+        subtitle="Join hundreds of satisfied guests who have experienced the magic of The Coastal Pearl"
       >
-        <Button
-        variant="primary"
-        size="lg"
-        radius="full"
-        >
+        <Button variant="primary" size="lg" radius="full" width="full">
           Book your Stay
         </Button>
       </Section>

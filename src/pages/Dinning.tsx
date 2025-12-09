@@ -23,7 +23,7 @@ function Dinning() {
         <DiningCards />
       </Section>
 
-      <section className="w-full bg-[var(--bg-beige)] py-20">
+      <section className="w-full bg-[var(--bg-beige)] py-12 md:py-20">
         <div className="w-[90%] mx-auto flex flex-col gap-12">
           <div className="w-full flex flex-col lg:flex-row gap-14">
             {/* LEFT — LARGE IMAGE */}
@@ -140,7 +140,7 @@ function Dinning() {
         </p>
       </Section>
 
-      <section className="w-full bg-[var(--bg-dark)] py-20 px-4 md:px-10">
+      <section className="w-full bg-[var(--bg-dark)] py-12 md:py-20 px-4 md:px-10">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           {/* LEFT TEXT CONTENT */}
           <div>
@@ -161,7 +161,6 @@ function Dinning() {
             </p>
 
             <div className="grid grid-cols-2 gap-y-4 gap-x-6">
-              
               <div className="flex items-center gap-2">
                 <Image
                   src="/icons/fire.png"
@@ -169,10 +168,11 @@ function Dinning() {
                   width={20}
                   height={20}
                 />
-                <span className="text-base text-(--text-light)">Fresh ingredients</span>
+                <span className="text-base text-(--text-light)">
+                  Fresh ingredients
+                </span>
               </div>
 
-              
               <div className="flex items-center gap-2">
                 <Image
                   src="/icons/fire.png"
@@ -180,10 +180,11 @@ function Dinning() {
                   width={20}
                   height={20}
                 />
-                <span className="text-base text-(--text-light)">Grilling assistance</span>
+                <span className="text-base text-(--text-light)">
+                  Grilling assistance
+                </span>
               </div>
 
-              
               <div className="flex items-center gap-2">
                 <Image
                   src="/icons/fire.png"
@@ -191,10 +192,11 @@ function Dinning() {
                   width={20}
                   height={20}
                 />
-                <span className="text-base text-(--text-light)">Seating setup</span>
+                <span className="text-base text-(--text-light)">
+                  Seating setup
+                </span>
               </div>
 
-              
               <div className="flex items-center gap-2">
                 <Image
                   src="/icons/fire.png"
@@ -202,7 +204,9 @@ function Dinning() {
                   width={20}
                   height={20}
                 />
-                <span className="text-base text-(--text-light)">Beachside location</span>
+                <span className="text-base text-(--text-light)">
+                  Beachside location
+                </span>
               </div>
             </div>
           </div>
@@ -220,11 +224,11 @@ function Dinning() {
       </section>
 
       <Section
-      title="Afternoon Hi-Tea"
-      subtitle="Indulge in a traditional afternoon tea experience with a coastal twist. Enjoy premium teas, fresh pastries, and light refreshments while overlooking the Arabian Sea."
-      bgColor="bg-beige"
+        title="Afternoon Hi-Tea"
+        subtitle="Indulge in a traditional afternoon tea experience with a coastal twist. Enjoy premium teas, fresh pastries, and light refreshments while overlooking the Arabian Sea."
+        bgColor="bg-beige"
       >
-      <TeaCard/>
+        <TeaCard />
       </Section>
     </>
   );

@@ -5,7 +5,7 @@ import Hero from "@/components/home/Hero";
 import Section from "@/components/home/Section";
 import Journey from "@/components/card/aboutCard/Journey";
 import GuideCards from "@/components/card/aboutCard/GuideCards";
-import BottomSection from "@/components/home/BottomSection";
+// import BottomSection from "@/components/home/BottomSection";
 
 function About() {
   return (
@@ -18,59 +18,48 @@ function About() {
 
       {/* Section One */}
 
-      <section
-        className="
-    w-[90%] mx-auto
-    flex flex-col md:flex-row md:w-full
-    items-center
-    py-16 md:py-0 lg:py-16   /* ONLY desktop has padding */
-    gap-16
-  "
-      >
-        {/* IMAGE */}
-        <div className="w-full md:w-1/2 flex justify-center items-center h-[400px] md:h-[600px]">
-          <div className="relative w-full h-full">
-            <Image
-              src="/images/about-s-2.jpg"
-              alt="The Coastal Pearl"
-              fill
-              style={{ objectFit: "cover", borderRadius: "16px" }}
-            />
-          </div>
-        </div>
+      <section className="max-w-7xl mx-auto px-4 md:px-8 py-20">
+  <div className="flex flex-col md:flex-row items-center gap-16">
+    
+    {/* IMAGE */}
+    <div className="w-full md:w-1/2 flex justify-center items-center h-[400px] md:h-[600px]">
+      <div className="relative w-full h-full">
+        <Image
+          src="/images/about-s-2.jpg"
+          alt="The Coastal Pearl"
+          fill
+          style={{ objectFit: "cover", borderRadius: "16px" }}
+        />
+      </div>
+    </div>
 
-        {/* CONTENT */}
-        <div className="w-full md:w-1/2 flex flex-col justify-start">
-          <div className="w-[160px] bg-[#AEC6CF33] py-2 px-4 mb-6 rounded-full flex items-center">
-            Founder's Name
-          </div>
+    {/* CONTENT */}
+    <div className="w-full md:w-1/2 flex flex-col justify-start">
+      <div className="w-[160px] bg-[#AEC6CF33] py-2 px-4 mb-6 rounded-full flex items-center">
+        Founder's Name
+      </div>
 
-          <h2 className="!text-left mb-6">A Dream Realized</h2>
+      <h2 className="!text-left mb-6">A Dream Realized</h2>
 
-          <p className="text-2 mb-6">
-            The Coastal Pearl was born from a vision to create a sanctuary where
-            the sophistication of luxury hospitality meets the untamed beauty of
-            nature.
-          </p>
+      <p className="text-2 mb-6">
+      The Coastal Pearl was born from a vision to create a sanctuary where the sophistication of luxury hospitality meets the untamed beauty of nature. Growing up along the coast of Karachi, I always dreamed of establishing a place that would showcase the stunning potential of Hawksbay.
+      </p>
 
-          <p className="text-2 mb-6">
-            After years of careful planning and design, we opened our doors with
-            one simple promise: to offer every guest an extraordinary
-            experience.
-          </p>
+      <p className="text-2 mb-6">
+       After years of careful planning and design, we opened our doors with one simple promise: to offer every guest an experience that transcends ordinary hospitality. Each element of our resort, from the architectural details to the personalized service, reflects our commitment to excellence.
+      </p>
 
-          <p className="text-2 mb-6">
-            Today, The Coastal Pearl stands as a testament to passion and
-            dedication.
-          </p>
+      <p className="text-2 mb-6">
+        Today, The Coastal Pearl stands as a testament to what can be achieved when passion, vision, and dedication come together. We invite you to experience the magic for yourself.
+      </p>
 
-          <p className="text-2 opacity-100">— Founder & Director</p>
+      <p className="text-2 opacity-100">— Founder & Director</p>
+      <p className="text-2 !text-[var(--text-beige)]">The Coastal Pearl Resort</p>
+    </div>
 
-          <p className="text-2 !text-[var(--text-beige)]">
-            The Coastal Pearl Resort
-          </p>
-        </div>
-      </section>
+  </div>
+</section>
+
 
       <Section
         title="The Coastal Pearl Journey"

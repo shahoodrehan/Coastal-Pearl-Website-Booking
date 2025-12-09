@@ -41,10 +41,10 @@ const BottomSection: React.FC<BottomComponentProps> = ({
 
   return (
     <section
-      className={`w-full flex flex-col items-center text-center px-4 md:px-8 py-24 ${className}`}
+      className={`w-full flex flex-col items-center text-center px-4 md:px-8 py-12 md:py-24 ${className}`}
       style={bgStyle}
     >
-      <div className="mb-16 w-[60%]">
+      <div className="mb-16 w-[100%] md:w-[60%]">
         <h2
           className={`text-3xl md:text-5xl font-bold mb-4 ${titleClassName}`}
           style={{ color: titleColor }}

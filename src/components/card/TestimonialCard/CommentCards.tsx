@@ -68,14 +68,14 @@ const testimonials = [
 
 function CommentCards() {
   return (
-    <div className="flex flex-wrap gap-8 justify-start">
+    <div className="flex flex-wrap gap-6 justify-start">
       {testimonials.map((card, idx) => (
         <div
           key={idx}
           className="
-        w-full 
-        sm:w-[48%] 
-        lg:w-[31%]
+        w-full        /* Mobile: 1 card */
+        sm:w-[48%]    /* Tablet: 2 cards */
+        lg:w-[31%]    /* Desktop: 3 cards */
         bg-white p-6 rounded-xl shadow-md
         flex flex-col gap-4
       "
@@ -103,9 +103,10 @@ function CommentCards() {
 
           {/* Review */}
           <p className="text-2 text-left">{card.review}</p>
-          <div className="flex-row items-end">
+
+          <div className="flex flex-col">
             {/* Underline */}
-            <div className="w-full h-[1px] bg-(--bg-beige) my-3"></div>
+            <div className="w-full h-[1px] bg-[var(--bg-beige)] my-3"></div>
 
             {/* User Info */}
             <div className="flex items-center gap-3">
@@ -117,13 +118,13 @@ function CommentCards() {
                 className="rounded-full object-cover"
               />
               <div>
-                <p className="text-base text-(--text-dark) opacity-80 text-left">
+                <p className="text-base text-[var(--text-dark)] opacity-80 text-left">
                   {card.name}
                 </p>
-                <p className="text-sm text-(--text-dark) opacity-60 text-left">
+                <p className="text-sm text-[var(--text-dark)] opacity-60 text-left">
                   {card.role}
                 </p>
-                <p className="text-[12px] text-(--text-beige) text-left">
+                <p className="text-[12px] text-[var(--text-beige)] text-left">
                   {card.date}
                 </p>
               </div>

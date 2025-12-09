@@ -29,21 +29,21 @@ const MissionVisionSection = () => {
   ];
 
   return (
-    <section className="w-[94%] mx-auto py-16">
+    <section className="w-[94%] mx-auto py-0 md:py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {cards.map((item, index) => (
           <div
             key={index}
-            className="bg-[var(--bg-beige)] p-10 rounded-2xl flex flex-col items-left text-center gap-5  shadow-md hover:shadow-lg transition-shadow duration-300"
+            className="bg-[var(--bg-beige)] md:p-10 p-6 rounded-2xl flex flex-col items-left text-center gap-5  shadow-md hover:shadow-lg transition-shadow duration-300"
           >
             {/* Circle Icon */}
-            <div className="w-[80px] h-[80px] rounded-full bg-[var(--bg-light)] flex items-center justify-center shadow-md hover:shadow-lg">
+            <div className="w-[40px] md:w-[80px] h-[40px] md:h-[80px] rounded-full bg-[var(--bg-light)] flex items-center justify-center shadow-md hover:shadow-lg">
               <Image
                 src={item.icon}
                 alt={item.title}
                 width={40}
                 height={40}
-                className="object-contain"
+                className="object-contain w-[20px] h-[20px] md:w-[40px] md:h-[40px]"
               />
             </div>
 

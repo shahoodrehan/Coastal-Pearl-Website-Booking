@@ -11,23 +11,23 @@ type AvailabilityFormValues = {
   numberOfGuests: number;
 };
 
-const handleAvailability = async (values: AvailabilityFormValues) => {
-  
-  try {
-    const payload = {
-    StartTime: values.startTime,
-    EndTime: values.endTime,
-    NumberOfGuests: values.numberOfGuests,
-  }
-    const response = await api.post(apiEndpoints.CHECK_AVAILABILITY, payload)
-    if(response.success){
-      alert("Available")
-    }
-  } catch (error) {
-    console.error("Availability check failed:", error)
-  }
+// const handleAvailability = async (values: AvailabilityFormValues) => {
 
-}
+//   try {
+//     const payload = {
+//     StartTime: values.startTime,
+//     EndTime: values.endTime,
+//     NumberOfGuests: values.numberOfGuests,
+//   }
+//     const response = await api.post(apiEndpoints.CHECK_AVAILABILITY, payload)
+//     if(response.success){
+//       alert("Available")
+//     }
+//   } catch (error) {
+//     console.error("Availability check failed:", error)
+//   }
+
+// }
 
 export default function AvailabilityCheckForm() {
   const formik = useFormik<AvailabilityFormValues>({
@@ -46,24 +46,27 @@ export default function AvailabilityCheckForm() {
     }),
 
     onSubmit: async (values: AvailabilityFormValues) => {
-       try {
-    const payload = {
-      startTime: values.startTime,
-      endTime: values.endTime,
-      numberOfGuests: values.numberOfGuests,
-    };
+      try {
+        const payload = {
+          startTime: values.startTime,
+          endTime: values.endTime,
+          numberOfGuests: values.numberOfGuests,
+        };
 
-    const response = await api.post(apiEndpoints.CHECK_AVAILABILITY, payload);
-    console.log("API Response:", response);
-    if (response.success) {
-      alert("Slot found!");
-    } else {
-      alert("Slot not found! Suggested alternatives:\n");
-    }
-  } catch (error) {
-    console.error("Availability check failed:", error);
-    alert("Something went wrong!");
-  }
+        const response = await api.post(
+          apiEndpoints.CHECK_AVAILABILITY,
+          payload
+        );
+        console.log("API Response:", response);
+        if (response.success) {
+          alert("Slot found!");
+        } else {
+          alert("Slot not found! Suggested alternatives:\n");
+        }
+      } catch (error) {
+        console.error("Availability check failed:", error);
+        alert("Something went wrong!");
+      }
     },
   });
 
@@ -83,9 +86,7 @@ export default function AvailabilityCheckForm() {
           className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
         />
         {formik.touched.startTime && formik.errors.startTime && (
-          <p className="text-red-500 text-sm mt-1">
-            {formik.errors.startTime}
-          </p>
+          <p className="text-red-500 text-sm mt-1">{formik.errors.startTime}</p>
         )}
       </div>
 

@@ -14,10 +14,11 @@ function Contact() {
         subtitle="We're here to help make your coastal escape unforgettable"
         backgroundImage="/images/about-hero.jpg"
       />
-      <section className="w-full bg-(--bg-light) y-20">
+      <section className="w-full bg-(--bg-light) py-12 md:py-20">
         <ContactCards />
       </section>
-      <section className="w-full bg-(--bg-beige) py-20">
+
+      <section className="w-full bg-(--bg-beige) py-12 md:py-20">
         <div className="w-[90%] mx-auto flex flex-col lg:flex-row gap-12">
           {/* Left — Google Map */}
           <div className="w-full lg:w-1/2 h-80 lg:h-[500px] rounded-2xl overflow-hidden">
@@ -26,7 +27,7 @@ function Contact() {
               width="100%"
               height="100%"
               // style="border:0;"
-              allowfullscreen=""
+              allowFullScreen=""
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
             ></iframe>

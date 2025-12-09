@@ -163,7 +163,7 @@ h5 {
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 32px;
+    font-size: 36px;
     line-height: 40px;
   }
 
@@ -175,5 +175,9 @@ h5 {
     font-size: 24px;
     line-height: 38.4px;
     letter-spacing: -0.64px;
+  }
+  .hero-text {
+    font-size: 20px;
+    margin-bottom: 40px;
   }
 }
