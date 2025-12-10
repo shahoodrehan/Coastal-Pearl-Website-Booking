@@ -34,7 +34,7 @@ function Contact() {
           </div>
 
           {/* Right — Content */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+          <div className="w-full lg:w-1/2 flex flex-col gap-6 justify-between">
             <div className="p-6 rounded-2xl bg-white shadow-md flex flex-col gap-4">
               <h3 className="text-2xl font-semibold">Contact & Social</h3>
               <p className="text-gray-700">

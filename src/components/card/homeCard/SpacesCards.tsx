@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion, Variants } from "framer-motion";
 
 const floors = [
   {
@@ -22,15 +25,44 @@ const floors = [
   },
 ];
 
+// Container variant for stagger effect
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2, // delay between children
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1], // use cubic-bezier array
+    },
+  },
+};
+
 function SpacesCards() {
   return (
-    <div className="grid md:grid-cols-3 gap-6 w-full">
+    <motion.div
+      className="grid md:grid-cols-3 gap-6 w-full"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }} // triggers when 30% of container is in view
+    >
       {floors.map((item, index) => (
-        <div
+        <motion.div
           key={index}
           className="w-full h-[480px] bg-white rounded-2xl shadow-md overflow-hidden flex flex-col"
+          variants={cardVariants}
         >
-          {/* Image Section - Increased Height */}
+          {/* Image Section */}
           <div className="h-[55%] w-full relative">
             <Image
               src={item.src}
@@ -48,32 +80,31 @@ function SpacesCards() {
             </div>
 
             <Link
-          href={item.link}
-          className="text-2 flex items-center gap-2 mt-3"
-        >
-          Learn More
-
-          {/* REPLACE ARROW WITH THIS SVG */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mt-[2px]"
-          >
-            <path d="M5 12h14" />
-            <path d="M13 5l7 7-7 7" />
-          </svg>
-        </Link>
+              href={item.link}
+              className="text-2 flex items-center gap-2 mt-3"
+            >
+              Learn More
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mt-[2px]"
+              >
+                <path d="M5 12h14" />
+                <path d="M13 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
+
 export default SpacesCards;

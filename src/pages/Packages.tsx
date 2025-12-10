@@ -5,10 +5,12 @@ import Hero from "@/components/home/Hero";
 import Button from "@/components/ui/Button";
 import Section from "@/components/home/Section";
 import PackageBottomCard from "@/components/card/Package/PackageBottomCard";
+import { useRouter } from "next/router";
 
 // import Section from "@/components/home/Section";
 
 function Packages() {
+  const router = useRouter();
   return (
     <>
       <Hero
@@ -90,7 +92,12 @@ function Packages() {
                 ))}
               </ul>
 
-              <Button variant="beige" size="sm" radius="full">
+              <Button
+                onClick={() => router.push("/Packages")}
+                variant="beige"
+                size="sm"
+                radius="full"
+              >
                 Book Now
               </Button>
             </div>
@@ -100,7 +107,7 @@ function Packages() {
           <div className="rounded-3xl overflow-hidden shadow-2xl">
             {/* TOP BOX */}
             <div
-              className="p-6 flex flex-col items-start text-left"
+              className="p-6 md:p-10 flex flex-col text-left"
               style={{
                 background: "linear-gradient(180deg, #0A3D62 0%, #AEC6CF 100%)",
               }}
@@ -111,33 +118,34 @@ function Packages() {
                 alt="icon"
                 width={40}
                 height={40}
-                className="mb-4"
+                className="mb-4 md:mb-6 md:w-[60px] md:h-[60px]"
               />
 
-              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">
-                Day Package
+              <h3 className="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3">
+                Night Package
               </h3>
-              <p className="text-sm md:text-2 mb-3 text-[var(--text-light)]">
-                10 AM - 6 PM
+
+              <p className="text-sm md:text-base text-[var(--text-light)] mb-4 md:mb-6">
+                7 PM – 3 AM
               </p>
 
-              <p className="text-2xl md:text-5xl text-[var(--text-light)] font-bold mb-1">
-                PKR 50,000
+              <p className="text-3xl md:text-5xl text-[var(--text-light)] font-bold">
+                PKR 60,000
               </p>
-              <p className="text-sm md:text-2 text-[var(--text-light)]">
+              <p className="text-sm md:text-base text-[var(--text-light)]">
                 Per booking
               </p>
             </div>
 
             {/* BOTTOM BOX */}
-            <div className="p-6 bg-[var(--bg-light)] flex flex-col gap-2 md:gap-4">
+            <div className="p-6 md:p-10 bg-[var(--bg-light)] flex flex-col gap-3 md:gap-4">
               <h4 className="text-base md:text-lg font-semibold">Includes:</h4>
 
-              <ul className="flex flex-col gap-2 md:gap-3 mb-4">
+              <ul className="mb-6 md:mb-8 flex flex-col gap-2 md:gap-3">
                 {[
                   "Access to all lounges",
                   "Private pool usage",
-                  "Complimentary Hi-Tea",
+                  "Complimentary Dinner",
                   "Direct beachfront access",
                   "Pool-side amenities",
                   "Wi-Fi access",
@@ -166,7 +174,12 @@ function Packages() {
                 ))}
               </ul>
 
-              <Button size="sm" radius="full">
+              <Button
+                onClick={() => router.push("/Packages")}
+                size="sm"
+                radius="full"
+                variant="primary"
+              >
                 Book This Package
               </Button>
             </div>

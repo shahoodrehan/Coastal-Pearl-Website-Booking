@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import { useRouter } from "next/router";
+import { motion } from "motion/react";
 
 import Hero from "@/components/home/Hero";
-import Section from "@/components/home/Section"
+import Section from "@/components/home/Section";
 import Button from "@/components/ui/Button";
 import ChooseHome from "@/components/card/homeCard/ChooseHome";
 import GalleryCard from "@/components/card/homeCard/GalleryCard";
@@ -11,7 +12,7 @@ import SpacesCards from "@/components/card/homeCard/SpacesCards";
 import GuestCards from "@/components/card/homeCard/GuestCards";
 import BottomSection from "@/components/home/BottomSection";
 import { redirect } from "next/dist/server/api-utils";
-
+import AvailabilityCheckForm from "@/components/Forms/AvaiblityForm";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,7 +51,6 @@ export default function Home() {
   const router = useRouter();
   const homeGallery = ["/images/g-1.jpg", "/images/g-2.jpg", "/images/g-3.jpg"];
 
-
   return (
     <>
       <Hero
@@ -59,10 +59,18 @@ export default function Home() {
         backgroundImage="/images/home-hero.jpg"
         height="100vh"
         buttons={[
-          <Button variant="primary" size="lg" radius="full" width="responsive" arrow>
+          <Button
+            onClick={() => router.push("/BookingForm")}
+            variant="primary"
+            size="lg"
+            radius="full"
+            width="responsive"
+            arrow
+          >
             Book Now
           </Button>,
           <Button
+            onClick={() => router.push("/Packages")}
             variant="transparent"
             size="lg"
             radius="full"
@@ -71,7 +79,9 @@ export default function Home() {
             View Packages
           </Button>,
         ]}
-      />
+      >
+        <AvailabilityCheckForm />
+      </Hero>
       <Section
         title="Welcome to The Coastal Pearl"
         subtitle="Nestled along the pristine shores of Hawksbay, The Coastal Pearl Resort offers an unparalleled luxury experience where modern elegance meets natural beauty. Our exclusive beachfront property is designed to provide you with the ultimate escape from the everyday."
@@ -99,7 +109,7 @@ export default function Home() {
             radius="full"
             width="responsive"
             arrow
-            onClick={() => router.push('/Gallery')}
+            onClick={() => router.push("/Gallery")}
           >
             View Full Gallery
           </Button>
@@ -122,19 +132,19 @@ export default function Home() {
         <GuestCards />
       </Section>
 
-
       <BottomSection
-      title="Ready to Experience Paradise?"
-      titleColor="var(--text-light)"
-      subtitleColor="var(--text-light)"
-      subtitle="Book your stay at The Coastal Pearl and create memories that last a lifetime"
-      backgroundImage="/images/home-bottom.jpg"
+        title="Ready to Experience Paradise?"
+        titleColor="var(--text-light)"
+        subtitleColor="var(--text-light)"
+        subtitle="Book your stay at The Coastal Pearl and create memories that last a lifetime"
+        backgroundImage="/images/home-bottom.jpg"
       >
         <Button
-        variant="secondary"
-        size="lg"
-        radius="full"
-        arrow
+          onClick={() => router.push("/BookingForm")}
+          variant="secondary"
+          size="lg"
+          radius="full"
+          arrow
         >
           Book Your Stay
         </Button>

@@ -10,8 +10,7 @@ type ButtonProps = {
   onClick?: () => void;
   size?: "sm" | "lg";
   radius?: "full" | "md";
-
-  arrow?: boolean; // NEW → control arrow icon
+  arrow?: boolean;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -85,7 +84,6 @@ const Button: React.FC<ButtonProps> = ({
           <path d="M13 5l7 7-7 7" />
         </svg>
       )}
-
     </button>
   );
 };

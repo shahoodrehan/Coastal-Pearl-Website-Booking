@@ -5,17 +5,18 @@ const FirstFloorCards = () => {
     {
       image: "/icons/lounge (2).png",
       title: "Sea-Facing Bedrooms",
-      description:"Multiple luxury bedrooms with panoramic ocean views",
+      description: "Multiple luxury bedrooms with panoramic ocean views",
     },
     {
       image: "/icons/vip.png",
       title: "Theatre Lounge",
-      description: "Entertainment space with state-of-the-art audio-visual system",
+      description:
+        "Entertainment space with state-of-the-art audio-visual system",
     },
     {
       image: "/icons/kitchen.png",
       title: "Mini Kitchen",
-      description:"Convenient kitchenette for refreshments and light meals",
+      description: "Convenient kitchenette for refreshments and light meals",
     },
     {
       image: "/icons/vip.png",

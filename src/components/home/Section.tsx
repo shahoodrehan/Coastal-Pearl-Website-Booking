@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 type SectionProps = {
   title: string;
   subtitle?: string;
@@ -38,11 +39,12 @@ const Section: React.FC<SectionProps> = ({
         backgroundPosition: "center",
       }
     : {
-        backgroundColor: bgColor === "bg-light"
-    ? "#ffffff"
-    : bgColor === "bg-dark"
-    ? "var(--bg-dark)"
-    : "var(--bg-beige)"
+        backgroundColor:
+          bgColor === "bg-light"
+            ? "#ffffff"
+            : bgColor === "bg-dark"
+            ? "var(--bg-dark)"
+            : "var(--bg-beige)",
       };
 
   return (
@@ -51,20 +53,30 @@ const Section: React.FC<SectionProps> = ({
       style={bgStyle}
     >
       <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full">
-        <h2
+        {/* Animated Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className={`text-3xl md:text-5xl font-bold mb-4 ${titleClassName}`}
           style={{ color: titleColor }}
         >
           {title}
-        </h2>
+        </motion.h2>
 
+        {/* Animated Subtitle */}
         {subtitle && (
-          <p
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className={`text-1 ${subtitleClassName}`}
             style={{ color: subtitleColor }}
           >
             {subtitle}
-          </p>
+          </motion.p>
         )}
       </div>
 
