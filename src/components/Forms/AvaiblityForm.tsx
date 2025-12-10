@@ -4,14 +4,31 @@ import { useFormik } from "formik";
 import { availabilitySchema } from "@/schemas/avaiblityschema";
 import apiEndpoints from "@/constant/apiEndpoint";
 import api from "@/utils/api";
+import { useRouter } from "next/router";
 
 type AvailabilityFormValues = {
   startTime: string;
   endTime: string;
   numberOfGuests: number;
 };
+interface AvailabilityResponse {
+  success: boolean;
+  failed: boolean;
+  error: string;
+  data: {
+    isAvailable: boolean;
+    message: string;
+    alternatives: {
+      floor: number;
+      start: string;
+      end: string;
+    }[];
+  };
+}
 
 export default function AvailabilityCheckForm() {
+  const router = useRouter();
+
   const formik = useFormik<AvailabilityFormValues>({
     initialValues: {
       startTime: "",
@@ -29,12 +46,21 @@ export default function AvailabilityCheckForm() {
           numberOfGuests: values.numberOfGuests,
         };
 
-        const response = await api.post(
+        const response = await api.post<AvailabilityResponse["data"]>(
           apiEndpoints.CHECK_AVAILABILITY,
           payload
         );
+
         console.log("API Response:", response);
         if (response.success) {
+          router.push({
+            pathname: "/BookingForm",
+            query: {
+              isAvailable: response.data?.isAvailable.toString(),
+              message: response.data?.message,
+              alternatives: JSON.stringify(response.data?.alternatives),
+            },
+          });
           alert("Slot found!");
         } else {
           alert("Slot not found! Suggested alternatives:\n");

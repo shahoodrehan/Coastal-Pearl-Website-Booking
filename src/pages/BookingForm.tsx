@@ -2,6 +2,7 @@ import apiEndpoints from "@/constant/apiEndpoint";
 import api from "@/utils/api";
 import { useFormik } from "formik";
 import BookingSchema from "@/schemas/BookingSchema";
+import { useRouter } from "next/router";
 
 const extraFacilitiesList = [
   { extraFacilitiesId: 1, facilityName: "Horse Riding" },
@@ -24,8 +25,18 @@ interface BookingFormValues {
   floorPreference: number;
   extraFacilitiesID: number[];
 }
+interface Alternative {
+  floor: number;
+  start: string;
+  end: string;
+}
 
 const BookingForm = () => {
+  const router = useRouter();
+  const { isAvailable, message, alternatives } = router.query;
+  const parsedAlternatives: Alternative[] = alternatives
+    ? JSON.parse(alternatives as string)
+    : [];
   const formik = useFormik<BookingFormValues>({
     initialValues: {
       userEmail: "",
@@ -34,7 +45,7 @@ const BookingForm = () => {
       startTime: "",
       endTime: "",
       noOfGuests: 0,
-      floorPreference: 0,
+      floorPreference: 1,
       extraFacilitiesID: [],
     },
     validationSchema: BookingSchema,
@@ -66,196 +77,219 @@ const BookingForm = () => {
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="w-full max-w-xl mx-auto bg-white p-6 rounded-xl space-y-4 mt-30"
-      autoComplete="off"
-    >
-      {/* EMAIL */}
-      <div className="flex flex-col">
-        <label className="font-medium">Email Address*</label>
+    <>
+      <div className="p-6">
+        <h1 className="text-xl font-bold">Availability Result</h1>
 
-        <input
-          type="email"
-          name="userEmail"
-          placeholder="Enter your email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.userEmail}
-          className="border rounded-lg p-2"
-        />
+        <p>Status: {isAvailable === "true" ? "Available" : "Not Available"}</p>
+        <p>Message: {message}</p>
 
-        {formik.touched.userEmail && formik.errors.userEmail && (
-          <p className="text-red-500 text-sm">{formik.errors.userEmail}</p>
-        )}
-      </div>
+        <h2 className="mt-4 font-medium">Alternative Options:</h2>
 
-      {/* USERNAME */}
-      <div className="flex flex-col">
-        <label className="font-medium">User Name</label>
-
-        <input
-          type="text"
-          name="userName"
-          placeholder="Your Name"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.userName}
-          className="border rounded-lg p-2"
-        />
-
-        {formik.touched.userName && formik.errors.userName && (
-          <p className="text-red-500 text-sm">{formik.errors.userName}</p>
-        )}
-      </div>
-
-      {/* CONTACT NO */}
-      <div className="flex flex-col">
-        <label className="font-medium">Phone Number*</label>
-
-        <input
-          type="text"
-          name="contactNo"
-          placeholder="+92 300 1234567"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.contactNo}
-          className="border rounded-lg p-2"
-        />
-
-        {formik.touched.contactNo && formik.errors.contactNo && (
-          <p className="text-red-500 text-sm">{formik.errors.contactNo}</p>
-        )}
-      </div>
-
-      {/* START TIME */}
-      <div className="flex flex-col">
-        <label className="font-medium">Start Time</label>
-
-        <input
-          type="datetime-local"
-          name="startTime"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.startTime}
-          className="border rounded-lg p-2"
-        />
-
-        {formik.touched.startTime && formik.errors.startTime && (
-          <p className="text-red-500 text-sm">{formik.errors.startTime}</p>
-        )}
-      </div>
-
-      {/* END TIME */}
-      <div className="flex flex-col">
-        <label className="font-medium">End Time</label>
-
-        <input
-          type="datetime-local"
-          name="endTime"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.endTime}
-          className="border rounded-lg p-2"
-        />
-
-        {formik.touched.endTime && formik.errors.endTime && (
-          <p className="text-red-500 text-sm">{formik.errors.endTime}</p>
-        )}
-      </div>
-
-      {/* NO OF GUESTS */}
-      <div className="flex flex-col">
-        <label className="font-medium">Number of Guests</label>
-
-        <input
-          type="number"
-          name="noOfGuests"
-          placeholder="0"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.noOfGuests}
-          className="border rounded-lg p-2"
-        />
-
-        {formik.touched.noOfGuests && formik.errors.noOfGuests && (
-          <p className="text-red-500 text-sm">{formik.errors.noOfGuests}</p>
-        )}
-      </div>
-
-      {/* FLOOR PREFERENCE */}
-      <div className="flex flex-col">
-        <label className="font-medium">Floor Preference</label>
-
-        <select
-          name="floorPreference"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.floorPreference}
-          className="border rounded-lg p-2"
-        >
-          <option value="1">Ground Floor</option>
-          <option value="2">First Floor</option>
-          <option value="3">Second Floor</option>
-          <option value="4">Complete Resort</option>
-        </select>
-
-        {formik.touched.floorPreference && formik.errors.floorPreference && (
-          <p className="text-red-500 text-sm">
-            {formik.errors.floorPreference}
-          </p>
-        )}
-      </div>
-
-      {/* EXTRA FACILITIES CHECKBOXES */}
-      <div className="flex flex-col">
-        <label className="font-semibold mb-1">Extra Facilities</label>
-
-        <div className="flex flex-col gap-2">
-          {extraFacilitiesList.map((facility) => (
-            <label
-              key={facility.extraFacilitiesId}
-              className="flex items-center gap-2"
-            >
-              <input
-                type="checkbox"
-                value={facility.extraFacilitiesId}
-                checked={formik.values.extraFacilitiesID.includes(
-                  facility.extraFacilitiesId
-                )}
-                onChange={(e) => {
-                  const id = Number(e.target.value);
-                  const selected = formik.values.extraFacilitiesID;
-
-                  formik.setFieldValue(
-                    "extraFacilitiesID",
-                    selected.includes(id)
-                      ? selected.filter((v) => v !== id)
-                      : [...selected, id]
-                  );
-                }}
-                onBlur={formik.handleBlur}
-              />
-              {facility.facilityName}
-            </label>
+        <ul className="mt-2 space-y-2">
+          {parsedAlternatives.map((item, index) => (
+            <li key={index} className="border p-2 rounded">
+              <p>Floor: {item.floor}</p>
+              <p>Start: {item.start}</p>
+              <p>End: {item.end}</p>
+            </li>
           ))}
+        </ul>
+      </div>
+
+      <form
+        onSubmit={formik.handleSubmit}
+        className="w-full max-w-xl mx-auto bg-white p-6 rounded-xl space-y-4 mt-30"
+        autoComplete="off"
+      >
+        {/* EMAIL */}
+        <div className="flex flex-col">
+          <label className="font-medium">Email Address*</label>
+
+          <input
+            type="email"
+            name="userEmail"
+            placeholder="Enter your email"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.userEmail}
+            className="border rounded-lg p-2"
+          />
+
+          {formik.touched.userEmail && formik.errors.userEmail && (
+            <p className="text-red-500 text-sm">{formik.errors.userEmail}</p>
+          )}
         </div>
 
-        {formik.touched.extraFacilitiesID &&
-          formik.errors.extraFacilitiesID && (
+        {/* USERNAME */}
+        <div className="flex flex-col">
+          <label className="font-medium">User Name</label>
+
+          <input
+            type="text"
+            name="userName"
+            placeholder="Your Name"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.userName}
+            className="border rounded-lg p-2"
+          />
+
+          {formik.touched.userName && formik.errors.userName && (
+            <p className="text-red-500 text-sm">{formik.errors.userName}</p>
+          )}
+        </div>
+
+        {/* CONTACT NO */}
+        <div className="flex flex-col">
+          <label className="font-medium">Phone Number*</label>
+
+          <input
+            type="text"
+            name="contactNo"
+            placeholder="+92 300 1234567"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.contactNo}
+            className="border rounded-lg p-2"
+          />
+
+          {formik.touched.contactNo && formik.errors.contactNo && (
+            <p className="text-red-500 text-sm">{formik.errors.contactNo}</p>
+          )}
+        </div>
+
+        {/* START TIME */}
+        <div className="flex flex-col">
+          <label className="font-medium">Start Time</label>
+
+          <input
+            type="datetime-local"
+            name="startTime"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.startTime}
+            className="border rounded-lg p-2"
+          />
+
+          {formik.touched.startTime && formik.errors.startTime && (
+            <p className="text-red-500 text-sm">{formik.errors.startTime}</p>
+          )}
+        </div>
+
+        {/* END TIME */}
+        <div className="flex flex-col">
+          <label className="font-medium">End Time</label>
+
+          <input
+            type="datetime-local"
+            name="endTime"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.endTime}
+            className="border rounded-lg p-2"
+          />
+
+          {formik.touched.endTime && formik.errors.endTime && (
+            <p className="text-red-500 text-sm">{formik.errors.endTime}</p>
+          )}
+        </div>
+
+        {/* NO OF GUESTS */}
+        <div className="flex flex-col">
+          <label className="font-medium">Number of Guests</label>
+
+          <input
+            type="number"
+            name="noOfGuests"
+            placeholder="0"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.noOfGuests}
+            className="border rounded-lg p-2"
+          />
+
+          {formik.touched.noOfGuests && formik.errors.noOfGuests && (
+            <p className="text-red-500 text-sm">{formik.errors.noOfGuests}</p>
+          )}
+        </div>
+
+        {/* FLOOR PREFERENCE */}
+        <div className="flex flex-col">
+          <label className="font-medium">Floor Preference</label>
+
+          <select
+            name="floorPreference"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.floorPreference}
+            className="border rounded-lg p-2"
+          >
+            <option value="1">Ground Floor</option>
+            <option value="2">First Floor</option>
+            <option value="3">Second Floor</option>
+            <option value="4">Complete Resort</option>
+          </select>
+
+          {formik.touched.floorPreference && formik.errors.floorPreference && (
             <p className="text-red-500 text-sm">
-              {formik.errors.extraFacilitiesID}
+              {formik.errors.floorPreference}
             </p>
           )}
-      </div>
+        </div>
 
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold"
-      >
-        Submit Booking
-      </button>
-    </form>
+        {/* EXTRA FACILITIES CHECKBOXES */}
+        <div className="flex flex-col">
+          <label className="font-semibold mb-1">Extra Facilities</label>
+
+          <div className="flex flex-col gap-2">
+            {extraFacilitiesList.map((facility) => (
+              <label
+                key={facility.extraFacilitiesId}
+                className="flex items-center gap-2"
+              >
+                <input
+                  type="checkbox"
+                  name="extraFacilitiesID"
+                  value={facility.extraFacilitiesId}
+                  checked={formik.values.extraFacilitiesID.includes(
+                    facility.extraFacilitiesId
+                  )}
+                  onChange={(e) => {
+                    const id = Number(e.target.value);
+                    const selected = formik.values.extraFacilitiesID;
+
+                    formik.setFieldValue(
+                      "extraFacilitiesID",
+                      selected.includes(id)
+                        ? selected.filter((v) => v !== id)
+                        : [...selected, id]
+                    );
+                  }}
+                  onBlur={formik.handleBlur}
+                />
+
+                {facility.facilityName}
+              </label>
+            ))}
+          </div>
+
+          {formik.touched.extraFacilitiesID &&
+            formik.errors.extraFacilitiesID && (
+              <p className="text-red-500 text-sm">
+                {formik.errors.extraFacilitiesID}
+              </p>
+            )}
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold"
+        >
+          Submit Booking
+        </button>
+      </form>
+    </>
   );
 };
 
