@@ -24,7 +24,7 @@ function Dinning() {
 
       <section className="w-full bg-[var(--bg-beige)] py-12 md:py-20">
         <div className="w-[90%] mx-auto flex flex-col gap-12">
-          <div class="w-full flex flex-col lg:flex-row lg:items-center gap-14">
+          <div className="w-full flex flex-col lg:flex-row lg:items-center gap-14">
             {/* LEFT — LARGE IMAGE */}
             <div
               className="w-full lg:w-1/2 relative rounded-2xl overflow-hidden 

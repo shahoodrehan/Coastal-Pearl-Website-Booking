@@ -49,7 +49,11 @@ export const cardsData = [
 
 export default function Home() {
   const router = useRouter();
-  const homeGallery = ["/images/g-1.jpg", "/images/g-2.jpg", "/images/g-3.jpg"];
+  const homeGallery = [
+    "/images/paradice-1.jpg",
+    "/images/paradice-2.jpg",
+    "/images/paradice-3.jpg",
+  ];
 
   return (
     <>

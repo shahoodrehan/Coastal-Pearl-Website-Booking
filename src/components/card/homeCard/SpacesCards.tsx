@@ -6,19 +6,19 @@ import { motion, Variants } from "framer-motion";
 
 const floors = [
   {
-    src: "/images/space-1.jpg",
+    src: "/images/ground-floor-1.jpg",
     title: "Ground Floor",
     description: "Spacious lounge, private pool, VIP facilities",
     link: "/ground-floor",
   },
   {
-    src: "/images/space-2.jpg",
+    src: "/images/first-floor.jpg",
     title: "First Floor",
     description: "Sea-facing bedrooms, theatre lounge, mini kitchen",
     link: "/first-floor",
   },
   {
-    src: "/images/space-3.jpg",
+    src: "/images/terris.jpg",
     title: "Top Floor Terrace",
     description: "Rooftop terrace with kitchenette, event capacity",
     link: "/top-floor",
