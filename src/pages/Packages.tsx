@@ -50,7 +50,7 @@ function Packages() {
               <p className="text-3xl md:text-5xl text-[var(--text-light)] font-bold">
                 PKR 50,000
               </p>
-              <p className="text-sm md:text-base text-[var(--text-light)]">
+              <p className="text-sm md:text-base text-(--text-light)">
                 Per booking
               </p>
             </div>

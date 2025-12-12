@@ -16,8 +16,7 @@ const GroundFloorCards = () => {
     {
       image: "/icons/kitchen.png",
       title: "Gourmet Kitchen",
-      description:
-        "Fully equipped modern kitchen with premium appliances",
+      description: "Fully equipped modern kitchen with premium appliances",
     },
     {
       image: "/icons/vip.png",

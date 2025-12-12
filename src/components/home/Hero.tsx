@@ -20,7 +20,7 @@ function Hero({
 }: HeroProps) {
   return (
     <section
-      className="w-full flex flex-col pt-10 md:py-0 items-center justify-center text-center bg-cover bg-center"
+      className="w-full flex flex-col pt-10 md:py-0 px-10 items-center justify-center text-center bg-cover bg-center"
       style={{
         height: height,
         backgroundImage: `
@@ -29,7 +29,7 @@ function Hero({
         `,
       }}
     >
-      <div className="w-[90%] md:w-[70%] mx-auto flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center">
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}

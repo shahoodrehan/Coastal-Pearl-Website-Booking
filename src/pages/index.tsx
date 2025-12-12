@@ -50,9 +50,9 @@ export const cardsData = [
 export default function Home() {
   const router = useRouter();
   const homeGallery = [
-    "/images/paradice-1.jpg",
-    "/images/paradice-2.jpg",
-    "/images/paradice-3.jpg",
+    "/images/paradise-1.jpg",
+    "/images/paradise-2.jpg",
+    "/images/paradise-3.jpg",
   ];
 
   return (
@@ -62,27 +62,27 @@ export default function Home() {
         subtitle="Where every stay feels like a memory in the making"
         backgroundImage="/images/home-hero.jpg"
         height="100vh"
-        buttons={[
-          <Button
-            onClick={() => router.push("/BookingForm")}
-            variant="primary"
-            size="lg"
-            radius="full"
-            width="responsive"
-            arrow
-          >
-            Book Now
-          </Button>,
-          <Button
-            onClick={() => router.push("/Packages")}
-            variant="transparent"
-            size="lg"
-            radius="full"
-            width="responsive"
-          >
-            View Packages
-          </Button>,
-        ]}
+        // buttons={[
+        //   <Button
+        //     onClick={() => router.push("/BookingForm")}
+        //     variant="primary"
+        //     size="lg"
+        //     radius="full"
+        //     width="responsive"
+        //     arrow
+        //   >
+        //     Book Now
+        //   </Button>,
+        //   <Button
+        //     onClick={() => router.push("/Packages")}
+        //     variant="transparent"
+        //     size="lg"
+        //     radius="full"
+        //     width="responsive"
+        //   >
+        //     View Packages
+        //   </Button>,
+        // ]}
       >
         <AvailabilityCheckForm />
       </Hero>

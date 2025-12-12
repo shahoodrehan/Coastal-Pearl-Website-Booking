@@ -15,35 +15,35 @@ const Journey: React.FC = () => {
       title: "The Vision",
       description:
         "The concept of The Coastal Pearl was conceived, inspired by the world's finest beach resorts and adapted to showcase the unique beauty of Pakistan's coastline.",
-      image: "/images/space-1.jpg",
+      image: "/images/vision.jpg",
     },
     {
       icon: "2019",
       title: "Design & Planning",
       description:
         "Our team of architects and designers worked tirelessly to create a space that would harmonize luxury with nature, incorporating sustainable practices and local aesthetics.",
-      image: "/images/space-1.jpg",
+      image: "/images/design.jpg",
     },
     {
       icon: "2020",
       title: "Construction Begins",
       description:
         "Breaking ground on our dream, we began building with a commitment to quality and attention to every detail, from foundation to finishing touches.",
-      image: "/images/space-1.jpg",
+      image: "/images/construction.jpg",
     },
     {
       icon: "2021",
       title: "Grand Opening",
       description:
         "The Coastal Pearl opened its doors, welcoming guests to experience a new standard of coastal luxury in Karachi.",
-      image: "/images/space-1.jpg",
+      image: "/images/opening.jpeg",
     },
     {
       icon: "2024",
       title: "Today",
       description:
         "We continue to evolve and enhance our offerings, maintaining our position as the premier beachside resort destination in Hawksbay.",
-      image: "/images/space-1.jpg",
+      image: "/images/today.jpg",
     },
   ];
 

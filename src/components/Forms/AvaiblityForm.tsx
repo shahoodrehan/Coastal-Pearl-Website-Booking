@@ -5,6 +5,7 @@ import { availabilitySchema } from "@/schemas/avaiblityschema";
 import apiEndpoints from "@/constant/apiEndpoint";
 import api from "@/utils/api";
 import { useRouter } from "next/router";
+import { toast } from "sonner";
 
 type AvailabilityFormValues = {
   startTime: string;
@@ -53,6 +54,12 @@ export default function AvailabilityCheckForm() {
 
         console.log("API Response:", response);
         if (response.success) {
+          if (response.data?.isAvailable) {
+            toast.success("Slot available!");
+          } else {
+            toast.warning("Slot not available! Check alternative slots.");
+          }
+
           router.push({
             pathname: "/BookingForm",
             query: {
@@ -61,13 +68,11 @@ export default function AvailabilityCheckForm() {
               alternatives: JSON.stringify(response.data?.alternatives),
             },
           });
-          alert("Slot found!");
         } else {
-          alert("Slot not found! Suggested alternatives:\n");
+          toast.error("Failed to check availability. Please try again.");
         }
       } catch (error) {
-        console.error("Availability check failed:", error);
-        alert("Something went wrong!");
+        toast("Something went wrong!");
       }
     },
   });
@@ -82,7 +87,7 @@ export default function AvailabilityCheckForm() {
     rounded-2xl 
     shadow-[0_8px_32px_rgba(0,0,0,0.2)]
     p-4 sm:p-6 
-    mt-10 mx-auto
+   mx-auto
   "
     >
       <div className="flex flex-col md:flex-row md:items-end gap-4">

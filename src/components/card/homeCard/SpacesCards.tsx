@@ -6,7 +6,7 @@ import { motion, Variants } from "framer-motion";
 
 const floors = [
   {
-    src: "/images/ground-floor-1.jpg",
+    src: "/images/ground-floor.jpg",
     title: "Ground Floor",
     description: "Spacious lounge, private pool, VIP facilities",
     link: "/ground-floor",

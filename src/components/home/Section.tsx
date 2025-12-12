@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 type SectionProps = {
-  title: string;
+  title?: string;
   subtitle?: string;
   children?: React.ReactNode;
   buttons?: React.ReactNode[];

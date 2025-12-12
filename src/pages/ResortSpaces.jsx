@@ -14,7 +14,7 @@ function ResortSpaces() {
       <Hero
         title="Resort Spaces"
         subtitle="Discover our thoughtfully designed spaces across three magnificent floors"
-        backgroundImage="/images/about-hero.jpg"
+        backgroundImage="/images/resort-hero.jpg"
       />
 
       {/* GROUND FLOOR */}
@@ -46,7 +46,7 @@ function ResortSpaces() {
             <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 auto-rows-fr justify-center">
               <div className="rounded-2xl overflow-hidden h-80">
                 <Image
-                  src="/images/space-1.jpg"
+                  src="/images/ground-two.jpg"
                   alt="design"
                   width={300}
                   height={300}
@@ -56,7 +56,7 @@ function ResortSpaces() {
 
               <div className="rounded-2xl overflow-hidden h-80">
                 <Image
-                  src="/images/space-2.jpg"
+                  src="/images/ground-3.jpg"
                   alt="design"
                   width={300}
                   height={300}
@@ -66,7 +66,7 @@ function ResortSpaces() {
 
               <div className="rounded-2xl overflow-hidden h-40">
                 <Image
-                  src="/images/space-3.jpg"
+                  src="/images/ground-1.jpg"
                   alt="design"
                   width={300}
                   height={300}
@@ -76,7 +76,7 @@ function ResortSpaces() {
 
               <div className="rounded-2xl overflow-hidden h-40">
                 <Image
-                  src="/images/g-1.jpg"
+                  src="/images/ground-4.jpg"
                   alt="design"
                   width={300}
                   height={300}
