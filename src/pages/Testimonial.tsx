@@ -13,7 +13,8 @@ function Testimonial() {
       <Hero
         title="Guest Experiences"
         subtitle="Hear what our guests have to say about their stay at The Coastal Pearl"
-        backgroundImage="/images/about-hero.jpg"
+        backgroundImage="/images/opening.jpeg"
+        position=""
       />
 
       <section className="w-full bg-(--bg-light) py-12 md:py-20 px-4 md:px-8">

@@ -11,9 +11,10 @@ function Gallery() {
   return (
     <>
       <Hero
-        title="Guest Experiences"
-        subtitle="Hear what our guests have to say about their stay at The Coastal Pearl"
-        backgroundImage="/images/about-hero.jpg"
+        title="Gallery"
+        subtitle="Explore moments of comfort, elegance, and unforgettable experiences at The Coastal Pearl"
+        backgroundImage="/images/ground-4.jpg"
+        position=""
       />
 
       <GalleryTabs />

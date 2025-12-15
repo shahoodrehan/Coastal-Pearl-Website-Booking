@@ -16,7 +16,8 @@ function Packages() {
       <Hero
         title="Stay Packages"
         subtitle="Choose the perfect package for your beachside escape"
-        backgroundImage="/images/g-1.jpg"
+        backgroundImage="/images/package.hero.jpg"
+        position=""
       />
 
       <section className="w-full bg-(--bg-beige) py-12 md:py-20">

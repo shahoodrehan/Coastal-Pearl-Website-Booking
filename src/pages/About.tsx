@@ -13,7 +13,8 @@ function About() {
       <Hero
         title="Our Story"
         subtitle="A legacy of luxury, hospitality, and coastal elegance"
-        backgroundImage="/images/about-hero.jpg"
+        backgroundImage="/images/paradise-2.jpg"
+        position=""
       />
 
       {/* Section One */}

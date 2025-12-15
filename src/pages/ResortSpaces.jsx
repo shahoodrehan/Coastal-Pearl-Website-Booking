@@ -15,6 +15,7 @@ function ResortSpaces() {
         title="Resort Spaces"
         subtitle="Discover our thoughtfully designed spaces across three magnificent floors"
         backgroundImage="/images/resort-hero.jpg"
+        position=""
       />
 
       {/* GROUND FLOOR */}
@@ -114,7 +115,7 @@ function ResortSpaces() {
             >
               {/* Background Image */}
               <Image
-                src="/images/space-2.jpg"
+                src="/images/first-badroom.jpg"
                 alt="Design"
                 fill
                 style={{ objectFit: "cover" }}
@@ -175,7 +176,7 @@ function ResortSpaces() {
             >
               {/* Background Image */}
               <Image
-                src="/images/space-3.jpg"
+                src="/images/top-terris.jpg"
                 alt="Design"
                 fill
                 style={{ objectFit: "cover" }}

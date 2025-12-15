@@ -10,13 +10,18 @@ import Section from "@/components/home/Section";
 import ActivitiesBottomcards from "@/components/card/ActivitiesCard/ActivitiesBottomcards";
 
 function Activities() {
-  const homeGallery = ["/images/g-1.jpg", "/images/g-2.jpg", "/images/g-3.jpg"];
+  const homeGallery = [
+    "/images/ab-1.jpeg",
+    "/images/ab-4.jpeg",
+    "/images/ab-2.jpeg",
+  ];
   return (
     <>
       <Hero
         title="Activities & Adventures"
         subtitle="Endless excitement both on water and shore"
-        backgroundImage="/images/about-hero.jpg"
+        backgroundImage="/images/ground-1.jpg"
+        position=""
       />
 
       <section className="w-full flex flex-col items-center text-center bg-(--bg-light) px-4 md:px-8  py-12 md:py-20">

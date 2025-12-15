@@ -13,7 +13,8 @@ function Dinning() {
       <Hero
         title="Dining Experience"
         subtitle="Culinary excellence meets coastal charm"
-        backgroundImage="/images/about-hero.jpg"
+        backgroundImage="/images/ab-1.jpeg"
+        position=""
       />
       <Section
         title="Dining Spaces"
@@ -31,7 +32,7 @@ function Dinning() {
              h-64 md:h-96 lg:h-[600px] p-6"
             >
               <Image
-                src="/images/space-2.jpg"
+                src="/images/luxury-dinning.jpeg"
                 alt="Design"
                 fill
                 style={{ objectFit: "cover" }}
@@ -40,10 +41,10 @@ function Dinning() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl"></div>
               <div className="absolute bottom-0 left-0 w-full p-6">
                 <h3 className="text-white text-2xl font-semibold mb-2">
-                  Luxury Bedrooms
+                  Luxury Dinning
                 </h3>
                 <p className="!text-[var(--text-light)] text-2 opacity-90">
-                  Wake up to breathtaking ocean views
+                  Wake up to breathtaking Luxury views
                 </p>
               </div>
             </div>
@@ -53,7 +54,7 @@ function Dinning() {
               {/* Top Box: Image with text */}
               <div className="relative w-full h-[288px] rounded-2xl overflow-hidden">
                 <Image
-                  src="/images/space-3.jpg"
+                  src="/images/top-terris.jpg"
                   alt="Top Room"
                   fill
                   style={{ objectFit: "cover" }}

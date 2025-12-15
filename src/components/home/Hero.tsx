@@ -8,6 +8,7 @@ interface HeroProps {
   height?: string;
   buttons?: ReactNode[];
   children?: ReactNode; // <-- add children prop
+  position: string;
 }
 
 function Hero({
@@ -16,6 +17,7 @@ function Hero({
   backgroundImage,
   height = "70vh",
   buttons,
+  position,
   children, // <-- destructure children
 }: HeroProps) {
   return (
@@ -27,6 +29,9 @@ function Hero({
           linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%),
           url(${backgroundImage})
         `,
+        backgroundPosition: position, // move image DOWN
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="flex flex-col justify-center items-center">

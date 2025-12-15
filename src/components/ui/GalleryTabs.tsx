@@ -19,43 +19,157 @@ const galleryImages = [
     description: "Experience premium comfort with elegant interior décor.",
   },
   {
-    src: "/images/space-2.jpg",
+    src: "/images/about collage-3.jpg",
     category: "Interior",
     title: "Modern Lounge Area",
     description: "Spacious lounge designed for relaxation and gatherings.",
   },
   {
-    src: "/images/space-1.jpg",
-    category: "Exterior",
+    src: "/images/ab-1.jpeg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/ground-4.jpg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/ground-floor.jpg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/first-floor-expericne.jpg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/ground-3.jpg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/interior-1.jpg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/interior-2.jpeg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/interior.jpg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/interior (2).jpg",
+    category: "Interior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
+  },
+  {
+    src: "/images/exterior.jpg",
+    category: "Terrace",
     title: "Beachfront Exterior",
     description: "Enjoy stunning views with direct access to the beach.",
   },
   {
-    src: "/images/born-fire.jpg",
+    src: "/images/ab-3.jpeg",
     category: "Exterior",
     title: "Bonfire Night",
     description: "Cozy bonfire setup for memorable outdoor evenings.",
   },
   {
-    src: "/images/space-3.jpg",
+    src: "/images/event-hero.jpeg",
+    category: "Exterior",
+    title: "Bonfire Night",
+    description: "Cozy bonfire setup for memorable outdoor evenings.",
+  },
+  {
+    src: "/images/ground-1.jpg",
+    category: "Exterior",
+    title: "Bonfire Night",
+    description: "Cozy bonfire setup for memorable outdoor evenings.",
+  },
+  {
+    src: "/images/home-bottom.jpg",
+    category: "Exterior",
+    title: "Bonfire Night",
+    description: "Cozy bonfire setup for memorable outdoor evenings.",
+  },
+  {
+    src: "/images/about-collage.jpg",
+    category: "Exterior",
+    title: "Bonfire Night",
+    description: "Cozy bonfire setup for memorable outdoor evenings.",
+  },
+  {
+    src: "/images/exterior-3.jpg",
+    category: "Exterior",
+    title: "Bonfire Night",
+    description: "Cozy bonfire setup for memorable outdoor evenings.",
+  },
+  {
+    src: "/images/beaxh-front.jpeg",
     category: "Pool",
     title: "Private Pool",
     description: "Relax in a serene private pool with luxury amenities.",
   },
   {
-    src: "/images/terrace-1.jpg",
+    src: "/images/top-terris.jpg",
     category: "Terrace",
     title: "Open Terrace View",
     description: "A peaceful terrace with breathtaking sunset views.",
   },
   {
-    src: "/images/events-1.jpg",
+    src: "/images/top-floor-terrace.jpg",
+    category: "Terrace",
+    title: "Open Terrace View",
+    description: "A peaceful terrace with breathtaking sunset views.",
+  },
+  {
+    src: "/images/ab-3.jpeg",
+    category: "Terrace",
+    title: "Open Terrace View",
+    description: "A peaceful terrace with breathtaking sunset views.",
+  },
+  {
+    src: "/images/opening.jpeg",
     category: "Events",
     title: "Event Venue",
     description: "A spacious area perfect for gatherings and celebrations.",
   },
   {
-    src: "/images/dining-1.jpg",
+    src: "/images/dinning-area.jpeg",
+    category: "Dining",
+    title: "Fine Dining",
+    description: "Enjoy gourmet meals in an elegant dining space.",
+  },
+  {
+    src: "/images/luxury-dinning-2.jpeg",
+    category: "Dining",
+    title: "Fine Dining",
+    description: "Enjoy gourmet meals in an elegant dining space.",
+  },
+  {
+    src: "/images/luxury-dinning.jpeg",
+    category: "Dining",
+    title: "Fine Dining",
+    description: "Enjoy gourmet meals in an elegant dining space.",
+  },
+  {
+    src: "/images/interior-1.jpg",
     category: "Dining",
     title: "Fine Dining",
     description: "Enjoy gourmet meals in an elegant dining space.",
@@ -73,38 +187,71 @@ export default function GalleryPage() {
   return (
     <section className="w-full bg-[var(--bg-light)]">
       {/* Tabs */}
-      <div className="flex flex-wrap justify-center gap-4 py-16 mb-8 shadow-md">
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            className={`px-4 py-2 rounded-full transition-all duration-300 
-              ${
-                selectedTab === tab
-                  ? "bg-[var(--bg-dark)] text-white"
-                  : "bg-(--bg-beige) text-[var(--text-dark)] shadow-sm"
-              }`}
-            onClick={() => setSelectedTab(tab)}
-          >
-            {tab}
-          </button>
-        ))}
+      <div className="w-full overflow-x-auto scrollbar-hide">
+        <div
+          className="
+      flex flex-nowrap gap-4 py-6 px-4 shadow-md
+      justify-start
+      lg:justify-center
+      md:justify-center
+      sm:justify-start
+    "
+        >
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              className={`whitespace-nowrap px-4 py-2 rounded-full transition-all duration-300 flex-shrink-0
+          ${
+            selectedTab === tab
+              ? "bg-[var(--bg-dark)] text-white"
+              : "bg-[var(--bg-beige)] text-[var(--text-dark)] shadow-sm"
+          }`}
+              onClick={() => setSelectedTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Images Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-16 md:px-16 bg-(--bg-beige)">
-        {filteredImages.map((img, idx) => (
-          <div
-            key={idx}
-            className="relative w-full h-64 rounded-xl overflow-hidden shadow-md"
-          >
-            <Image
-              src={img.src}
-              alt={img.category}
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-300"
-            />
+      <div className="py-16 bg-[var(--bg-beige)]">
+        {/* MOBILE + TABLET → SLIDER */}
+        <div className="block lg:hidden w-full overflow-x-auto scrollbar-hide">
+          <div className="flex gap-6 px-4 md:px-16">
+            {filteredImages.map((img, idx) => (
+              <div
+                key={idx}
+                className="relative min-w-[260px] sm:min-w-[300px]
+                     h-64 rounded-xl overflow-hidden shadow-md flex-shrink-0"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.category}
+                  fill
+                  className="object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* DESKTOP → GRID */}
+        <div className="hidden lg:grid grid-cols-4 gap-6 px-16">
+          {filteredImages.map((img, idx) => (
+            <div
+              key={idx}
+              className="relative w-full h-64 rounded-xl overflow-hidden shadow-md"
+            >
+              <Image
+                src={img.src}
+                alt={img.category}
+                fill
+                className="object-cover transition-transform duration-300 hover:scale-105"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

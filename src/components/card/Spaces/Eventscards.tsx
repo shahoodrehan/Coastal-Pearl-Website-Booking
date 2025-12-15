@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const eventscards = [
   {
-    src: "/images/space-3.jpg",
+    src: "/images/terris.jpg",
     title: "Rooftop Terrace",
     guest: "50 guests",
     point1: "360° ocean views",
@@ -11,7 +11,7 @@ const eventscards = [
     point3: "Open-air setting",
   },
   {
-    src: "/images/space-2.jpg",
+    src: "/images/beaxh-front.jpeg",
     title: "Beach Front",
     guest: "100+ guests",
     point1: "Direct beach access",
@@ -19,10 +19,10 @@ const eventscards = [
     point3: "Natural ambiance",
   },
   {
-    src: "/images/space-1.jpg",
-    title: "Poolside Area",
+    src: "/images/dinning-area.jpeg",
+    title: "Dinning Area",
     guest: "40 guests",
-    point1: "Infinity pool backdrop",
+    point1: "Infinity Dinning backdrop",
     point2: "Luxury setting",
     point3: "Day/night events",
   },

@@ -84,9 +84,10 @@ const BookingForm = () => {
         title="Plan Your Visit"
         subtitle="View available timings and book"
         backgroundImage="/images/home-hero.jpg"
+        position=""
       ></Hero>
-      <Section title="Availability Result" bgColor="bg-beige">
-        {isAvailable !== undefined && (
+      {isAvailable !== undefined && (
+        <Section title="Availability Result" bgColor="bg-beige">
           <div
             className="
       w-full mb-10 p-8
@@ -222,9 +223,9 @@ const BookingForm = () => {
               </div>
             )}
           </div>
-        )}
-      </Section>
-      <Section>
+        </Section>
+      )}
+      <div className="py-10">
         <div className="w-full max-w-xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* HEADING SECTION */}
           <div
@@ -443,7 +444,7 @@ const BookingForm = () => {
             </div>
           </form>
         </div>
-      </Section>
+      </div>
     </>
   );
 };
