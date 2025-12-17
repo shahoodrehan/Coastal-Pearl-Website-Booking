@@ -24,3 +24,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default Dashboard;
+
+Dashboard.getLayout = (page: React.ReactNode) => page;

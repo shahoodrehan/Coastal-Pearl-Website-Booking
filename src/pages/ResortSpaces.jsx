@@ -39,50 +39,54 @@ function ResortSpaces() {
           {/* BOTTOM TWO COLUMNS */}
           <div className="w-full flex flex-col lg:flex-row gap-14">
             {/* LEFT — CARD LIST */}
-            <div className="w-full lg:w-1/2 flex flex-col gap-6">
+            <div className="w-full lg:w-1/2 flex flex-col">
               <GroundFloorCards />
             </div>
 
-            {/* RIGHT — IMAGE GRID */}
-            <div className="w-full lg:w-1/2 grid grid-cols-2 gap-4 auto-rows-fr justify-center">
-              <div className="rounded-2xl overflow-hidden h-80">
-                <Image
-                  src="/images/ground-two.jpg"
-                  alt="design"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
+            {/* RIGHT — IMAGE FLEX */}
+            <div className="w-full lg:w-1/2 flex flex-col gap-4">
+              {/* Top Row */}
+              <div className="flex gap-4">
+                <div className="flex-1 h-[256px] lg:h-[320px] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/ground-two.jpg"
+                    alt="design"
+                    width={300}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex-1 h-[256px] lg:h-[320px] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/ground-3.jpg"
+                    alt="design"
+                    width={300}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
 
-              <div className="rounded-2xl overflow-hidden h-80">
-                <Image
-                  src="/images/ground-3.jpg"
-                  alt="design"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="rounded-2xl overflow-hidden h-40">
-                <Image
-                  src="/images/ground-1.jpg"
-                  alt="design"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="rounded-2xl overflow-hidden h-40">
-                <Image
-                  src="/images/ground-4.jpg"
-                  alt="design"
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-cover"
-                />
+              {/* Bottom Row */}
+              <div className="flex gap-4">
+                <div className="flex-1 h-[160px] lg:h-[192px] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/ground-1.jpg"
+                    alt="design"
+                    width={300}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {/* <div className="flex-1 h-[160px] lg:h-[192px] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/images/ground-4.jpg"
+                    alt="design"
+                    width={300}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </div> */}
               </div>
             </div>
           </div>
@@ -111,7 +115,7 @@ function ResortSpaces() {
             {/* LEFT — IMAGE GRID */}
             <div
               className="w-full lg:w-1/2 relative rounded-2xl overflow-hidden 
-                h-64 md:h-96 lg:h-[500px] p-6"
+             h-64 md:h-96 lg:h-[566px] p-6"
             >
               {/* Background Image */}
               <Image
@@ -172,7 +176,7 @@ function ResortSpaces() {
             {/* Right — IMAGE GRID */}
             <div
               className="w-full lg:w-1/2 relative rounded-2xl overflow-hidden 
-                h-64 md:h-96 lg:h-[500px] p-6"
+                h-64 md:h-96 lg:h-[536px] p-6"
             >
               {/* Background Image */}
               <Image

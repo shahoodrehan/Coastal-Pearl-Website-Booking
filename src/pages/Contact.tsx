@@ -12,7 +12,7 @@ function Contact() {
       <Hero
         title="Get In Touch"
         subtitle="We're here to help make your coastal escape unforgettable"
-        backgroundImage="/images/about-hero.jpg"
+        backgroundImage="/images/beaxh-front.jpeg"
         position=""
       />
       <section className="w-full bg-(--bg-light) py-12 md:py-20">

@@ -34,10 +34,14 @@ const MissionVisionSection = () => {
         {cards.map((item, index) => (
           <div
             key={index}
-            className="bg-[var(--bg-beige)] md:p-10 p-6 rounded-2xl flex flex-col items-left text-center gap-5  shadow-md hover:shadow-lg transition-shadow duration-300"
+            className="bg-[var(--bg-beige)] md:p-10 p-6 rounded-2xl flex flex-col items-left text-center gap-5
+                   shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300"
           >
             {/* Circle Icon */}
-            <div className="w-[40px] md:w-[80px] h-[40px] md:h-[80px] rounded-full bg-[var(--bg-light)] flex items-center justify-center shadow-md hover:shadow-lg">
+            <div
+              className="w-[40px] md:w-[80px] h-[40px] md:h-[80px] rounded-full bg-[var(--bg-light)] flex items-center justify-center
+                        shadow-md hover:shadow-lg transition-shadow duration-300"
+            >
               <Image
                 src={item.icon}
                 alt={item.title}
@@ -48,10 +52,10 @@ const MissionVisionSection = () => {
             </div>
 
             {/* Title */}
-            <h3 className=" text-left">{item.title}</h3>
+            <h3 className="text-left">{item.title}</h3>
 
             {/* Description */}
-            <p className="text-2 !text-left  opacity-80">{item.description}</p>
+            <p className="text-2 !text-left opacity-80">{item.description}</p>
           </div>
         ))}
       </div>

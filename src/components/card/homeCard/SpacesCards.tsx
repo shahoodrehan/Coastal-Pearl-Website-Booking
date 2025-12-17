@@ -49,27 +49,26 @@ const cardVariants: Variants = {
 
 function SpacesCards() {
   return (
-    <motion.div
-      className="grid md:grid-cols-3 gap-6 w-full"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }} // triggers when 30% of container is in view
-    >
+    <motion.div className="grid md:grid-cols-3 gap-6 w-full">
       {floors.map((item, index) => (
         <motion.div
           key={index}
-          className="w-full h-[480px] bg-white rounded-2xl shadow-md overflow-hidden flex flex-col"
-          variants={cardVariants}
+          className="w-full h-[480px] bg-white rounded-2xl overflow-hidden flex flex-col shadow-md transition-shadow duration-300 hover:shadow-xl"
         >
           {/* Image Section */}
-          <div className="h-[55%] w-full relative">
-            <Image
-              src={item.src}
-              alt={item.title}
-              fill
-              className="object-cover"
-            />
+          <div className="h-[55%] w-full relative overflow-hidden">
+            <motion.div
+              className="h-full w-full"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Image
+                src={item.src}
+                alt={item.title}
+                fill
+                className="object-cover"
+              />
+            </motion.div>
           </div>
 
           {/* Content Section */}
@@ -81,7 +80,7 @@ function SpacesCards() {
 
             <Link
               href={item.link}
-              className="text-2 flex items-center gap-2 mt-3"
+              className="group text-lg opacity-80 flex items-center gap-2 mt-3 text-[var(--text-dark)] hover:text-[var(--text-beige)] transition-colors duration-300"
             >
               Learn More
               <svg
@@ -94,7 +93,7 @@ function SpacesCards() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="mt-[2px]"
+                className="mt-[2px] transition-colors duration-300 group-hover:stroke-[var(--text-beige)]"
               >
                 <path d="M5 12h14" />
                 <path d="M13 5l7 7-7 7" />

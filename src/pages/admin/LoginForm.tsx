@@ -94,3 +94,5 @@ export default function LoginForm() {
     </div>
   );
 }
+
+LoginForm.getLayout = (page: React.ReactNode) => page;

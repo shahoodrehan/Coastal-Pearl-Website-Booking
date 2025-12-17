@@ -62,7 +62,7 @@ export default function Home() {
         subtitle="Where every stay feels like a memory in the making"
         backgroundImage="/images/home-hero.jpg"
         height="100vh"
-        position="center 0px"
+        position="center"
         // buttons={[
         //   <Button
         //     onClick={() => router.push("/BookingForm")}

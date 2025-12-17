@@ -150,7 +150,7 @@ export default function Footer() {
         {/* Column 1 */}
         <div>
           <Image
-            src="/images/logo.png"
+            src="/images/Logo.png"
             alt="logo"
             width={173}
             height={64}
@@ -171,8 +171,8 @@ export default function Footer() {
                 <Image
                   src={`/icons/${icon}.png`}
                   alt={icon}
-                  width={icon === "facebook" ? 12 : 18}
-                  height={icon === "facebook" ? 12 : 18}
+                  width={icon === "facebook" ? 18 : 18}
+                  height={icon === "facebook" ? 18 : 18}
                 />
               </div>
             ))}

@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { removeAdminAuth } from "@/utils/auth";
+import { Menu } from "lucide-react";
+import Image from "next/image";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const [isOpen, setIsOpen] = useState(true); // sidebar open/close
+
   const handleLogout = () => {
     removeAdminAuth();
     window.location.href = "/";
@@ -9,29 +14,58 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen flex bg-[var(--bg-beige)] overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-64 bg-[var(--bg-dark)] text-[var(--text-light)] p-6 flex flex-col justify-between">
+      <aside
+        className={`bg-[var(--bg-dark)] text-[var(--text-light)] flex flex-col justify-between transition-all duration-300 ${
+          isOpen ? "w-64 p-6" : "w-16 p-2"
+        }`}
+      >
         <div>
-          <h2 className="text-2xl font-semibold mb-8">Admin Panel</h2>
+          {/* Header: Logo + Toggle */}
+          <div className="flex items-center justify-between mb-6">
+            {isOpen && (
+              <div className="flex-shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt="Logo"
+                  width={100}
+                  height={50}
+                  className="object-contain"
+                />
+              </div>
+            )}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-[var(--text-beige)] hover:text-white transition"
+            >
+              <Menu size={24} />
+            </button>
+          </div>
 
-          <nav className="flex flex-col gap-4">
+          {/* Navigation */}
+          <nav className="flex flex-col gap-3">
             <a
               href="/admin/dashboard"
-              className="hover:text-[var(--text-beige)] transition"
+              className={`mt-8 w-full py-2 rounded-lg text-center font-semibold transition ${
+                isOpen
+                  ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
+                  : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
+              }`}
             >
-              Dashboard
+              {isOpen ? "Show Bookings" : "📄"}
             </a>
-            {/* <a href="#" className="hover:text-[var(--text-beige)] transition">
-              Bookings
-            </a> */}
           </nav>
         </div>
 
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className="mt-8 w-full py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+          className={`mt-8 w-full py-2 rounded-lg font-semibold transition ${
+            isOpen
+              ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
+              : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
+          }`}
         >
-          Logout
+          {isOpen ? "Logout" : "🚪"}
         </button>
       </aside>
 

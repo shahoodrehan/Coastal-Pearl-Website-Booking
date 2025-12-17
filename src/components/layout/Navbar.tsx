@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Button from "../ui/Button";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -19,7 +21,7 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "About", href: "/About" },
     { name: "Resort Spaces", href: "/ResortSpaces" },
-    { name: "Packages", href: "/Packages" },
+    // { name: "Packages", href: "/Packages" },
     { name: "Contact", href: "/Contact" },
   ];
 
@@ -40,10 +42,10 @@ export default function Navbar() {
           <div className="flex-shrink-0">
             <Link href="/">
               <Image
-                src="/images/Link.png"
+                src="/images/Logo.png"
                 alt="Logo"
-                width={129}
-                height={48}
+                width={90}
+                height={28}
                 priority
               />
             </Link>
@@ -54,17 +56,33 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm transition-colors duration-300
-    ${scrolled ? "text-[#0A3D62]" : "text-white"}
+                className={`relative text-sm font-medium transition-all duration-300
+    ${
+      scrolled
+        ? "text-[#0A3D62] hover:text-[var(--text-beige)]"
+        : "text-white hover:text-[var(--text-beige)]"
+    }
+    ${router.pathname === link.href ? "font-semibold" : ""}
   `}
               >
                 {link.name}
+
+                {/* underline */}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-current transition-all duration-300
+      ${router.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"}
+    `}
+                />
               </Link>
             ))}
           </div>
 
           <div className="hidden lg:block">
-            <Button variant="primary" radius="full">
+            <Button
+              variant="primary"
+              radius="full"
+              onClick={() => router.push("/BookingForm")}
+            >
               Book Now
             </Button>
           </div>

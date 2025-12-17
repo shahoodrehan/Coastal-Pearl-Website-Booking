@@ -77,51 +77,54 @@ export default function AvailabilityCheckForm() {
     >
       {/* Start DateTime */}
       <div>
-        <label className="block text-[#0A3D62] mb-2">Start Date & Time *</label>
+        <label className="block text-[#0A3D62] mb-2">
+          Start Date & Time <span className="text-red-500">*</span>
+        </label>
         <input
-          type="datetime-local"
           name="startTime"
           value={formik.values.startTime}
           onChange={formik.handleChange}
           className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
         />
-        {formik.touched.startTime && formik.errors.startTime && (
-          <p className="text-red-500 text-sm mt-1">{formik.errors.startTime}</p>
-        )}
       </div>
 
       {/* End DateTime */}
       <div>
-        <label className="block text-[#0A3D62] mb-2">End Date & Time *</label>
+        <label className="block text-[#0A3D62] mb-2">
+          End Date & Time <span className="text-red-500">*</span>
+        </label>
         <input
-          type="datetime-local"
           name="endTime"
           value={formik.values.endTime}
           onChange={formik.handleChange}
           className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
         />
-        {formik.touched.endTime && formik.errors.endTime && (
-          <p className="text-red-500 text-sm mt-1">{formik.errors.endTime}</p>
-        )}
       </div>
 
       {/* Number of Guests */}
       <div>
-        <label className="block text-[#0A3D62] mb-2">Number of Guests *</label>
+        <label className="block text-[#0A3D62] mb-2">
+          Number of Guests <span className="text-red-500">*</span>
+        </label>
         <input
-          type="number"
-          min={1}
           name="numberOfGuests"
+          placeholder="Enter number of guests"
           value={formik.values.numberOfGuests}
           onChange={formik.handleChange}
           className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
         />
-        {formik.touched.numberOfGuests && formik.errors.numberOfGuests && (
-          <p className="text-red-500 text-sm mt-1">
-            {formik.errors.numberOfGuests}
-          </p>
-        )}
       </div>
+
+      {/* FIXED ERROR AREA (no layout shift) */}
+      {Object.keys(formik.errors).length > 0 && (
+        <div className="rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-600">
+          <ul className="list-disc pl-5 space-y-1">
+            {Object.values(formik.errors).map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Submit Button */}
       <button

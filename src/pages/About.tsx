@@ -88,74 +88,50 @@ function About() {
       </Section>
 
       <section className="w-full bg-[var(--bg-dark)] py-20 px-4 md:px-10">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-start">
           {/* LEFT TEXT CONTENT */}
-          <div>
+          <div className="flex-1">
             <h2 className="text-3xl md:text-4xl font-bold !text-left !text-[var(--text-light)] mb-6">
-              Architectural & Design Philosophy
+              Spaces Design Wedith Purpose
             </h2>
 
             <p className="text-2 !text-[var(--text-light)] mb-4">
-              Our architectural approach celebrates the seamless integration of
-              modern luxury with coastal aesthetics. Every space is designed to
-              maximize natural light, ocean views, and the gentle sea breeze.
+              Private stay and family getways , Coporate offsite and curated
+              events , Beachside, dinner and cabana setups, Photoshoots,
+              creative projects, and celebrations
             </p>
 
             <p className="text-2 !text-[var(--text-light)] mb-4">
-              The use of natural materials, soft color palettes, and open
-              layouts creates an atmosphere of tranquility and sophistication.
-              Large windows and terraces blur the boundaries between indoor and
-              outdoor living.
+              we don't believe in one-size-fits-all hospitality. Every guest
+              arrives with a different reason, and we adapt accordingly.If you
+              want quite we protect it, If you want to celebrate, we help you do
+              it right.
             </p>
 
             <p className="text-2 !text-[var(--text-light)]">
-              From the grand entrance to the intimate bedroom spaces, each area
-              tells a story of thoughtful design and attention to detail,
-              ensuring that your experience is nothing short of extraordinary.
+              We see the beauty is rawness, potencial in the silence, and pride
+              in offering a space that reflects a positive images's of Karachi
+              beaches. The Costal Pride Resort is our Contribution to reshaping
+              the city's costal side
             </p>
           </div>
 
-          {/* RIGHT IMAGES GRID */}
-          <div className="grid grid-cols-2 gap-4 justify-center">
-            <div className="rounded-2xl overflow-hidden h-[192px]">
-              <Image
-                src="/images/ab-1.jpeg"
-                alt=""
-                width={264}
-                height={192}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="rounded-2xl overflow-hidden h-[192px]">
-              <Image
-                src="/images/ab-2.jpeg"
-                alt=""
-                width={264}
-                height={192}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="rounded-2xl overflow-hidden h-[192px]">
-              <Image
-                src="/images/ab-3.jpeg"
-                alt=""
-                width={264}
-                height={192}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="rounded-2xl overflow-hidden h-[192px]">
-              <Image
-                src="/images/ab-4.jpeg"
-                alt=""
-                width={264}
-                height={192}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          {/* RIGHT IMAGES FLEX */}
+          <div className="flex-1 flex flex-wrap gap-4 h-full p-3">
+            {[1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className="flex-1 min-w-[48%] md:min-w-[48%] rounded-2xl overflow-hidden *h-[180px] md:h-[220px] relative"
+              >
+                <Image
+                  src={`/images/ab-${i}.jpeg`}
+                  alt=""
+                  width={264}
+                  height={192}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
