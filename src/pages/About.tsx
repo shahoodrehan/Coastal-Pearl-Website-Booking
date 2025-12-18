@@ -13,7 +13,7 @@ function About() {
       <Hero
         title="Our Story"
         subtitle="A legacy of luxury, hospitality, and coastal elegance"
-        backgroundImage="/images/paradise-2.jpg"
+        backgroundImage="/images/design.jpg"
         position=""
       />
 
@@ -95,20 +95,20 @@ function About() {
               Spaces Design Wedith Purpose
             </h2>
 
-            <p className="text-2 !text-[var(--text-light)] mb-4">
+            <p className="text-2 !text-[var(--text-light)] mb-4 text-justify">
               Private stay and family getways , Coporate offsite and curated
               events , Beachside, dinner and cabana setups, Photoshoots,
               creative projects, and celebrations
             </p>
 
-            <p className="text-2 !text-[var(--text-light)] mb-4">
+            <p className="text-2 !text-[var(--text-light)] mb-4 text-justify">
               we don't believe in one-size-fits-all hospitality. Every guest
               arrives with a different reason, and we adapt accordingly.If you
               want quite we protect it, If you want to celebrate, we help you do
               it right.
             </p>
 
-            <p className="text-2 !text-[var(--text-light)]">
+            <p className="text-2 !text-[var(--text-light)] text-justify">
               We see the beauty is rawness, potencial in the silence, and pride
               in offering a space that reflects a positive images's of Karachi
               beaches. The Costal Pride Resort is our Contribution to reshaping

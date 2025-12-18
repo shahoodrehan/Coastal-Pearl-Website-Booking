@@ -55,7 +55,7 @@ function Events() {
         subtitle="Let us help you plan the perfect event. Get a customized quote tailored to your needs."
       >
         <Button size="lg" radius="full" arrow>
-          Get a Quote
+          Book Now
         </Button>
       </Section>
     </>

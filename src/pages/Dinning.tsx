@@ -13,8 +13,8 @@ function Dinning() {
       <Hero
         title="Dining Experience"
         subtitle="Culinary excellence meets coastal charm"
-        backgroundImage="/images/ab-1.jpeg"
-        position=""
+        backgroundImage="/images/.jpeg"
+        position="top-center"
       />
       <Section
         title="Dining Spaces"
@@ -29,7 +29,7 @@ function Dinning() {
             {/* LEFT — LARGE IMAGE */}
             <div
               className="w-full lg:w-1/2 relative rounded-2xl overflow-hidden 
-             h-64 md:h-96 lg:h-[600px] p-6"
+             h-64 md:h-96 lg:h-[645px] p-6"
             >
               <Image
                 src="/images/luxury-dinning.jpeg"
@@ -38,13 +38,15 @@ function Dinning() {
                 style={{ objectFit: "cover" }}
                 className="rounded-2xl"
               />
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl"></div>
+
               <div className="absolute bottom-0 left-0 w-full p-6">
                 <h3 className="text-white text-2xl font-semibold mb-2">
-                  Luxury Dinning
+                  Hi Tea
                 </h3>
                 <p className="!text-[var(--text-light)] text-2 opacity-90">
-                  Wake up to breathtaking Luxury views
+                  A mix of sweet and savory treats served with premium tea
                 </p>
               </div>
             </div>
@@ -62,8 +64,8 @@ function Dinning() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-2xl"></div>
                 <div className="absolute bottom-0 left-0 w-full p-4">
-                  <h4 className="!text-(--text-light) mb-1">Premium Suite</h4>
-                  <p className="text-white/80 text-sm">
+                  <h4 className="!text-(--text-light) !mb-1">Premium Suite</h4>
+                  <p className="!text-[var(--text-light)] text-2 opacity-90">
                     Ocean view with private balcony
                   </p>
                 </div>
@@ -148,13 +150,13 @@ function Dinning() {
               Beachside BBQ
             </h2>
 
-            <p className="text-2 mb-6 !text-(--text-light) opacity-100">
+            <p className="text-2 mb-6 !text-(--text-light) opacity-100 text-justify">
               Experience the authentic taste of grilled perfection with our
               beachside BBQ setup. Fresh ingredients, expert grilling, and the
               soothing sound of waves create an unforgettable dining experience.
             </p>
 
-            <p className="text-2 mb-6 !text-(--text-light) opacity-100">
+            <p className="text-2 mb-6 !text-(--text-light) opacity-100 text-justify">
               Our BBQ packages include fresh meats, marinades, grilling
               assistance, and all necessary equipment. Perfect for family
               gatherings, celebrations, or a casual evening by the sea.

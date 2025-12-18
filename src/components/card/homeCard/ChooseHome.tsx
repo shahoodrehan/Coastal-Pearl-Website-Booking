@@ -17,8 +17,8 @@ const chooseUs: ChooseUsCard[] = [
   },
   {
     iconSrc: "/icons/pool.png",
-    title: "Private Pool",
-    subtitle: "Exclusive infinity pool overlooking the sea",
+    title: "Private Balcony:",
+    subtitle: "Exclusive infinity overlooking the waves",
   },
   {
     iconSrc: "/icons/luxury.png",

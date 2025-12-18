@@ -12,49 +12,49 @@ const DiningCards: React.FC = () => {
       paragraph:
         "Elegant indoor dining space with air conditioning and modern amenities",
       points: [
-        "Climate controlled",
+        "Fully Equipped Kitchen",
         "Premium tableware",
-        "Ambient lighting",
-        "Sound system",
+        "On-Site Chef Option",
+        "Complimentary Refreshments",
       ],
     },
     {
       iconSrc: "/icons/white-sun-2.png",
       title: "Capacity",
-      subtitle: "40 guests",
-      heading: "Outdoor Dining",
+      subtitle: "20+ guests",
+      heading: "OUTDOOR DINING & BBQ",
       paragraph: "Al fresco dining with ocean views and gentle sea breeze",
       points: [
-        "Beachfront seating",
-        "Sunset views",
-        "Natural ambiance",
-        "Covered option",
+        "Front Porch Dining",
+        "Seaside BBQ Setup",
+        "Terrace Evenings",
+        "Ocean Ambience",
       ],
     },
     {
       iconSrc: "/icons/white-fire.png",
       title: "Capacity",
-      subtitle: "30 guests",
-      heading: "BBQ Space",
-      paragraph: "Dedicated BBQ area with grills and beachside setup",
+      subtitle: "20+ guests",
+      heading: "CATERING OPTIONS",
+      paragraph: "Curated menus for every event",
       points: [
-        "Multiple grills",
-        "Prep stations",
-        "Outdoor seating",
-        "Evening atmosphere",
+        "Desi & Continental",
+        "BBQ Night Menus",
+        "Breakfast & Brunch",
+        "Custom Events",
       ],
     },
     {
       iconSrc: "/icons/white-cup.png",
       title: "Capacity",
-      subtitle: "20 guests",
+      subtitle: "20+ guests",
       heading: "Hi-Tea by the Sea",
       paragraph: "Afternoon tea service with ocean panoramas",
       points: [
-        "Premium tea selection",
-        "Fresh pastries",
-        "Seaside setting",
-        "Elegant service",
+        "Sweet & Savory",
+        "Premium Tea/Coffee",
+        "Sunset Timings",
+        "Sea View Setting",
       ],
     },
   ];
@@ -98,7 +98,7 @@ const DiningCards: React.FC = () => {
                 </span>
               </div>
             ))}
-          </div> 
+          </div>
         </div>
       ))}
     </div>

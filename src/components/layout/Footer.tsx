@@ -145,14 +145,14 @@ export default function Footer() {
     //   </div>
     // </footer>
 
-    <footer className="w-full bg-[var(--bg-dark)] text-[var(--text-light)] py-16 px-8">
+    <footer className="w-full bg-[var(--bg-dark)] text-[var(--text-light)] py-16 px-4 md:px-8">
       <div className="w-[92%] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Column 1 */}
         <div>
           <Image
             src="/images/Logo.png"
             alt="logo"
-            width={173}
+            width={123}
             height={64}
             className="object-contain mb-4"
           />
@@ -163,24 +163,48 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-4 mt-4">
-            {["facebook", "insta", "twiter"].map((icon, i) => (
-              <div
+            {[
+              {
+                name: "facebook",
+                url: "https://www.facebook.com/people/The-Coastal-Pearl/61579023041544/",
+              },
+              {
+                name: "insta",
+                url: "https://www.instagram.com/thecoastalpearlresort/",
+              },
+              {
+                name: "youtube-icon",
+                url: "https://www.youtube.com/@TheCoastalPearl",
+              },
+              {
+                name: "linked-in",
+                url: "http://www.linkedin.com/in/the-coastal-pearl-2b609637a",
+              },
+              {
+                name: "airbnb-icon",
+                url: "https://www.airbnb.com/rooms/1492638272427670349?check_in=2025-11-30&check_out=2025-12-05&guests=1&adults=1&s=67&unique_share_id=abdfd982-98d0-4f5c-b148-5afc88eeb2f2",
+              },
+            ].map((social, i) => (
+              <a
                 key={i}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-[#235172] flex items-center justify-center hover:bg-[var(--bg-beige2)] transition-colors duration-300"
               >
                 <Image
-                  src={`/icons/${icon}.png`}
-                  alt={icon}
-                  width={icon === "facebook" ? 18 : 18}
-                  height={icon === "facebook" ? 18 : 18}
+                  src={`/icons/${social.name}.png`}
+                  alt={social.name}
+                  width={20}
+                  height={18}
                 />
-              </div>
+              </a>
             ))}
           </div>
         </div>
 
         {/* Column 2 */}
-        <div>
+        <div className="pt-6">
           <h3 className="text-[16px] mb-4 !text-[var(--text-beige)]">
             Explore
           </h3>
@@ -196,7 +220,7 @@ export default function Footer() {
         </div>
 
         {/* Column 3 */}
-        <div>
+        <div className="pt-6">
           <h3 className="text-[18px] md:text-[16px] font-semibold !text-[var(--text-beige)] mb-4">
             Experience
           </h3>
@@ -212,7 +236,7 @@ export default function Footer() {
         </div>
 
         {/* Column 4 */}
-        <div>
+        <div className="pt-6">
           <h3 className="text-[18px] md:text-[16px] font-semibold !text-[var(--text-beige)] mb-4">
             Contact
           </h3>

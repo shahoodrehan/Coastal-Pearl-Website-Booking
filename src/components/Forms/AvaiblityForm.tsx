@@ -30,6 +30,8 @@ interface AvailabilityResponse {
 
 export default function AvailabilityCheckForm() {
   const router = useRouter();
+  const now = new Date();
+  const minDateTime = now.toISOString().slice(0, 16);
 
   const formik = useFormik<AvailabilityFormValues>({
     initialValues: {
@@ -91,7 +93,10 @@ export default function AvailabilityCheckForm() {
     mx-auto
   "
     >
-      <div className="flex flex-col md:flex-row md:items-end gap-4">
+      <div
+        className="flex flex-col md:flex-row md:items-end gap-1 sm:gap-2 md:gap-4
+"
+      >
         {/* Start DateTime */}
         <div className="flex-1">
           <label className="block text-[var(--text-light)] mb-1 sm:mb-2 text-sm sm:text-base">
@@ -101,9 +106,10 @@ export default function AvailabilityCheckForm() {
           <input
             type="datetime-local"
             name="startTime"
+            min={minDateTime}
             value={formik.values.startTime}
             onChange={formik.handleChange}
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-(--bg-beige) rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
           />
 
           {/* Error placeholder (RESERVED SPACE) */}
@@ -125,9 +131,10 @@ export default function AvailabilityCheckForm() {
           <input
             type="datetime-local"
             name="endTime"
+            min={minDateTime}
             value={formik.values.endTime}
             onChange={formik.handleChange}
-            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-(--bg-beige) rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
           />
 
           <div className="min-h-[20px]">
@@ -153,7 +160,7 @@ export default function AvailabilityCheckForm() {
             value={formik.values.numberOfGuests || ""}
             onChange={formik.handleChange}
             className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base 
-               bg-[#F5EFE7] rounded-xl border-2 border-transparent 
+               bg-(--bg-beige) rounded-xl border-2 border-transparent 
                focus:border-[#0A3D62] outline-none"
           />
 
@@ -171,7 +178,10 @@ export default function AvailabilityCheckForm() {
         {/* Submit */}
         <div className="flex-1 md:flex-none flex flex-col">
           {/* Empty label spacer to align with input labels */}
-          <div className="h-[28px] mb-1 sm:mb-2"></div>
+          <div
+            className="h-[28px] mb-1 sm:mb-2 hidden md:block
+"
+          ></div>
 
           <button
             type="submit"

@@ -4,30 +4,34 @@ import Image from "next/image";
 function EventPackagesCards() {
   const packages = [
     {
-      title: "Basic Package",
-      hours: "2 hours",
-      price: "PKR 25,000",
-      points: ["Single location", "50 edited photos", "Digital delivery"],
-      button: "Book Now",
+      title: "Morning Package",
+      hours: "10:00 AM | 6:00 PM",
+      price: "Includes",
+      points: [
+        "Full access to indoor & outdoor lounges",
+        "Hi-tea with snacks & beverages",
+        "Beachfront access",
+        "Complimentary water (up to 10 guests)",
+      ],
     },
 
     {
-      title: "Premium Package",
-      hours: "4 hours",
-      price: "PKR 45,000",
+      title: "Evening Package",
+      hours: "6:00 PM | 9:00 AM",
+      price: "Includes",
       points: [
-        "Multiple locations",
-        "100 edited photos",
-        "Drone shots",
-        "Same-day preview",
+        "Sea-view bedrooms",
+        "Tea & coffee setup",
+        "Lounge & pool access",
+        "Bonfire on request",
+        "Late-night lounge access",
       ],
-      button: "Book Now",
     },
 
     {
       title: "Luxury Package",
       hours: "Full day",
-      price: "PKR 75,000",
+      price: "Includes",
       points: [
         "Entire property access",
         "200+ edited photos",
@@ -35,7 +39,6 @@ function EventPackagesCards() {
         "Makeup room",
         "Refreshments",
       ],
-      button: "Book Now",
     },
   ];
 
@@ -58,7 +61,9 @@ function EventPackagesCards() {
           </h4>
 
           {/* Hours */}
-          <p className="text-2 text-left !text-[var(--text-beige)] mb-6">{pack.hours}</p>
+          <p className="text-2 text-left !text-[var(--text-beige)] mb-6">
+            {pack.hours}
+          </p>
 
           {/* Price */}
           <p className="text-4xl text-left font-normal text-[var(--text-light)] mb-6">
@@ -70,24 +75,17 @@ function EventPackagesCards() {
             {pack.points.map((pt, i) => (
               <div key={i} className="flex items-center gap-2">
                 <Image
-                  src="/icons/brown-camera.png"
+                  src="/icons/dot.png"
                   alt="check"
-                  width={18}
-                  height={18}
+                  width={10}
+                  height={10}
                 />
-                <span className="text-base text-(--text-light) font-['Inter']">{pt}</span>
+                <span className="text-base text-(--text-light) font-['Inter']">
+                  {pt}
+                </span>
               </div>
             ))}
           </div>
-
-          {/* Button */}
-          <Button
-          variant="beige"
-          size="sm"
-          radius="full"
-          >
-            Book Now
-          </Button>
         </div>
       ))}
     </div>

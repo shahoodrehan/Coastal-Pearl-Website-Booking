@@ -35,6 +35,9 @@ interface Alternative {
 
 const BookingForm = () => {
   const router = useRouter();
+  const now = new Date();
+  const minDateTime = now.toISOString().slice(0, 16);
+
   const { isAvailable, message, alternatives } = router.query;
   const parsedAlternatives: Alternative[] = alternatives
     ? JSON.parse(alternatives as string)
@@ -316,6 +319,7 @@ const BookingForm = () => {
               <input
                 type="datetime-local"
                 name="startTime"
+                min={minDateTime}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.startTime}
@@ -334,6 +338,7 @@ const BookingForm = () => {
               <input
                 type="datetime-local"
                 name="endTime"
+                min={minDateTime}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endTime}

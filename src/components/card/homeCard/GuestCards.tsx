@@ -60,13 +60,19 @@ export default function GuestCards() {
           {/* Star Rating */}
           <div className="flex gap-1 mb-4">
             {Array.from({ length: 5 }).map((_, idx) => (
-              <Image
+              <svg
                 key={idx}
-                src="/icons/rating.png" // path to your star image
-                alt="star"
-                width={16}
-                height={16}
-              />
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#B08D57"
+                stroke="#B08D57"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-6 h-6"
+              >
+                <path d="M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.6L12 16.9 5.8 20l1.6-6.6L2.2 8.9l6.9-.6L12 2z" />
+              </svg>
             ))}
           </div>
 

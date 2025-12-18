@@ -12,6 +12,7 @@ type SectionProps = {
   subtitleColor?: string;
   titleClassName?: string;
   subtitleClassName?: string;
+  id?: any;
 };
 
 const Section: React.FC<SectionProps> = ({
@@ -27,6 +28,7 @@ const Section: React.FC<SectionProps> = ({
   subtitleColor = "var(--text-dark)",
   titleClassName = "",
   subtitleClassName = "",
+  id = "",
 }) => {
   const bgStyle = backgroundImage
     ? {
@@ -51,6 +53,7 @@ const Section: React.FC<SectionProps> = ({
     <section
       className={`w-full flex flex-col items-center text-center px-4 py-12 md:px-8 md:py-24 ${className}`}
       style={bgStyle}
+      id={id}
     >
       <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full">
         {/* Animated Title */}

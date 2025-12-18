@@ -12,26 +12,26 @@ const contactcard: Cards[] = [
   {
     iconSrc: "/icons/white-location.png",
     title: "Location",
-    detail1: "Hawksbay Beach",
-    detail2: "Karachi, Pakistan",
+    detail1: "Resort No 115/38B,",
+    detail2: "Hawksbay Road Near Dua Resturaunt, Karachi",
   },
   {
     iconSrc: "/icons/white-phone.png",
     title: "Phone",
-    detail1: "+92 300 1234567",
-    detail2: "+92 321 7654321",
+    detail1: "+92 321-8200150",
+    detail2: "+92 322-2270908",
   },
   {
     iconSrc: "/icons/white-mail.png",
     title: "Email",
-    detail1: "info@coastalpearl.com",
+    detail1: "thecoastalp@gmail.com",
     detail2: "bookings@coastalpearl.com",
   },
   {
     iconSrc: "/icons/white-clock.png",
     title: "Hours",
     detail1: "24/7 Booking Support",
-    detail2: "Check-in: 10 AM",
+    detail2: "Assist Anytime You Need",
   },
 ];
 

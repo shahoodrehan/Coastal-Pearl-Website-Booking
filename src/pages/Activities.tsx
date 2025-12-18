@@ -71,14 +71,14 @@ function Activities() {
               Bonfire Nights
             </h2>
 
-            <p className="text-2 mb-6">
+            <p className="text-2 mb-6 text-justify">
               As the sun sets over the Arabian Sea, gather around our beachside
               bonfire for an unforgettable evening. Share stories, roast
               marshmallows, and enjoy the tranquil sound of waves under a
               starlit sky.
             </p>
 
-            <p className="text-2 mb-6">
+            <p className="text-2 mb-6 text-justify">
               Our bonfire setup includes comfortable seating, ambient lighting,
               and all the essentials for a perfect beach evening. Available as
               part of our night package or as an add-on for day guests.
@@ -87,7 +87,7 @@ function Activities() {
             <div className="flex gap-2 justify-between flex-wrap">
               <div className="flex items-center gap-2">
                 <Image
-                  src="/icons/sun-2.png"
+                  src="/icons/profile.png"
                   alt="icon"
                   width={20}
                   height={20}
@@ -96,7 +96,7 @@ function Activities() {
               </div>
               <div className="flex items-center gap-2">
                 <Image
-                  src="/icons/fire.png"
+                  src="/icons/music.png"
                   alt="icon"
                   width={20}
                   height={20}
@@ -105,7 +105,7 @@ function Activities() {
               </div>
               <div className="flex items-center gap-2">
                 <Image
-                  src="/icons/music.png"
+                  src="/icons/sun-2.png"
                   alt="icon"
                   width={20}
                   height={20}
@@ -127,7 +127,7 @@ function Activities() {
         </div>
       </section>
 
-      <Section
+      {/* <Section
         title="Safety First"
         titleColor="var(--text-light)"
         subtitle="Your safety is our priority. All activities are supervised by trained professionals."
@@ -135,7 +135,7 @@ function Activities() {
         bgColor="bg-dark"
       >
         <ActivitiesBottomcards />
-      </Section>
+      </Section> */}
     </>
   );
 }

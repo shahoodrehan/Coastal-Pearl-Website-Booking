@@ -60,7 +60,7 @@ function Contact() {
             </div>
 
             {/* Bottom Box: Booking Information */}
-            <div className="p-6 rounded-2xl bg-gradient-to-b from-[#0A3D62] to-[#AEC6CF] shadow-md flex flex-col gap-4">
+            <div className="p-6 rounded-2xl bg-(--bg-dark) shadow-md flex flex-col gap-4">
               <h3 className="text-(--text-light)">Booking Information</h3>
               <ul className="text-(--text-light) flex flex-col gap-3 mt-2">
                 <li className="flex items-start gap-2">

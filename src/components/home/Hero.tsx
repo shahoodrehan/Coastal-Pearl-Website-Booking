@@ -22,14 +22,14 @@ function Hero({
 }: HeroProps) {
   return (
     <section
-      className="w-full flex flex-col pt-10 md:py-0 px-10 items-center justify-center text-center bg-cover bg-center"
+      className="w-full flex flex-col pt-10 md:py-0 px-4 md:px-10 items-center justify-center text-center bg-cover bg-center"
       style={{
         height: height,
         backgroundImage: `
           linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%),
           url(${backgroundImage})
         `,
-        backgroundPosition: position, // move image DOWN
+        backgroundPosition: position,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}

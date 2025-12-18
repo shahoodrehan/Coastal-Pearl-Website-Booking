@@ -60,7 +60,7 @@ export default function Home() {
       <Hero
         title="Your Beachside Escape at Hawksbay, Karachi"
         subtitle="Where every stay feels like a memory in the making"
-        backgroundImage="/images/home-hero.jpg"
+        backgroundImage="/images/vision.jpg"
         height="100vh"
         position="center"
         // buttons={[

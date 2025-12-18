@@ -8,20 +8,20 @@ const floors = [
   {
     src: "/images/ground-floor.jpg",
     title: "Ground Floor",
-    description: "Spacious lounge, private pool, VIP facilities",
-    link: "/ground-floor",
+    description: "Spacious lounge, Front porch area, VIP facilities",
+    link: "/ResortSpaces/#ground-floor",
   },
   {
     src: "/images/first-floor.jpg",
     title: "First Floor",
     description: "Sea-facing bedrooms, theatre lounge, mini kitchen",
-    link: "/first-floor",
+    link: "/ResortSpaces/#first-floor",
   },
   {
     src: "/images/terris.jpg",
     title: "Top Floor Terrace",
     description: "Rooftop terrace with kitchenette, event capacity",
-    link: "/top-floor",
+    link: "/ResortSpaces/#top-floor",
   },
 ];
 
@@ -80,7 +80,7 @@ function SpacesCards() {
 
             <Link
               href={item.link}
-              className="group text-lg opacity-80 flex items-center gap-2 mt-3 text-[var(--text-dark)] hover:text-[var(--text-beige)] transition-colors duration-300"
+              className="group text-lg opacity-80 flex items-center gap-2 mt-3 text-[var(--text-dark)] hover:text-[var(--text-beige2)] transition-colors duration-300"
             >
               Learn More
               <svg

@@ -5,7 +5,7 @@ const tabs = [
   "All",
   "Interior",
   "Exterior",
-  "Pool",
+  // "Pool",
   "Terrace",
   "Events",
   "Dining",
@@ -54,12 +54,7 @@ const galleryImages = [
     title: "Modern Lounge Area",
     description: "Spacious lounge designed for relaxation and gatherings.",
   },
-  {
-    src: "/images/interior-1.jpg",
-    category: "Interior",
-    title: "Modern Lounge Area",
-    description: "Spacious lounge designed for relaxation and gatherings.",
-  },
+
   {
     src: "/images/interior-2.jpeg",
     category: "Interior",
@@ -101,6 +96,12 @@ const galleryImages = [
     category: "Exterior",
     title: "Bonfire Night",
     description: "Cozy bonfire setup for memorable outdoor evenings.",
+  },
+  {
+    src: "/images/interior-1.jpg",
+    category: "Exterior",
+    title: "Modern Lounge Area",
+    description: "Spacious lounge designed for relaxation and gatherings.",
   },
   {
     src: "/images/home-bottom.jpg",
@@ -145,7 +146,25 @@ const galleryImages = [
     description: "A peaceful terrace with breathtaking sunset views.",
   },
   {
-    src: "/images/opening.jpeg",
+    src: "/images/event-hero.jpeg",
+    category: "Events",
+    title: "Event Venue",
+    description: "A spacious area perfect for gatherings and celebrations.",
+  },
+  {
+    src: "/images/event-1.jpeg",
+    category: "Events",
+    title: "Event Venue",
+    description: "A spacious area perfect for gatherings and celebrations.",
+  },
+  {
+    src: "/images/event-2.jpeg",
+    category: "Events",
+    title: "Event Venue",
+    description: "A spacious area perfect for gatherings and celebrations.",
+  },
+  {
+    src: "/images/event-3.jpeg",
     category: "Events",
     title: "Event Venue",
     description: "A spacious area perfect for gatherings and celebrations.",

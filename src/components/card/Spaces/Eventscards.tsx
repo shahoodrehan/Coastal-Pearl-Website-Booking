@@ -34,9 +34,11 @@ function EventsCards() {
       {eventscards.map((item, index) => (
         <div
           key={index}
-          className="relative w-full h-[480px] bg-white rounded-2xl shadow-md overflow-hidden flex flex-col"
+          className="relative w-full h-[480px] bg-white rounded-2xl shadow-md overflow-hidden flex flex-col hover:shadow-xl
+    hover:-translate-y-2
+    transition-all duration-300 ease-out"
         >
-          <div className="absolute top-4 right-4 inline-flex bg-(--bg-light) py-2 px-6 rounded-full items-center text-(--text-dark) z-10">
+          <div className="absolute top-4 right-4 inline-flex bg-[var(--bg-light)] py-2 px-6 rounded-full items-center text-[var(--text-dark)] z-10">
             <Image src="/icons/vip-2.png" alt="icon" width={16} height={16} />
             <span className="text-sm ml-2">{item.guest}</span>
           </div>

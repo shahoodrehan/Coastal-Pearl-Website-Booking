@@ -70,16 +70,7 @@ function CommentCards() {
   return (
     <div className="flex flex-wrap gap-6 justify-start">
       {testimonials.map((card, idx) => (
-        <div
-          key={idx}
-          className="
-        w-full        /* Mobile: 1 card */
-        sm:w-[48%]    /* Tablet: 2 cards */
-        lg:w-[31%]    /* Desktop: 3 cards */
-        bg-white p-6 rounded-xl shadow-md
-        flex flex-col gap-4
-      "
-        >
+        <div className="w-full sm:w-[48%] lg:w-[31%] bg-white p-6 rounded-xl shadow-md flex flex-col justify-between lg:h-[393px]">
           {/* Testimonial Icon */}
           <Image
             src="/icons/testimonial.png"

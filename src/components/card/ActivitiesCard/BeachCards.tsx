@@ -5,46 +5,39 @@ type activitiesCard = {
   iconSrc: string;
   title: string;
   subtitle: string;
-  price: string;
 };
 
 const beachcard: activitiesCard[] = [
   {
-    iconSrc: "/icons/seaview.png",
+    iconSrc: "/icons/ride.png",
     title: "Camel Ride",
     subtitle: "Traditional beachside experience",
-    price: "PKR 500 / ride",
   },
   {
-    iconSrc: "/icons/seaview.png",
+    iconSrc: "/icons/ride.png",
     title: "Horse Ride",
     subtitle: "Gallop along the pristine shoreline",
-    price: "PKR 800 / ride",
   },
   {
-    iconSrc: "/icons/seaview.png",
+    iconSrc: "/icons/blue-fire.png",
     title: "Beach Bonfire",
     subtitle: "Evening gatherings under the stars",
-    price: "Included in packages",
   },
 
   {
-    iconSrc: "/icons/seaview.png",
+    iconSrc: "/icons/games.png",
     title: "Beach Games",
     subtitle: "Volleyball, cricket, and more",
-    price: "Complimentary",
   },
   {
-    iconSrc: "/icons/seaview.png",
+    iconSrc: "/icons/blue-music.png",
     title: "BBQ Setup",
     subtitle: "Beachside grilling experience",
-    price: "PKR 5,000 setup",
   },
   {
     iconSrc: "/icons/seaview.png",
     title: "Beach Walk",
     subtitle: "Guided sunset strolls",
-    price: "Complimentary",
   },
 ];
 
@@ -77,11 +70,6 @@ const BeachCards: React.FC = () => {
           {/* Subtitle */}
           <p className="text-[17px] font-['Inter'] leading-[28px] text-left mb-4">
             {card.subtitle}
-          </p>
-
-          {/* Price */}
-          <p className="text-[16px] text-[var(--text-dark)] font-['Inter'] leading-[24px] text-left">
-            {card.price}
           </p>
         </div>
       ))}

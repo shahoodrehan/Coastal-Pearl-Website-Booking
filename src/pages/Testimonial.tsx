@@ -13,7 +13,7 @@ function Testimonial() {
       <Hero
         title="Guest Experiences"
         subtitle="Hear what our guests have to say about their stay at The Coastal Pearl"
-        backgroundImage="/images/opening.jpeg"
+        backgroundImage="/images/paradise-2.jpg"
         position=""
       />
 
@@ -72,7 +72,7 @@ function Testimonial() {
         title="Create Your Own Story"
         subtitle="Join hundreds of satisfied guests who have experienced the magic of The Coastal Pearl"
       >
-        <Button variant="primary" size="lg" radius="full" width="full">
+        <Button variant="primary" size="sm" radius="full">
           Book your Stay
         </Button>
       </Section>
