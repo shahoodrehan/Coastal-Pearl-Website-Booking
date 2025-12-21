@@ -11,44 +11,44 @@ type SectionItem = {
 const Journey: React.FC = () => {
   const timelineData = [
     {
-      icon: "2018",
-      title: "The Vision",
+      icon: "-",
+      title: "What We Believe",
       description:
-        "The concept of The Coastal Pearl was conceived, inspired by the world's finest beach resorts and adapted to showcase the unique beauty of Pakistan's coastline.",
+        "At The Coastal Pearl Resort, hospitality is not a checklist. It’s an attitude. We believe: Guests should feel welcome, not managed Luxury should feel effortless",
       image: "/images/vision.jpg",
     },
     {
       icon: "2019",
-      title: "Design & Planning",
+      title: "Spaces Designed With Purpose",
       description:
-        "Our team of architects and designers worked tirelessly to create a space that would harmonize luxury with nature, incorporating sustainable practices and local aesthetics.",
+        "From cozy indoor lounges to open-air seating, from carefully designed rooms to beach-facing setups, nothing exists by accident. Our interiors are calm, neutral, and inviting.",
       image: "/images/design.jpg",
     },
     {
       icon: "2020",
-      title: "Construction Begins",
+      title: "More Than Just a Stay",
       description:
-        "Breaking ground on our dream, we began building with a commitment to quality and attention to every detail, from foundation to finishing touches.",
+        "Coastal Pearl Resort grown into a destination for: Private stays and family getaways Corporate offsites and curated events Beachside dinners and cabana setups Photoshoots, ",
       image: "/images/construction.jpg",
     },
     {
       icon: "2021",
-      title: "Grand Opening",
+      title: "Rooted in Karachi’s Coast",
       description:
-        "The Coastal Pearl opened its doors, welcoming guests to experience a new standard of coastal luxury in Karachi.",
+        "We see beauty in the rawness, potential in the silence, and pride in offering a space that reflects a positive image of Karachi’s beaches. ",
       image: "/images/opening.jpeg",
     },
     {
       icon: "2024",
-      title: "Today",
+      title: "Looking Ahead",
       description:
-        "We continue to evolve and enhance our offerings, maintaining our position as the premier beachside resort destination in Hawksbay.",
+        "Our journey is still unfolding. With upcoming experiences like beach cabanas, curated setups, and expanded guest services, we continue to grow thoughtfully. ",
       image: "/images/today.jpg",
     },
   ];
 
   return (
-    <div className="w-[94%] mx-auto px-0 md:px-0 lg:px-8 flex flex-col gap-10">
+    <div className="w-full max-w-6xl mx-auto px-4 md:px-0 lg:px-0 flex flex-col gap-10">
       {timelineData.map((item, index) => {
         const isReversed = index % 2 !== 0;
 

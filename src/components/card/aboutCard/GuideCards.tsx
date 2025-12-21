@@ -6,30 +6,30 @@ const MissionVisionSection = () => {
       icon: "/icons/mission.png",
       title: "Our Mission",
       description:
-        "To provide an unparalleled luxury beachfront experience that combines exceptional hospitality with the natural beauty of Hawksbay, creating unforgettable memories for every guest.",
+        "We aim to offer every visitor a seamless blend of hospitality, nature, and personalized comfort, making Hawksbay a destination worth returning to again and again.",
     },
     {
       icon: "/icons/eye.png",
       title: "Our Vision",
       description:
-        "To be recognized as Pakistan's premier coastal resort destination, setting new standards in luxury hospitality and environmental sustainability.",
+        "To redefine beachside living in Pakistan by creating a space that feels exclusive yet comforting, where luxury meets authenticity and guests feel truly at home by the sea.",
     },
     {
       icon: "/icons/heart.png",
       title: "Our Philosophy",
       description:
-        "We believe in creating experiences, not just stays. Every detail is crafted with care, from our architectural design to our personalized service.",
+        "We believe luxury isn’t about price, it’s about peace of mind. Here, it’s the soft sound of the waves, the glow of warm lights at night, the scent of salt in the air.",
     },
     {
       icon: "/icons/value.png",
       title: "Core Values",
       description:
-        "Excellence, authenticity, sustainability, and genuine hospitality form the foundation of everything we do at The Coastal Pearl.",
+        "Hospitality with Heart: Warm, respectful, and genuine service. Detail in Design: Every space crafted with intent and balance.",
     },
   ];
 
   return (
-    <section className="w-[94%] mx-auto py-0 md:py-16">
+    <section className="w-[94%] max-w-6xl mx-auto py-0 md:py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {cards.map((item, index) => (
           <div

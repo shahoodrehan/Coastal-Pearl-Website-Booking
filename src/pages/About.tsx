@@ -35,37 +35,50 @@ function About() {
 
           {/* CONTENT */}
           <div className="w-full md:w-1/2 flex flex-col justify-start">
-            <div className="w-[160px] bg-[#AEC6CF33] py-2 px-4 mb-6 rounded-full flex items-center">
-              Founder's Name
+            <div className="w-[127px] bg-[#AEC6CF33] py-2 px-4 mb-6 rounded-full flex items-center">
+              Our Journey
             </div>
 
             <h2 className="!text-left mb-6">A Dream Realized</h2>
 
             <p className="text-2 mb-6">
-              The Coastal Pearl was born from a vision to create a sanctuary
+              {/* The Coastal Pearl was born from a vision to create a sanctuary
               where the sophistication of luxury hospitality meets the untamed
               beauty of nature. Growing up along the coast of Karachi, I always
               dreamed of establishing a place that would showcase the stunning
-              potential of Hawksbay.
+              potential of Hawksbay. */}
+              The Coastal Pearl Resort was never meant to be just another
+              beachside stay. It began with a simple idea: Karachi deserves a
+              coastal space that feels calm, cared for, and genuinely welcoming.
+              A place where the sound of the waves matters more than noise, and
+              where comfort doesn’t come with attitude.
             </p>
 
             <p className="text-2 mb-6">
-              After years of careful planning and design, we opened our doors
+              {/* After years of careful planning and design, we opened our doors
               with one simple promise: to offer every guest an experience that
               transcends ordinary hospitality. Each element of our resort, from
               the architectural details to the personalized service, reflects
-              our commitment to excellence.
+              our commitment to excellence. */}
+              What started as a vision slowly turned into a journey. Brick by
+              brick, corner by corner, The Coastal Pearl Resort was shaped with
+              patience, intention, and respect for the coastline it stands
+              on.The land by the sea always had something special about it. The
+              land by the sea always had something special about it.
             </p>
 
             <p className="text-2 mb-6">
-              Today, The Coastal Pearl stands as a testament to what can be
+              {/* Today, The Coastal Pearl stands as a testament to what can be
               achieved when passion, vision, and dedication come together. We
-              invite you to experience the magic for yourself.
+              invite you to experience the magic for yourself. */}
+              The breeze, the open horizon, the quiet moments at sunrise and
+              sunset. Instead of building something loud or overdone, we chose
+              to build something thoughtful.
             </p>
 
-            <p className="text-2 opacity-100">— Founder & Director</p>
+            <p className="text-2 opacity-100">— We focused on</p>
             <p className="text-2 !text-[var(--text-beige)]">
-              The Coastal Pearl Resort
+              Comfort over excess
             </p>
           </div>
         </div>
@@ -73,7 +86,7 @@ function About() {
 
       <Section
         title="The Coastal Pearl Journey"
-        subtitle="From concept to reality, discover how we transformed a stretch of pristine coastline into Karachi's most exclusive beachfront resort."
+        subtitle="The land by the sea always had something special about it. The breeze, the open horizon, the quiet moments at sunrise and sunset"
         bgColor="bg-beige"
       >
         <Journey />
