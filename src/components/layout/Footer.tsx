@@ -145,7 +145,7 @@ export default function Footer() {
     //   </div>
     // </footer>
 
-    <footer className="w-full bg-[var(--bg-dark)] text-[var(--text-light)] py-16 px-4 md:px-8">
+    <footer className="w-full bg-[var(--bg-dark)] text-[var(--text-light)] py-16 px-0 md:px-8">
       <div className="w-[92%] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {/* Column 1 */}
         <div>

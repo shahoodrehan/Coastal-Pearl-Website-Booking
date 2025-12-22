@@ -3,6 +3,8 @@ import { useFormik } from "formik";
 import apiEndpoints from "@/constant/apiEndpoint";
 import api from "@/utils/api";
 import { setAdminAuth } from "@/utils/auth";
+import { useRouter } from "next/router";
+import { toast } from "sonner";
 
 interface LoginFormValues {
   userEmail: string;
@@ -10,6 +12,7 @@ interface LoginFormValues {
 }
 
 export default function LoginForm() {
+  const router = useRouter();
   const formik = useFormik<LoginFormValues>({
     initialValues: { userEmail: "", password: "" },
     onSubmit: async (values) => {
@@ -17,17 +20,20 @@ export default function LoginForm() {
         const payload = { email: values.userEmail, password: values.password };
         const response = await api.post(apiEndpoints.ADMIN_LOGIN, payload);
 
-        if (response.success) {
-          // Save "isAdmin" cookie for login
+        const data = response.data;
+
+        if (data) {
           setAdminAuth();
-          // Redirect to dashboard
-          window.location.href = "/admin/dashboard";
+          toast.success("Login Successfull");
+          router.push("/admin/dashboard");
         } else {
-          alert(response.error || "Invalid email or password");
+          console.error("Invalid credentials");
+          toast.error("Invalid credentials");
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
-        alert("Login error. Please try again.");
+
+        toast.error("Server error. Please try again later.");
       }
     },
   });

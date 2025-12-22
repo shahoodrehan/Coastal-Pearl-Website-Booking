@@ -35,8 +35,8 @@ function About() {
 
           {/* CONTENT */}
           <div className="w-full md:w-1/2 flex flex-col justify-start">
-            <div className="w-[127px] bg-[#AEC6CF33] py-2 px-4 mb-6 rounded-full flex items-center">
-              Our Journey
+            <div className="w-[138px] bg-[#AEC6CF33] py-2 px-4 mb-6 rounded-full flex items-center">
+              Our Philosphy
             </div>
 
             <h2 className="!text-left mb-6">A Dream Realized</h2>
@@ -105,7 +105,7 @@ function About() {
           {/* LEFT TEXT CONTENT */}
           <div className="flex-1">
             <h2 className="text-3xl md:text-4xl font-bold !text-left !text-[var(--text-light)] mb-6">
-              Spaces Design Wedith Purpose
+              Spaces Design With Purpose
             </h2>
 
             <p className="text-2 !text-[var(--text-light)] mb-4 text-justify">

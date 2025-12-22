@@ -12,7 +12,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="h-screen flex bg-[var(--bg-beige)] overflow-hidden">
+    <div className="h-screen flex bg-[var(--bg-beige)] overflow-hidden scrollbar-hide">
       {/* Sidebar */}
       <aside
         className={`bg-[var(--bg-dark)] text-[var(--text-light)] flex flex-col justify-between transition-all duration-300 ${
@@ -70,7 +70,9 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 overflow-auto">{children}</main>
+      <main className="flex-1 p-8 overflow-auto scrollbar-hide">
+        {children}
+      </main>
     </div>
   );
 }

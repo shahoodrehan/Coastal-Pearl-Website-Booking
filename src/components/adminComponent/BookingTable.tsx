@@ -9,6 +9,7 @@ import {
   FloorPreferenceLabels,
 } from "@/constant";
 import BookingModal from "@/components/modal/adminModal";
+import { toast } from "sonner";
 
 interface ExtraFacility {
   extraFacilitiesId: number;
@@ -134,14 +135,28 @@ export default function BookingTable() {
   const handleSaveModal = async (payload: any) => {
     console.log("API payload:", payload);
     // TODO: Call your API here
-    setBookings((prev) =>
-      prev.map((b) =>
-        b.bookingRequestId === payload.bookingRequestsId
-          ? { ...b, status: "Confirmed", totalPrice: payload.totalPrice }
-          : b
-      )
-    );
-    closeModal();
+
+    try {
+      const responce = await api.post(
+        apiEndpoints.UPDATE_BOOKING_STATUS,
+        payload
+      );
+      if (responce.success) {
+        toast.success("Booking updated successfully!");
+        setBookings((prev) =>
+          prev.map((b) =>
+            b.bookingRequestId === payload.bookingRequestsId
+              ? { ...b, status: "Confirmed", totalPrice: payload.totalPrice }
+              : b
+          )
+        );
+        closeModal();
+      } else {
+        toast.error("Failed to update booking: " + responce.error);
+      }
+    } catch (error) {
+      toast.error("An error occurred while updating the booking.");
+    }
   };
 
   return (
@@ -173,100 +188,104 @@ export default function BookingTable() {
         ) : bookings.length === 0 ? (
           <p>No bookings found.</p>
         ) : (
-          <div className="overflow-auto w-full max-h-full">
-            <table className="min-w-max border-collapse whitespace-nowrap">
-              <thead>
-                <tr className="bg-[var(--bg-dark)] text-[var(--text-light)]">
-                  <th className="p-3 text-left">ID</th>
-                  <th className="p-3 text-left">Name</th>
-                  <th className="p-3 text-left">Email</th>
-                  <th className="p-3 text-left">Contact</th>
-                  <th className="p-3 text-left">Start Time</th>
-                  <th className="p-3 text-left">End Time</th>
-                  <th className="p-3 text-left">Guests</th>
-                  <th className="p-3 text-left">Floor</th>
-                  <th className="p-3 text-left">Status</th>
-                  <th className="p-3 text-left">Created On</th>
-                  <th className="p-3 text-left">Extra Facilities</th>
-                  <th className="p-3 text-left">Actions</th>
-                </tr>
-              </thead>
+          <div className="overflow-y-auto w-full max-h-[400px] custom-scrollbar">
+            <div className="overflow-x-auto">
+              <div className="min-w-[1200px] custom-scrollbar">
+                <table className="min-w-max border-collapse whitespace-nowrap custom-scrollbar">
+                  <thead className="sticky top-0 z-10 bg-[var(--bg-dark)]">
+                    <tr className="bg-[var(--bg-dark)] text-[var(--text-light)]">
+                      <th className="p-3 text-left">ID</th>
+                      <th className="p-3 text-left">Name</th>
+                      <th className="p-3 text-left">Email</th>
+                      <th className="p-3 text-left">Contact</th>
+                      <th className="p-3 text-left">Start Time</th>
+                      <th className="p-3 text-left">End Time</th>
+                      <th className="p-3 text-left">Guests</th>
+                      <th className="p-3 text-left">Floor</th>
+                      <th className="p-3 text-left">Status</th>
+                      <th className="p-3 text-left">Created On</th>
+                      <th className="p-3 text-left">Extra Facilities</th>
+                      <th className="p-3 text-left">Actions</th>
+                    </tr>
+                  </thead>
 
-              <tbody>
-                {bookings.map((booking, idx) => (
-                  <tr
-                    key={booking.bookingRequestId}
-                    className={`border-b ${
-                      idx % 2 === 0
-                        ? "bg-[var(--bg-beige2)]/10"
-                        : "bg-[var(--bg-beige)]"
-                    } hover:bg-[var(--bg-beige2)]/30`}
-                  >
-                    <td className="p-3 p-3 whitespace-nowra">
-                      {booking.bookingRequestId}
-                    </td>
-                    <td className="p-3 capitalize whitespace-nowra">
-                      {booking.userName}
-                    </td>
-                    <td className="p-3 p-3 whitespace-nowra">
-                      {booking.userEmail}
-                    </td>
-                    <td className="p-3 p-3 whitespace-nowra">
-                      {booking.contactNo}
-                    </td>
-                    <td className="p-3 p-3 whitespace-nowra">
-                      {new Date(booking.startTime).toLocaleString()}
-                    </td>
-                    <td className="p-3 p-3 whitespace-nowra">
-                      {new Date(booking.endTime).toLocaleString()}
-                    </td>
-                    <td className="p-3 p-3 whitespace-nowra">
-                      {booking.noOfGuests}
-                    </td>
-                    <td className="p-3 p-3 whitespace-nowra">
-                      {
-                        FloorPreferenceLabels[
-                          booking.floorPreference as FloorPreference
-                        ]
-                      }
-                    </td>
-                    <td className="p-3 p-3 whitespace-nowra">
-                      <select
-                        value={booking.status}
-                        onChange={(e) =>
-                          handleStatusChange(
-                            booking.bookingRequestId,
-                            e.target.value
-                          )
-                        }
-                        className="px-2 py-1 rounded border border-[var(--bg-beige2)] bg-white focus:outline-none focus:ring-1 focus:ring-[var(--bg-dark)]"
+                  <tbody>
+                    {bookings.map((booking, idx) => (
+                      <tr
+                        key={booking.bookingRequestId}
+                        className={`border-b ${
+                          idx % 2 === 0
+                            ? "bg-[var(--bg-beige2)]/10"
+                            : "bg-[var(--bg-beige)]"
+                        } hover:bg-[var(--bg-beige2)]/30`}
                       >
-                        <option value="Pending">Pending</option>
-                        <option value="Confirmed">Confirmed</option>
-                        <option value="Cancelled">Cancelled</option>
-                        <option value="Completed">Completed</option>
-                      </select>
-                    </td>
-                    <td className="p-3">
-                      {new Date(booking.createdOn).toLocaleDateString()}
-                    </td>
-                    <td className="p-3">
-                      {booking.extraFacilities
-                        .map((f) => f.facilityName)
-                        .join(", ")}
-                    </td>
-                    <td className="p-3">
-                      <button
-                        onClick={() => openModal(booking)}
-                        className="px-3 py-1 rounded-lg bg-[var(--bg-dark)] text-white cursor-pointer"
-                      >
-                        Invoice
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          {booking.bookingRequestId}
+                        </td>
+                        <td className="p-3 capitalize whitespace-nowra">
+                          {booking.userName}
+                        </td>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          {booking.userEmail}
+                        </td>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          {booking.contactNo}
+                        </td>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          {new Date(booking.startTime).toLocaleString()}
+                        </td>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          {new Date(booking.endTime).toLocaleString()}
+                        </td>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          {booking.noOfGuests}
+                        </td>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          {
+                            FloorPreferenceLabels[
+                              booking.floorPreference as FloorPreference
+                            ]
+                          }
+                        </td>
+                        <td className="p-3 p-3 whitespace-nowra">
+                          <select
+                            value={booking.status}
+                            onChange={(e) =>
+                              handleStatusChange(
+                                booking.bookingRequestId,
+                                e.target.value
+                              )
+                            }
+                            className="px-2 py-1 rounded border border-[var(--bg-beige2)] bg-white focus:outline-none focus:ring-1 focus:ring-[var(--bg-dark)]"
+                          >
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Completed">Completed</option>
+                          </select>
+                        </td>
+                        <td className="p-3">
+                          {new Date(booking.createdOn).toLocaleDateString()}
+                        </td>
+                        <td className="p-3">
+                          {booking.extraFacilities
+                            .map((f) => f.facilityName)
+                            .join(", ")}
+                        </td>
+                        <td className="p-3">
+                          <button
+                            onClick={() => openModal(booking)}
+                            className="px-3 py-1 rounded-lg bg-[var(--bg-dark)] text-white cursor-pointer"
+                          >
+                            Invoice
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
             {/* Pagination */}
             <div className="mt-4 flex justify-end gap-2">

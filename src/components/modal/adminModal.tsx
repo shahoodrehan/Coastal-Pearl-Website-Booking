@@ -74,7 +74,7 @@ export default function BookingModal({
   const handleSave = () => {
     const payload = {
       bookingRequestsId: booking.bookingRequestId,
-      status: 1, // Confirmed
+      status: 1,
       totalPrice: calculateTotalPrice(),
       facilities: facilityInputs.map((f) => ({
         extraFacilitiesId: f.extraFacilitiesId,
@@ -97,7 +97,7 @@ export default function BookingModal({
         </button>
 
         <h2 className="text-xl font-semibold mb-4">
-          Invoice — #{booking.bookingRequestId}
+          Booking — #{booking.bookingRequestId}
         </h2>
 
         <div className="space-y-4">
@@ -145,34 +145,55 @@ export default function BookingModal({
                   key={f.extraFacilitiesId}
                   className="grid grid-cols-4 gap-2 mb-2"
                 >
-                  <input
-                    disabled
-                    value={f.facilityName}
-                    className="border p-2 rounded bg-gray-100"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Guests"
-                    value={f.noOfGuests}
-                    onChange={(e) =>
-                      updateFacility(idx, "noOfGuests", Number(e.target.value))
-                    }
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Price"
-                    value={f.price}
-                    onChange={(e) =>
-                      updateFacility(idx, "price", Number(e.target.value))
-                    }
-                    className="border p-2 rounded"
-                  />
-                  <input
-                    disabled
-                    value={f.total}
-                    className="border p-2 rounded bg-gray-100"
-                  />
+                  {/* Facility Name */}
+                  <div className="flex flex-col">
+                    <label className="text-sm font-medium mb-1">Facility</label>
+                    <input
+                      disabled
+                      value={f.facilityName}
+                      className="border p-2 rounded bg-gray-100"
+                    />
+                  </div>
+
+                  {/* Number of Guests */}
+                  <div className="flex flex-col">
+                    <label className="text-sm font-medium mb-1">Guests</label>
+                    <input
+                      type="number"
+                      value={f.noOfGuests}
+                      onChange={(e) =>
+                        updateFacility(
+                          idx,
+                          "noOfGuests",
+                          Number(e.target.value)
+                        )
+                      }
+                      className="border p-2 rounded"
+                    />
+                  </div>
+
+                  {/* Price per Guest */}
+                  <div className="flex flex-col">
+                    <label className="text-sm font-medium mb-1">Price</label>
+                    <input
+                      type="number"
+                      value={f.price}
+                      onChange={(e) =>
+                        updateFacility(idx, "price", Number(e.target.value))
+                      }
+                      className="border p-2 rounded"
+                    />
+                  </div>
+
+                  {/* Total Amount */}
+                  <div className="flex flex-col">
+                    <label className="text-sm font-medium mb-1">Total</label>
+                    <input
+                      disabled
+                      value={f.total}
+                      className="border p-2 rounded bg-gray-100"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -190,7 +211,7 @@ export default function BookingModal({
 
           <button
             onClick={handleSave}
-            className="w-full bg-green-600 text-white py-2 rounded mt-4"
+            className="w-full bg-[var(--bg-dark)] text-[var(--text-light)] py-2 rounded mt-4 cursor-pointer"
           >
             Save & Send
           </button>

@@ -11,35 +11,35 @@ type SectionItem = {
 const Journey: React.FC = () => {
   const timelineData = [
     {
-      icon: "-",
+      icon: "/icons/white-heart.png",
       title: "What We Believe",
       description:
         "At The Coastal Pearl Resort, hospitality is not a checklist. It’s an attitude. We believe: Guests should feel welcome, not managed Luxury should feel effortless",
       image: "/images/vision.jpg",
     },
     {
-      icon: "2019",
+      icon: "/icons/white-heart.png",
       title: "Spaces Designed With Purpose",
       description:
         "From cozy indoor lounges to open-air seating, from carefully designed rooms to beach-facing setups, nothing exists by accident. Our interiors are calm, neutral, and inviting.",
       image: "/images/design.jpg",
     },
     {
-      icon: "2020",
+      icon: "/icons/white-heart.png",
       title: "More Than Just a Stay",
       description:
         "Coastal Pearl Resort grown into a destination for: Private stays and family getaways Corporate offsites and curated events Beachside dinners and cabana setups Photoshoots, ",
       image: "/images/construction.jpg",
     },
     {
-      icon: "2021",
+      icon: "/icons/white-heart.png",
       title: "Rooted in Karachi’s Coast",
       description:
         "We see beauty in the rawness, potential in the silence, and pride in offering a space that reflects a positive image of Karachi’s beaches. ",
       image: "/images/opening.jpeg",
     },
     {
-      icon: "2024",
+      icon: "/icons/white-heart.png",
       title: "Looking Ahead",
       description:
         "Our journey is still unfolding. With upcoming experiences like beach cabanas, curated setups, and expanded guest services, we continue to grow thoughtfully. ",
@@ -66,8 +66,8 @@ const Journey: React.FC = () => {
                   "0px 4px 6px -4px #0000001A, 0px 10px 15px -3px #0000001A",
               }}
             >
-              <div className="w-[auto] rounded-full bg-[var(--bg-dark)] text-white py-2 px-4 flex items-center justify-center ">
-                {item.icon}
+              <div className="w-[auto] rounded-full bg-[var(--bg-dark)] text-white py-2 px-4 flex items-center justify-center">
+                <Image src={item.icon} alt="Icon" width={20} height={20} />
               </div>
 
               <h3>{item.title}</h3>
