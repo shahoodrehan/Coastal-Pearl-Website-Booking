@@ -154,7 +154,7 @@ export default function Footer() {
             alt="logo"
             width={123}
             height={64}
-            className="object-contain mb-4"
+            className="w-[123px] h-auto object-contain mb-4"
           />
 
           <p className="footer-para text-[16px]">
@@ -273,10 +273,10 @@ export default function Footer() {
                 height={20}
                 className="mb-2 mr-2"
               />
-              <span className="foooter-link-style">info@coastalpearl.com</span>
+              <a href="mailto:info@coastalpearl.com"  className="foooter-link-style">info@coastalpearl.com</a>
             </li>
           </ul>
-        </div>
+        </div>a
       </div>
 
       {/* Copyright */}

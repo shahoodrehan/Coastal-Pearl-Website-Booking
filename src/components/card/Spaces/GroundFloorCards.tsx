@@ -4,19 +4,19 @@ const GroundFloorCards = () => {
   const facilities = [
     {
       image: "/icons/lounge (2).png",
-      title: "Luxury Lounge",
+      title: "Main Lounge",
       description:
-        "Spacious seating area with modern furnishings and ocean views",
+        "Natural sunlight pours in through sea-facing windows.",
     },
     {
       image: "/icons/vip.png",
-      title: "Private Pool",
-      description: "Exclusive infinity pool with direct beach access",
+      title: "Outdoor Deck & Pool",
+      description: "Beyond the lounge lies the poolside patio, overlooking the beach",
     },
     {
       image: "/icons/kitchen.png",
-      title: "Gourmet Kitchen",
-      description: "Fully equipped modern kitchen with premium appliances",
+      title: "Kitchen & Staff Quarters:",
+      description: "This kitchen is designed for family cooking and professional chefs.",
     },
     {
       image: "/icons/vip.png",

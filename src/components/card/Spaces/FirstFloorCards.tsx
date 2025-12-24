@@ -20,8 +20,8 @@ const FirstFloorCards = () => {
     },
     {
       image: "/icons/vip.png",
-      title: "Reading Nook",
-      description: "Cozy spaces perfect for relaxation and quiet moments",
+      title: "Private Balcony",
+      description: "The breeze here feels different, softer, saltier, unforgettable."
     },
   ];
 

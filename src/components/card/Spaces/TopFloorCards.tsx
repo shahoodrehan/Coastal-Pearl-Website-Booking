@@ -9,8 +9,8 @@ const TopFloorCards = () => {
     },
     {
       image: "/icons/vip.png",
-      title: "Terrace Kitchenette",
-      description: "Outdoor kitchen facilities for al fresco dining",
+      title: "Luxury Bathroom",
+      description: "The same design aesthetic as the rest of the villa",
     },
     {
       image: "/icons/kitchen.png",

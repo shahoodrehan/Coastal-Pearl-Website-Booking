@@ -75,7 +75,7 @@ export default function BookingModal({
     const payload = {
       bookingRequestsId: booking.bookingRequestId,
       status: 1,
-      totalPrice: calculateTotalPrice(),
+      totalPrice: floorPrice,
       facilities: facilityInputs.map((f) => ({
         extraFacilitiesId: f.extraFacilitiesId,
         noOfGuests: f.noOfGuests,

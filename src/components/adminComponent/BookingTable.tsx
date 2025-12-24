@@ -188,8 +188,8 @@ export default function BookingTable() {
         ) : bookings.length === 0 ? (
           <p>No bookings found.</p>
         ) : (
-          <div className="overflow-y-auto w-full max-h-[400px] custom-scrollbar">
-            <div className="overflow-x-auto">
+          <div className="overflow-y-auto w-full max-h-[400px] custom-scrollbar scrollbar-hide">
+            <div className="overflow-x-auto scrollbar-hide" >
               <div className="min-w-[1200px] custom-scrollbar">
                 <table className="min-w-max border-collapse whitespace-nowrap custom-scrollbar">
                   <thead className="sticky top-0 z-10 bg-[var(--bg-dark)]">

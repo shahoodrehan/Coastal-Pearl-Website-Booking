@@ -3,17 +3,17 @@ import React from "react";
 const SpaceBottomCards = () => {
   const stats = [
     {
-      number: "50+",
+      number: "350+",
       title: "Total Capacity",
       description: "Guests for events",
     },
     {
-      number: "6",
+      number: "4",
       title: "Bedroom Suites",
       description: "Luxury accommodations",
     },
     {
-      number: "3",
+      number: "2",
       title: "Event Spaces",
       description: "Versatile venues",
     },

@@ -33,9 +33,11 @@ function ResortSpaces() {
             <h2 className="text-white mb-6 !text-left">Ground Floor</h2>
 
             <p className="text-2 text-left text-[var(--text-light)] mb-4 ">
-              The heart of our resort features expansive communal spaces, a
-              stunning private pool, and direct access to the pristine beach.
-              Perfect for gathering, relaxing, and creating memories.
+              The Coastal Pearl opens its doors to a world of calm
+              sophistication.
+              The ground floor is where warmth meets functionality, a
+              blend of cozy living and luxurious design.
+
             </p>
           </div>
 

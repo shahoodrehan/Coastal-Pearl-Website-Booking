@@ -30,26 +30,30 @@ export default function Navbar() {
       className={`
     fixed top-0 left-0 w-full flex justify-center z-50 transition-all duration-300
     
-    ${
-      scrolled
-        ? "bg-white shadow-md backdrop-blur-md"
-        : "bg-white/10 backdrop-blur-md shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)]"
-    }
+    ${scrolled
+          ? "bg-white shadow-md backdrop-blur-md"
+          : "bg-white/10 backdrop-blur-md shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)]"
+        }
   `}
     >
       <nav className="w-full lg:w-[92%] mx-auto px-4 lg:px-0 relative">
         <div className="flex items-center justify-between h-[80px]">
           <div className="flex-shrink-0">
-            <Link href="/">
-              <Image
-                src="/images/Logo.png"
-                alt="Logo"
-                width={90}
-                height={28}
-                priority
-              />
-            </Link>
-          </div>
+  <Link href="/" className="block">
+    <div className="relative w-[90px] h-[80px]">
+      <Image
+        src="/images/Logo.png"
+        alt="Logo"
+        fill
+        priority
+        sizes="90px"
+        style={{ objectFit: "contain" }}
+      />
+    </div>
+  </Link>
+</div>
+
+
 
           <div className="hidden lg:flex items-center justify-center flex-1 gap-8">
             {navLinks.map((link) => (
@@ -57,11 +61,10 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={`relative text-sm font-medium transition-all duration-300
-    ${
-      scrolled
-        ? "text-[#0A3D62] hover:text-[var(--text-beige)]"
-        : "text-white hover:text-[var(--text-beige)]"
-    }
+    ${scrolled
+                    ? "text-[#0A3D62] hover:text-[var(--text-beige)]"
+                    : "text-white hover:text-[var(--text-beige)]"
+                  }
     ${router.pathname === link.href ? "font-semibold" : ""}
   `}
               >
@@ -132,11 +135,10 @@ export default function Navbar() {
           className={`
     lg:hidden absolute left-0 right-0 top-full bg-white shadow-md rounded-b-lg px-6 
     overflow-hidden transition-all duration-300 ease-in-out
-    ${
-      isOpen
-        ? "max-h-[520px] opacity-100 pointer-events-auto py-4"
-        : "max-h-0 opacity-0 pointer-events-none"
-    }
+    ${isOpen
+              ? "max-h-[520px] opacity-100 pointer-events-auto py-4"
+              : "max-h-0 opacity-0 pointer-events-none"
+            }
   `}
         >
           <nav className="flex flex-col space-y-3">
