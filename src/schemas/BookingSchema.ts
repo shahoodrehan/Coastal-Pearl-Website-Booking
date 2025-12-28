@@ -16,16 +16,25 @@ const BookingSchema = Yup.object().shape({
   startTime: Yup.string().required("Start time is required"),
   endTime: Yup.string()
     .required("End time is required")
-    .test("is-after-start", "End time must be later than start time", function (value) {
-      return new Date(value!) > new Date(this.parent.startTime);
-    }),
+    .test(
+      "is-after-start",
+      "End time must be later than start time",
+      function (value) {
+        return new Date(value!) > new Date(this.parent.startTime);
+      }
+    ),
 
   noOfGuests: Yup.number()
     .min(1, "At least 1 guest required")
     .required("Number of guests is required"),
 
+  // floorPreference: Yup.number()
+  // .min(1)
+  // .required("Floor preference is required"),
+
   floorPreference: Yup.number()
-    .min(1)
+    .transform((value, originalValue) => Number(originalValue)) // string -> number
+    .min(1, "Floor preference is required")
     .required("Floor preference is required"),
 
   extraFacilitiesID: Yup.array().of(Yup.number()),

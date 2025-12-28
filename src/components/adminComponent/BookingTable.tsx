@@ -33,6 +33,7 @@ interface Booking {
   noOfGuests: number;
   floorPreference: number;
   status: string; // "Pending" | "Confirmed"
+  statusNum: number;
   createdOn: string;
   extraFacilities: ExtraFacility[];
   items: Booking[];
@@ -75,7 +76,15 @@ export default function BookingTable() {
       console.log("Fetched bookings:", response);
 
       if (response.success && response.data) {
-        setBookings(response.data.items || []);
+        setBookings(
+          response.data.items.map((item) => ({
+            ...item,
+            statusNum:
+              bookingStatusOptions.find((s) => s.label === item.status)
+                ?.value || 0,
+          })) || []
+        );
+
         setTotalCount(response.data.totalCount || 0);
       } else {
         setBookings([]);
@@ -86,6 +95,12 @@ export default function BookingTable() {
     }
     setLoading(false);
   };
+  const bookingStatusOptions = [
+    { label: "Pending", value: BookingStatus.Pending },
+    { label: "Confirmed", value: BookingStatus.Confirmed },
+    { label: "Cancelled", value: BookingStatus.Cancelled },
+    { label: "Completed", value: BookingStatus.Completed },
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -96,23 +111,19 @@ export default function BookingTable() {
     const previousStatus =
       bookings.find((b) => b.bookingRequestId === id)?.status || newStatus;
 
-    setBookings((prev) =>
-      prev.map((b) =>
-        b.bookingRequestId === id ? { ...b, status: newStatus } : b
-      )
-    );
+    // setBookings((prev) =>
+    //   prev.map((b) =>
+    //     b.bookingRequestId === id ? { ...b, status: newStatus } : b
+    //   )
+    // );
 
-    //response
-    //success
-    //faled
-    setBookings((prev) =>
-      prev.map((b) =>
-        b.bookingRequestId === id ? { ...b, status: previousStatus } : b
-      )
-    );
+    // setBookings((prev) =>
+    //   prev.map((b) =>
+    //     b.bookingRequestId === id ? { ...b, status: previousStatus } : b
+    //   )
+    // );
 
     console.log("Update status for", id, "to", newStatus);
-    // TODO: Call API to update status
   };
 
   if (!mounted) return null;
@@ -142,20 +153,54 @@ export default function BookingTable() {
         payload
       );
       if (responce.success) {
-        toast.success("Booking updated successfully!");
-        setBookings((prev) =>
-          prev.map((b) =>
-            b.bookingRequestId === payload.bookingRequestsId
-              ? { ...b, status: "Confirmed", totalPrice: payload.totalPrice }
-              : b
-          )
-        );
+        toast.success("Email has sent!");
+
         closeModal();
       } else {
         toast.error("Failed to update booking: " + responce.error);
       }
     } catch (error) {
       toast.error("An error occurred while updating the booking.");
+    }
+  };
+  const StatusUpdate = async (
+    bookingRequestId: number,
+    newStatus: BookingStatus
+  ) => {
+    const previousBookings = [...bookings];
+
+    // Optimistic UI update
+    setBookings((prev) =>
+      prev.map((b) =>
+        b.bookingRequestId === bookingRequestId
+          ? {
+              ...b,
+              statusNum: newStatus,
+              status:
+                bookingStatusOptions.find((s) => s.value === newStatus)
+                  ?.label || b.status,
+            }
+          : b
+      )
+    );
+
+    try {
+      const payload = {
+        bookingRequestsId: bookingRequestId,
+        status: newStatus,
+      };
+
+      const response = await api.put(apiEndpoints.STATUS_UPDATE, payload);
+
+      if (response.success) {
+        toast.success("Booking updated successfully!");
+      } else {
+        throw new Error(response.error);
+      }
+    } catch (error) {
+      // rollback on failure
+      setBookings(previousBookings);
+      toast.error("Status update failed");
     }
   };
 
@@ -189,7 +234,7 @@ export default function BookingTable() {
           <p>No bookings found.</p>
         ) : (
           <div className="overflow-y-auto w-full max-h-[400px] custom-scrollbar scrollbar-hide">
-            <div className="overflow-x-auto scrollbar-hide" >
+            <div className="overflow-x-auto scrollbar-hide">
               <div className="min-w-[1200px] custom-scrollbar">
                 <table className="min-w-max border-collapse whitespace-nowrap custom-scrollbar">
                   <thead className="sticky top-0 z-10 bg-[var(--bg-dark)]">
@@ -249,19 +294,25 @@ export default function BookingTable() {
                         </td>
                         <td className="p-3 p-3 whitespace-nowra">
                           <select
-                            value={booking.status}
-                            onChange={(e) =>
-                              handleStatusChange(
-                                booking.bookingRequestId,
+                            value={booking.statusNum}
+                            onChange={(e) => {
+                              const newStatus = Number(
                                 e.target.value
-                              )
-                            }
+                              ) as BookingStatus;
+                              if (newStatus === booking.statusNum) return;
+
+                              StatusUpdate(booking.bookingRequestId, newStatus);
+                            }}
                             className="px-2 py-1 rounded border border-[var(--bg-beige2)] bg-white focus:outline-none focus:ring-1 focus:ring-[var(--bg-dark)]"
                           >
-                            <option value="Pending">Pending</option>
-                            <option value="Confirmed">Confirmed</option>
-                            <option value="Cancelled">Cancelled</option>
-                            <option value="Completed">Completed</option>
+                            <option value={0} disabled>
+                              Select Status
+                            </option>
+                            {bookingStatusOptions.map((status) => (
+                              <option key={status.value} value={status.value}>
+                                {status.label}
+                              </option>
+                            ))}
                           </select>
                         </td>
                         <td className="p-3">

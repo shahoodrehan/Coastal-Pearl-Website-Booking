@@ -2,6 +2,7 @@ import { useState } from "react";
 import { removeAdminAuth } from "@/utils/auth";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(true); // sidebar open/close
@@ -24,14 +25,19 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center justify-between mb-6">
             {isOpen && (
               <div className="flex-shrink-0">
+            <Link href="/admin/dashboard" className="block">
+              <div className="relative w-[100px] h-[80px]">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/Logo.png"
                   alt="Logo"
-                  width={100}
-                  height={50}
-                  className="object-contain"
+                  fill
+                  priority
+                  sizes="100px"
+                  style={{ objectFit: "contain" }}
                 />
               </div>
+            </Link>
+          </div>
             )}
             <button
               onClick={() => setIsOpen(!isOpen)}

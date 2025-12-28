@@ -150,7 +150,7 @@ export default function Footer() {
         {/* Column 1 */}
         <div>
           <Image
-            src="/images/Logo.png"
+            src="/images/logo.png"
             alt="logo"
             width={123}
             height={64}
@@ -276,7 +276,7 @@ export default function Footer() {
               <a href="mailto:info@coastalpearl.com"  className="foooter-link-style">info@coastalpearl.com</a>
             </li>
           </ul>
-        </div>a
+        </div>
       </div>
 
       {/* Copyright */}

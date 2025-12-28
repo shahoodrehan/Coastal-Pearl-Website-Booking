@@ -50,7 +50,7 @@ const BookingForm = () => {
       startTime: "",
       endTime: "",
       noOfGuests: 0,
-      floorPreference: 1,
+      floorPreference: 0,
       extraFacilitiesID: [],
     },
     validationSchema: BookingSchema,
@@ -93,28 +93,35 @@ const BookingForm = () => {
         <Section title="Availability Result" bgColor="bg-beige">
           <div
             className="
-      w-full mb-10 p-8
-      rounded-3xl
-      bg-white/70
-      backdrop-blur-xl
-      shadow-[0_8px_30px_rgb(0,0,0,0.12)]
-      border border-white/40
-      animate-fade-in
-    "
+    w-full
+    max-w-[1400px]   /* limit width on large screens */
+    mx-auto      /* center horizontally */
+    mb-10
+    sm-mb-2
+    p-8
+    rounded-3xl
+    bg-white/70
+    backdrop-blur-xl
+    shadow-[0_8px_30px_rgb(0,0,0,0.12)]
+    border border-white/40
+    animate-fade-in
+  "
           >
             {/* STATUS */}
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-lg font-medium text-gray-700">Status</span>
+            <div className="flex items-center justify-between mb-6 p-2 bg-white border border-gray-200 rounded-full shadow-sm">
+              <span className="text-sm font-semibold px-4 py-2 rounded-full bg-blue-100 text-blue-800 ">
+                Status
+              </span>
 
               <span
                 className={`
-          text-sm font-semibold px-4 py-2 rounded-full shadow-sm
-          ${
-            isAvailable === "true"
-              ? "bg-green-200/70 text-green-900 border border-green-300"
-              : "bg-red-200/70 text-red-900 border border-red-300"
-          }
-        `}
+      text-sm font-semibold px-4 py-2 rounded-full shadow-sm
+      ${
+        isAvailable === "true"
+          ? "bg-green-100 text-green-800 border border-green-200"
+          : "bg-red-100 text-red-800 border border-red-200"
+      }
+    `}
               >
                 {isAvailable === "true" ? "Available" : "Not Available"}
               </span>
@@ -125,23 +132,25 @@ const BookingForm = () => {
               <div className="mt-8">
                 {/* Show heading ONLY when not available */}
                 {isAvailable !== "true" && (
-                  <h2 className="text-lg font-semibold text-[#0A3D62] mb-3">
+                  <h2 className="text-lg font-semibold text-[#0A3D62] mb-18 sm:mb-2">
                     Alternative Slots
                   </h2>
                 )}
 
-                <div className="grid gap-6">
+                {/* Grid for 3 slots per row */}
+                <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center">
                   {parsedAlternatives.map((item, index) => (
                     <div
                       key={index}
                       className="
-    p-4
-    bg-white
-    border border-[#f5efe7]
-    shadow-sm
-    hover:shadow-md
-    transition-all duration-200
-  "
+            p-4
+            bg-white
+            border border-[#f5efe7]
+            shadow-sm
+            hover:shadow-md
+            transition-all duration-200
+            rounded-xl
+          "
                     >
                       {/* HEADER - Centered */}
                       <div className="flex flex-col items-center mb-4">
@@ -255,7 +264,7 @@ const BookingForm = () => {
             {/* EMAIL */}
             <div>
               <label className="block text-[#0A3D62] mb-2">
-                Email Address *
+                Email Address <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
@@ -275,11 +284,13 @@ const BookingForm = () => {
 
             {/* USERNAME */}
             <div>
-              <label className="block text-[#0A3D62] mb-2">User Name</label>
+              <label className="block text-[#0A3D62] mb-2">
+                Full Name <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 name="userName"
-                placeholder="Your Name"
+                placeholder="You Name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.userName}
@@ -295,7 +306,7 @@ const BookingForm = () => {
             {/* CONTACT NO */}
             <div>
               <label className="block text-[#0A3D62] mb-2">
-                Phone Number *
+                Phone Number <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -315,7 +326,9 @@ const BookingForm = () => {
 
             {/* START TIME */}
             <div>
-              <label className="block text-[#0A3D62] mb-2">Start Time *</label>
+              <label className="block text-[#0A3D62] mb-2">
+                Start Time <span className="text-red-500">*</span>
+              </label>
               <input
                 type="datetime-local"
                 name="startTime"
@@ -334,7 +347,9 @@ const BookingForm = () => {
 
             {/* END TIME */}
             <div>
-              <label className="block text-[#0A3D62] mb-2">End Time *</label>
+              <label className="block text-[#0A3D62] mb-2">
+                End Time <span className="text-red-500">*</span>
+              </label>
               <input
                 type="datetime-local"
                 name="endTime"
@@ -354,16 +369,27 @@ const BookingForm = () => {
             {/* NUMBER OF GUESTS */}
             <div>
               <label className="block text-[#0A3D62] mb-2">
-                Number of Guests *
+                Number of Guests <span className="text-red-500">*</span>
               </label>
               <input
                 type="number"
                 name="noOfGuests"
                 placeholder="0"
-                onChange={formik.handleChange}
+                min={1}
+                onChange={(e) => {
+                  const value = parseInt(e.target.value);
+                  if (!isNaN(value) && value >= 1) {
+                    formik.handleChange(e);
+                  } else if (e.target.value === "") {
+                    formik.handleChange(e);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (["-", "+", "e", "E"].includes(e.key)) e.preventDefault();
+                }}
                 onBlur={formik.handleBlur}
                 value={formik.values.noOfGuests}
-                className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
+                className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none no-spinner"
               />
               {formik.touched.noOfGuests && formik.errors.noOfGuests && (
                 <p className="text-red-500 text-sm mt-1">
@@ -373,22 +399,66 @@ const BookingForm = () => {
             </div>
 
             {/* FLOOR PREFERENCE */}
-            <div>
-              <label className="block text-[#0A3D62] mb-2">
-                Floor Preference
+            <div className="mb-5">
+              <label className="block text-[#0A3D62] font-semibold mb-2">
+                Floor Preference <span className="text-red-500">*</span>
               </label>
-              <select
-                name="floorPreference"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.floorPreference}
-                className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
-              >
-                <option value="1">Ground Floor</option>
-                <option value="2">First Floor</option>
-                <option value="3">Second Floor</option>
-                <option value="4">Complete Resort</option>
-              </select>
+              <div className="relative">
+                <select
+                  name="floorPreference"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.floorPreference}
+                  className="
+        w-full
+        appearance-none
+        px-4
+        py-3
+        bg-[#F5EFE7]
+        rounded-xl
+        border-2
+        border-transparent
+        focus:border-[#0A3D62]
+        outline-none
+        cursor-pointer
+        hover:border-[#0A3D62]
+        transition
+        duration-200
+      "
+                >
+                  <option value="0" disabled>
+                    Select Floor
+                  </option>
+                  <option value="1">Ground Floor</option>
+                  <option value="2">First Floor</option>
+                  <option value="3">Second Floor</option>
+                  <option value="4">Complete Resort</option>
+                </select>
+
+                {/* Dropdown arrow */}
+                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
+                  <svg
+                    className="w-5 h-5 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {formik.touched.floorPreference &&
+                formik.errors.floorPreference && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formik.errors.floorPreference}
+                  </p>
+                )}
             </div>
 
             {/* EXTRA FACILITIES (2-COLUMN GRID) */}

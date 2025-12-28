@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useFormik, FormikHelpers } from "formik";
+import AdminBookingSchema from "@/schemas/AdminBookingSchema"; // import your schema here
 
 export interface ExtraFacilityInput {
   extraFacilitiesId: number;
@@ -36,53 +38,74 @@ export default function BookingModal({
   onClose,
   onSave,
 }: BookingModalProps) {
-  const [floorPrice, setFloorPrice] = useState<number>(0);
-  const [facilityInputs, setFacilityInputs] = useState<ExtraFacilityInput[]>(
-    []
-  );
-
-  useEffect(() => {
-    const defaultFacilities: ExtraFacilityInput[] = booking.extraFacilities.map(
-      (f) => ({
+  // Initialize Formik
+  const formik = useFormik({
+    initialValues: {
+      floorPrice: 0,
+      facilities: booking.extraFacilities.map((f) => ({
         extraFacilitiesId: f.extraFacilitiesId,
         facilityName: f.facilityName,
         noOfGuests: 0,
         price: 0,
         total: 0,
-      })
-    );
-    setFacilityInputs(defaultFacilities);
-    setFloorPrice(0);
-  }, [booking]);
+      })),
+    },
+    validationSchema: AdminBookingSchema,
+    onSubmit: (values) => {
+      const payload = {
+        bookingRequestsId: booking.bookingRequestId,
+        status: 1,
+        totalPrice:
+          values.facilities.reduce((sum, f) => sum + f.total, 0) +
+          values.floorPrice,
+        facilities: values.facilities.map((f) => ({
+          extraFacilitiesId: f.extraFacilitiesId,
+          noOfGuests: f.noOfGuests,
+          price: f.price,
+        })),
+      };
+      onSave(payload);
+    },
+  });
 
-  const updateFacility = (
+  // Update total when guests or price change
+  const handleFacilityChange = (
     index: number,
     field: "noOfGuests" | "price",
     value: number
   ) => {
-    const updated = [...facilityInputs];
-    updated[index][field] = value;
+    const updated = [...formik.values.facilities];
+    updated[index][field] = value; // always a number
     updated[index].total = updated[index].noOfGuests * updated[index].price;
-    setFacilityInputs(updated);
+    formik.setFieldValue("facilities", updated);
   };
 
   const calculateTotalPrice = () => {
-    const facilityTotal = facilityInputs.reduce((sum, f) => sum + f.total, 0);
-    return floorPrice + facilityTotal;
+    return (
+      formik.values.floorPrice +
+      formik.values.facilities.reduce((sum, f) => sum + f.total, 0)
+    );
   };
 
-  const handleSave = () => {
-    const payload = {
-      bookingRequestsId: booking.bookingRequestId,
-      status: 1,
-      totalPrice: floorPrice,
-      facilities: facilityInputs.map((f) => ({
-        extraFacilitiesId: f.extraFacilitiesId,
-        noOfGuests: f.noOfGuests,
-        price: f.price,
-      })),
+  const formatDateTime12Hour = (dateStr: string) => {
+    const date = new Date(dateStr);
+
+    // Format date part
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     };
-    onSave(payload);
+    const datePart = date.toLocaleDateString(undefined, options);
+
+    // Format time part
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12 || 12; // convert 0 -> 12
+    const timePart = `${hours}:${minutes} ${ampm}`;
+
+    return `${datePart}, ${timePart}`;
   };
 
   return (
@@ -97,10 +120,10 @@ export default function BookingModal({
         </button>
 
         <h2 className="text-xl font-semibold mb-4">
-          Booking — #{booking.bookingRequestId}
+          Booking No. #{booking.bookingRequestId}
         </h2>
 
-        <div className="space-y-4">
+        <form onSubmit={formik.handleSubmit} className="space-y-4">
           {/* No of Guests */}
           <div>
             <label className="font-semibold">No. of Guests:</label>
@@ -116,11 +139,9 @@ export default function BookingModal({
             <label className="font-semibold">Booking Date:</label>
             <input
               disabled
-              value={`${new Date(
+              value={`${formatDateTime12Hour(
                 booking.startTime
-              ).toLocaleString()} → ${new Date(
-                booking.endTime
-              ).toLocaleString()}`}
+              )} → ${formatDateTime12Hour(booking.endTime)}`}
               className="w-full border p-2 rounded bg-gray-100"
             />
           </div>
@@ -130,17 +151,33 @@ export default function BookingModal({
             <label className="font-semibold">Floor Price:</label>
             <input
               type="number"
-              value={floorPrice}
-              onChange={(e) => setFloorPrice(Number(e.target.value))}
-              className="w-full border p-2 rounded"
+              name="floorPrice"
+              value={formik.values.floorPrice}
+              onChange={(e) => {
+                const value = parseInt(e.target.value);
+                if (!isNaN(value) && value >= 1) {
+                  formik.handleChange(e); // only allow numbers >= 1
+                } else if (e.target.value === "") {
+                  formik.handleChange(e); // allow empty to type
+                }
+              }}
+              onKeyDown={(e) => {
+                if (["-", "+", "e", "E"].includes(e.key)) e.preventDefault();
+              }}
+              className="w-full border p-2 rounded no-spinner"
             />
+            {formik.errors.floorPrice && (
+              <p className="text-red-500 text-sm mt-1">
+                {formik.errors.floorPrice}
+              </p>
+            )}
           </div>
 
           {/* Facilities */}
-          {facilityInputs.length > 0 && (
+          {formik.values.facilities.length > 0 && (
             <div>
               <h3 className="font-semibold mb-2">Facilities:</h3>
-              {facilityInputs.map((f, idx) => (
+              {formik.values.facilities.map((f, idx) => (
                 <div
                   key={f.extraFacilitiesId}
                   className="grid grid-cols-4 gap-2 mb-2"
@@ -162,13 +199,13 @@ export default function BookingModal({
                       type="number"
                       value={f.noOfGuests}
                       onChange={(e) =>
-                        updateFacility(
+                        handleFacilityChange(
                           idx,
                           "noOfGuests",
                           Number(e.target.value)
                         )
                       }
-                      className="border p-2 rounded"
+                      className="border p-2 rounded no-spinner"
                     />
                   </div>
 
@@ -179,9 +216,13 @@ export default function BookingModal({
                       type="number"
                       value={f.price}
                       onChange={(e) =>
-                        updateFacility(idx, "price", Number(e.target.value))
+                        handleFacilityChange(
+                          idx,
+                          "price",
+                          Number(e.target.value)
+                        )
                       }
-                      className="border p-2 rounded"
+                      className="border p-2 rounded no-spinner"
                     />
                   </div>
 
@@ -210,12 +251,12 @@ export default function BookingModal({
           </div>
 
           <button
-            onClick={handleSave}
+            type="submit"
             className="w-full bg-[var(--bg-dark)] text-[var(--text-light)] py-2 rounded mt-4 cursor-pointer"
           >
             Save & Send
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

@@ -39,19 +39,19 @@ export default function Navbar() {
       <nav className="w-full lg:w-[92%] mx-auto px-4 lg:px-0 relative">
         <div className="flex items-center justify-between h-[80px]">
           <div className="flex-shrink-0">
-  <Link href="/" className="block">
-    <div className="relative w-[90px] h-[80px]">
-      <Image
-        src="/images/Logo.png"
-        alt="Logo"
-        fill
-        priority
-        sizes="90px"
-        style={{ objectFit: "contain" }}
-      />
-    </div>
-  </Link>
-</div>
+            <Link href="/" className="block">
+              <div className="relative w-[90px] h-[80px]">
+                <Image
+                  src="/images/logo.png"
+                  alt="Logo"
+                  fill
+                  priority
+                  sizes="90px"
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+            </Link>
+          </div>
 
 
 
