@@ -4,12 +4,13 @@ import { Toaster } from "sonner";
 
 import Navbar from "../components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { AvailableSlotModalProvider } from "@/context/AvailableSlotModalContext";
+import AvailabilityModal from "@/components/modal/AvailabilityModal";
 
 export default function App({
   Component,
   pageProps,
 }: AppProps & { Component: any }) {
-  // Use page's custom layout if defined
   const getLayout =
     Component.getLayout ??
     ((page: React.ReactNode) => (
@@ -21,9 +22,10 @@ export default function App({
     ));
 
   return (
-    <>
+    <AvailableSlotModalProvider>
       {getLayout(<Component {...pageProps} />)}
+      <AvailabilityModal /> {/* Always mounted, controlled by context */}
       <Toaster position="top-right" />
-    </>
+    </AvailableSlotModalProvider>
   );
 }

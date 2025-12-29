@@ -202,7 +202,7 @@ export default function BookingModal({
                         handleFacilityChange(
                           idx,
                           "noOfGuests",
-                          Number(e.target.value)
+                          e.target.valueAsNumber
                         )
                       }
                       className="border p-2 rounded no-spinner"
@@ -219,7 +219,7 @@ export default function BookingModal({
                         handleFacilityChange(
                           idx,
                           "price",
-                          Number(e.target.value)
+                          e.target.valueAsNumber
                         )
                       }
                       className="border p-2 rounded no-spinner"
@@ -231,7 +231,7 @@ export default function BookingModal({
                     <label className="text-sm font-medium mb-1">Total</label>
                     <input
                       disabled
-                      value={f.total}
+                      value={f.total || "..."}
                       className="border p-2 rounded bg-gray-100"
                     />
                   </div>

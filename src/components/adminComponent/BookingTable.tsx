@@ -305,9 +305,6 @@ export default function BookingTable() {
                             }}
                             className="px-2 py-1 rounded border border-[var(--bg-beige2)] bg-white focus:outline-none focus:ring-1 focus:ring-[var(--bg-dark)]"
                           >
-                            <option value={0} disabled>
-                              Select Status
-                            </option>
                             {bookingStatusOptions.map((status) => (
                               <option key={status.value} value={status.value}>
                                 {status.label}

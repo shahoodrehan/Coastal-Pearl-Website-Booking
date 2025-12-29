@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { removeAdminAuth } from "@/utils/auth";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import router from "next/router";
+import { isAdminLoggedIn } from "@/utils/auth";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(true); // sidebar open/close
 
   const handleLogout = () => {
-    removeAdminAuth();
-    window.location.href = "/";
+    removeAdminAuth(router); // pass router to removeAdminAuth
   };
+  useEffect(() => {
+    if (!isAdminLoggedIn()) {
+      router.replace("/"); // redirect if not logged in
+    }
+  }, [router]);
 
   return (
     <div className="h-screen flex bg-[var(--bg-beige)] overflow-hidden scrollbar-hide">
@@ -25,19 +31,19 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
           <div className="flex items-center justify-between mb-6">
             {isOpen && (
               <div className="flex-shrink-0">
-            <Link href="/admin/dashboard" className="block">
-              <div className="relative w-[100px] h-[80px]">
-                <Image
-                  src="/images/Logo.png"
-                  alt="Logo"
-                  fill
-                  priority
-                  sizes="100px"
-                  style={{ objectFit: "contain" }}
-                />
+                <Link href="/admin/dashboard" className="block">
+                  <div className="relative w-[100px] h-[80px]">
+                    <Image
+                      src="/images/Logo.png"
+                      alt="Logo"
+                      fill
+                      priority
+                      sizes="100px"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
             )}
             <button
               onClick={() => setIsOpen(!isOpen)}

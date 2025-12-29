@@ -11,24 +11,6 @@ type AvailabilityFormValues = {
   numberOfGuests: number;
 };
 
-// const handleAvailability = async (values: AvailabilityFormValues) => {
-
-//   try {
-//     const payload = {
-//     StartTime: values.startTime,
-//     EndTime: values.endTime,
-//     NumberOfGuests: values.numberOfGuests,
-//   }
-//     const response = await api.post(apiEndpoints.CHECK_AVAILABILITY, payload)
-//     if(response.success){
-//       alert("Available")
-//     }
-//   } catch (error) {
-//     console.error("Availability check failed:", error)
-//   }
-
-// }
-
 export default function AvailabilityCheckForm() {
   const formik = useFormik<AvailabilityFormValues>({
     initialValues: {

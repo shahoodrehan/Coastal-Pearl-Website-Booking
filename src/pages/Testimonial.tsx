@@ -7,7 +7,10 @@ import Section from "@/components/home/Section";
 import CommentCards from "@/components/card/TestimonialCard/CommentCards";
 import Button from "@/components/ui/Button";
 
+import { useAvailableSlotModal } from "@/context/AvailableSlotModalContext";
+
 function Testimonial() {
+  const { openModal } = useAvailableSlotModal();
   return (
     <>
       <Hero
@@ -72,7 +75,12 @@ function Testimonial() {
         title="Create Your Own Story"
         subtitle="Join hundreds of satisfied guests who have experienced the magic of The Coastal Pearl"
       >
-        <Button variant="primary" size="sm" radius="full">
+        <Button
+          variant="primary"
+          size="lg"
+          radius="full"
+          onClick={() => openModal()}
+        >
           Book your Stay
         </Button>
       </Section>

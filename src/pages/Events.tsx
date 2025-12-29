@@ -7,7 +7,10 @@ import ThemeCards from "@/components/card/Events/ThemeCard";
 import EventPackagesCards from "@/components/card/Events/EventPackageCards";
 import Button from "@/components/ui/Button";
 
+import { useAvailableSlotModal } from "@/context/AvailableSlotModalContext";
+
 function Events() {
+  const { openModal } = useAvailableSlotModal();
   return (
     <>
       <Hero
@@ -54,7 +57,7 @@ function Events() {
         title="Request an Event Quote"
         subtitle="Let us help you plan the perfect event. Get a customized quote tailored to your needs."
       >
-        <Button size="lg" radius="full" arrow>
+        <Button size="lg" radius="full" arrow onClick={() => openModal()}>
           Book Now
         </Button>
       </Section>

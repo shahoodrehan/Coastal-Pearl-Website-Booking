@@ -14,6 +14,8 @@ import BottomSection from "@/components/home/BottomSection";
 import { redirect } from "next/dist/server/api-utils";
 import AvailabilityCheckForm from "@/components/Forms/AvaiblityForm";
 
+import { useAvailableSlotModal } from "@/context/AvailableSlotModalContext";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -54,6 +56,7 @@ export default function Home() {
     "/images/paradise-2.jpg",
     "/images/paradise-3.jpg",
   ];
+  const { openModal } = useAvailableSlotModal();
 
   return (
     <>
@@ -63,27 +66,6 @@ export default function Home() {
         backgroundImage="/images/vision.jpg"
         height="100vh"
         position="center"
-        // buttons={[
-        //   <Button
-        //     onClick={() => router.push("/BookingForm")}
-        //     variant="primary"
-        //     size="lg"
-        //     radius="full"
-        //     width="responsive"
-        //     arrow
-        //   >
-        //     Book Now
-        //   </Button>,
-        //   <Button
-        //     onClick={() => router.push("/Packages")}
-        //     variant="transparent"
-        //     size="lg"
-        //     radius="full"
-        //     width="responsive"
-        //   >
-        //     View Packages
-        //   </Button>,
-        // ]}
       >
         <AvailabilityCheckForm />
       </Hero>
@@ -145,7 +127,7 @@ export default function Home() {
         backgroundImage="/images/home-bottom.jpg"
       >
         <Button
-          onClick={() => router.push("/BookingForm")}
+          onClick={() => openModal()}
           variant="secondary"
           size="lg"
           radius="full"
