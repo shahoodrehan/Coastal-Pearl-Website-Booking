@@ -37,7 +37,7 @@ const contactcard: Cards[] = [
 
 const ContactCards: React.FC = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-6">
+    <div className="w-full max-w-[1368px] mx-auto px-4 lg:px-0 flex flex-wrap justify-between gap-6">
       {contactcard.map((card, idx) => (
         <div
           key={idx}

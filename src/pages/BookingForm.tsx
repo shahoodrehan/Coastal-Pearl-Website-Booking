@@ -32,6 +32,12 @@ interface Alternative {
   start: string;
   end: string;
 }
+const floorLabels: Record<number, string> = {
+  1: "Ground Floor",
+  2: "First Floor",
+  3: "Terrace",
+  4: "Complete Resort",
+};
 
 const BookingForm = () => {
   const router = useRouter();
@@ -171,11 +177,10 @@ const BookingForm = () => {
                           </svg>
                         </div>
                         <p className="text-lg font-semibold text-[#0a3d62]">
-                          Floor {item.floor}
+                          {floorLabels[item.floor] || "Unknown Floor"}
                         </p>
                       </div>
 
-                      {/* CONTENT - Left aligned in two columns */}
                       <div className="grid grid-cols-2 gap-4">
                         {/* START */}
                         <div>

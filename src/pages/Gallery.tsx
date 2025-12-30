@@ -6,8 +6,11 @@ import Button from "@/components/ui/Button";
 import GalleryTabs from "@/components/ui/GalleryTabs";
 import { useRouter } from "next/router";
 
+import { useAvailableSlotModal } from "@/context/AvailableSlotModalContext";
+
 function Gallery() {
   const router = useRouter();
+  const { openModal } = useAvailableSlotModal();
   return (
     <>
       <Hero
@@ -24,7 +27,7 @@ function Gallery() {
         subtitle="Pictures can only capture so much. Come experience the magic of The Coastal Pearl in person."
       >
         <Button
-          onClick={() => router.push("/BookingForm")}
+          onClick={() => openModal()}
           variant="primary"
           size="lg"
           radius="full"

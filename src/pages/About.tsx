@@ -101,7 +101,7 @@ function About() {
       </Section>
 
       <section className="w-full bg-[var(--bg-dark)] py-20 px-4 md:px-10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-start">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-start">
           {/* LEFT TEXT CONTENT */}
           <div className="flex-1">
             <h2 className="text-3xl md:text-4xl font-bold !text-left !text-[var(--text-light)] mb-6">
@@ -134,7 +134,7 @@ function About() {
             {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
-                className="flex-1 min-w-[48%] md:min-w-[48%] rounded-2xl overflow-hidden *h-[180px] md:h-[220px] relative"
+                className="flex-1 min-w-[48%] md:min-w-[48%] rounded-2xl overflow-hidden *h-[180px] md:h-[172px] relative"
               >
                 <Image
                   src={`/images/ab-${i}.jpeg`}

@@ -24,7 +24,7 @@ function ResortSpaces() {
         className="w-full bg-[var(--bg-light)] py-12 md:py-20"
         id="ground-floor"
       >
-        <div className="w-[90%] mx-auto flex flex-col gap-12">
+        <div className="w-full max-w-[1368px] mx-auto px-4 lg:px-0 flex flex-col gap-12">
           {/* TOP HEADING + PARAGRAPHS */}
           <div className="w-full lg:w-[70%]">
             <div className="inline-flex bg-[#AEC6CF33] py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">
@@ -34,10 +34,8 @@ function ResortSpaces() {
 
             <p className="text-2 text-left text-[var(--text-light)] mb-4 ">
               The Coastal Pearl opens its doors to a world of calm
-              sophistication.
-              The ground floor is where warmth meets functionality, a
-              blend of cozy living and luxurious design.
-
+              sophistication. The ground floor is where warmth meets
+              functionality, a blend of cozy living and luxurious design.
             </p>
           </div>
 
@@ -104,7 +102,7 @@ function ResortSpaces() {
         className="w-full bg-[var(--bg-beige)] py-12 md:py-20"
         id="first-floor"
       >
-        <div className="w-[90%] mx-auto flex flex-col gap-12">
+        <div className="w-full max-w-[1368px] mx-auto px-4 lg:px-0 flex flex-col gap-12">
           <div className="w-full lg:w-[70%]">
             <div className="inline-flex bg-(--bg-light) py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">
               Level 2
@@ -162,7 +160,7 @@ function ResortSpaces() {
         className="w-full bg-[var(--bg-light)] py-12 md:py-20"
         id="top-floor"
       >
-        <div className="w-[90%] mx-auto flex flex-col gap-12">
+        <div className="w-full max-w-[1368px] mx-auto px-4 lg:px-0 flex flex-col gap-12">
           {/* TOP HEADING + PARAGRAPHS */}
           <div className="w-full lg:w-[70%]">
             <div className="inline-flex bg-[#AEC6CF33] py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">

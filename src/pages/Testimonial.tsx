@@ -20,7 +20,7 @@ function Testimonial() {
         position=""
       />
 
-      <section className="w-full bg-(--bg-light) py-12 md:py-20 px-4 md:px-8">
+      <section className="w-full bg-(--bg-light) py-12 md:py-20 px-4 lg:px-0 ">
         <StatsCards />
       </section>
 

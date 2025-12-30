@@ -48,7 +48,7 @@ const Journey: React.FC = () => {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 md:px-0 lg:px-0 flex flex-col gap-10">
+    <div className="w-full mx-auto px-4 md:px-0 lg:px-0 flex flex-col gap-10">
       {timelineData.map((item, index) => {
         const isReversed = index % 2 !== 0;
 

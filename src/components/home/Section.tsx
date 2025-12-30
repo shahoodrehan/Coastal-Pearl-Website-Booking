@@ -55,47 +55,49 @@ const Section: React.FC<SectionProps> = ({
       style={bgStyle}
       id={id}
     >
-      <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full">
-        {/* Animated Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className={`text-3xl md:text-5xl font-bold mb-4 ${titleClassName}`}
-          style={{ color: titleColor }}
-        >
-          {title}
-        </motion.h2>
-
-        {/* Animated Subtitle */}
-        {subtitle && (
-          <motion.p
+      <div className="w-full max-w-[1368px] flex flex-col items-center text-center">
+        <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full">
+          {/* Animated Title */}
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className={`text-1 ${subtitleClassName}`}
-            style={{ color: subtitleColor }}
+            transition={{ duration: 0.6 }}
+            className={`text-3xl md:text-5xl font-bold mb-4 ${titleClassName}`}
+            style={{ color: titleColor }}
           >
-            {subtitle}
-          </motion.p>
+            {title}
+          </motion.h2>
+
+          {/* Animated Subtitle */}
+          {subtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className={`text-1 ${subtitleClassName}`}
+              style={{ color: subtitleColor }}
+            >
+              {subtitle}
+            </motion.p>
+          )}
+        </div>
+
+        {children && (
+          <div className="w-full flex flex-wrap justify-center gap-6 mb-8">
+            {children}
+          </div>
+        )}
+
+        {buttons && buttons.length > 0 && (
+          <div className="flex flex-col sm:flex-row gap-4 mt-4">
+            {buttons.map((btn, idx) => (
+              <span key={idx}>{btn}</span>
+            ))}
+          </div>
         )}
       </div>
-
-      {children && (
-        <div className="w-full flex flex-wrap justify-center gap-6 mb-8">
-          {children}
-        </div>
-      )}
-
-      {buttons && buttons.length > 0 && (
-        <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          {buttons.map((btn, idx) => (
-            <span key={idx}>{btn}</span>
-          ))}
-        </div>
-      )}
     </section>
   );
 };

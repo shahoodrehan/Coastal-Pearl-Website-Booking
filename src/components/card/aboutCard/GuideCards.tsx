@@ -29,7 +29,7 @@ const MissionVisionSection = () => {
   ];
 
   return (
-    <section className="w-[94%] max-w-6xl mx-auto py-0 md:py-16">
+    <section className="w-[100%] mx-auto py-0 md:py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {cards.map((item, index) => (
           <div

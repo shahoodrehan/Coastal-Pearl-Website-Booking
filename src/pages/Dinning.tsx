@@ -13,7 +13,7 @@ function Dinning() {
       <Hero
         title="Dining Experience"
         subtitle="Culinary excellence meets coastal charm"
-        backgroundImage="/images/.jpeg"
+        backgroundImage="/images/ab-2.jpeg"
         position="top-center"
       />
       <Section
@@ -24,7 +24,7 @@ function Dinning() {
       </Section>
 
       <section className="w-full bg-[var(--bg-beige)] py-12 md:py-20">
-        <div className="w-[90%] mx-auto flex flex-col gap-12">
+        <div className="w-full max-w-[1368px] mx-auto flex flex-col gap-12">
           <div className="w-full flex flex-col lg:flex-row lg:items-center gap-14">
             {/* LEFT — LARGE IMAGE */}
             <div
@@ -143,7 +143,7 @@ function Dinning() {
       </Section>
 
       <section className="w-full bg-[var(--bg-dark)] py-12 md:py-20 px-4 md:px-10">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           {/* LEFT TEXT CONTENT */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold !text-left mb-6 !text-(--text-light)">

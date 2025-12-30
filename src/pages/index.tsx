@@ -11,7 +11,6 @@ import GalleryCard from "@/components/card/homeCard/GalleryCard";
 import SpacesCards from "@/components/card/homeCard/SpacesCards";
 import GuestCards from "@/components/card/homeCard/GuestCards";
 import BottomSection from "@/components/home/BottomSection";
-import { redirect } from "next/dist/server/api-utils";
 import AvailabilityCheckForm from "@/components/Forms/AvaiblityForm";
 
 import { useAvailableSlotModal } from "@/context/AvailableSlotModalContext";

@@ -273,7 +273,12 @@ export default function Footer() {
                 height={20}
                 className="mb-2 mr-2"
               />
-              <a href="mailto:info@coastalpearl.com"  className="foooter-link-style">info@coastalpearl.com</a>
+              <a
+                href="mailto:info@coastalpearl.com"
+                className="foooter-link-style"
+              >
+                info@coastalpearl.com
+              </a>
             </li>
           </ul>
         </div>

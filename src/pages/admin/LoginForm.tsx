@@ -6,12 +6,17 @@ import { setAdminAuth } from "@/utils/auth";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
 
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+
 interface LoginFormValues {
   userEmail: string;
   password: string;
 }
 
 export default function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const router = useRouter();
   const formik = useFormik<LoginFormValues>({
     initialValues: { userEmail: "", password: "" },
@@ -70,22 +75,33 @@ export default function LoginForm() {
           </div>
 
           {/* Password */}
-          <div className="flex flex-col">
+
+          <div className="flex flex-col relative">
             <label
               htmlFor="password"
               className="text-[var(--text-dark)] font-medium"
             >
               Password
             </label>
+
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
-              className="border border-[var(--bg-beige2)] p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--bg-dark)]"
+              className="border border-[var(--bg-beige2)] p-3 pr-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--bg-dark)]"
               placeholder="Enter password"
             />
+
+            {/* Eye Button */}
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-[42px] text-[var(--text-dark)] hover:opacity-70"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
           </div>
 
           {/* Submit Button */}

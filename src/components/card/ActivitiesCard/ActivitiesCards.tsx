@@ -37,7 +37,7 @@ const activitycard: activitiesCard[] = [
 
 const ActivityCards: React.FC = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-6">
+    <div className="w-full max-w-[1368px] flex flex-wrap justify-center gap-6">
       {activitycard.map((card, idx) => (
         <div
           key={idx}

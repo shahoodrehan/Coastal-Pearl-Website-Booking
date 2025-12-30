@@ -1,28 +1,25 @@
-
 function StatsCards() {
-
   const statsData = [
-  {
-    count: "500+",
-    stats: "Happy Guests",
-  },
-  {
-    count: "4.9",
-    stats: "Average Rating",
-  },
-  {
-    count: "200+",
-    stats: "Events Hosted",
-  },
-  {
-    count: "98%",
-    stats: "Return Rate",
-  },
-];
-
+    {
+      count: "500+",
+      stats: "Happy Guests",
+    },
+    {
+      count: "4.9",
+      stats: "Average Rating",
+    },
+    {
+      count: "200+",
+      stats: "Events Hosted",
+    },
+    {
+      count: "98%",
+      stats: "Return Rate",
+    },
+  ];
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 mt-10">
+    <div className="w-full max-w-[1368px] mx-auto flex gap-12 mt-10">
       {statsData.map((item, index) => (
         <div
           key={index}
@@ -34,9 +31,7 @@ function StatsCards() {
             hover:shadow-xl transition-all duration-300
           "
         >
-          <p className="text-[40px] font-bold leading-none">
-            {item.count}
-          </p>
+          <p className="text-[40px] font-bold leading-none">{item.count}</p>
           <p className="text-[16px] text-(--text-dark) opacity-80 mt-2">
             {item.stats}
           </p>

@@ -20,7 +20,7 @@ function Contact() {
       </section>
 
       <section className="w-full bg-(--bg-beige) py-12 md:py-20">
-        <div className="w-[90%] mx-auto flex flex-col lg:flex-row gap-12">
+        <div className="w-full max-w-[1368px] mx-auto flex flex-col lg:flex-row gap-12">
           {/* Left — Google Map */}
           <div className="w-full lg:w-1/2 h-80 lg:h-[500px] rounded-2xl overflow-hidden">
             <iframe

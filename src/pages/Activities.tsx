@@ -25,7 +25,7 @@ function Activities() {
       />
 
       <section className="w-full flex flex-col items-center text-center bg-(--bg-light) px-4 md:px-8  py-12 md:py-20">
-        <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full ">
+        <div className="w-full max-w-[1368px] mx-auto mb-16 px-4 md:px-8 flex flex-col items-center text-center">
           <div className="inline-flex bg-[#AEC6CF33] py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">
             Water Adventures
           </div>
@@ -37,15 +37,14 @@ function Activities() {
             and activities
           </p>
         </div>
-
-        <div className="w-full flex flex-wrap justify-center gap-y-12 mb-8 ">
+        <div className="w-full flex flex-col lg:flex-col justify-center items-center gap-12 mb-8">
           <ActivityCards />
           <Gallery images={homeGallery} />
         </div>
       </section>
 
       <section className="w-full flex flex-col items-center text-center bg-(--bg-beige) px-4 md:px-8 py-12 md:py-20">
-        <div className="mb-16 w-[60%] max-[769px]:w-[90%] max-[425px]:w-full ">
+        <div className="w-full max-w-[1368px] mx-auto mb-16 px-4 md:px-8 flex flex-col items-center text-center">
           <div className="inline-flex bg-[#AEC6CF33] py-2 px-6 mb-6 rounded-full items-center text-(--text-dark)">
             On-Shore Activities
           </div>
@@ -64,7 +63,7 @@ function Activities() {
       </section>
 
       <section className="w-full bg-[var(--bg-light)] py-12 md:py-20 px-4 md:px-10">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           {/* LEFT TEXT CONTENT */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold !text-left mb-6">
@@ -87,7 +86,7 @@ function Activities() {
             <div className="flex gap-2 justify-between flex-wrap">
               <div className="flex items-center gap-2">
                 <Image
-                  src="/icons/profile.png"
+                  src="/icons/events.png"
                   alt="icon"
                   width={20}
                   height={20}
@@ -95,17 +94,12 @@ function Activities() {
                 <span className="text-base">Seating for 20+</span>
               </div>
               <div className="flex items-center gap-2">
-                <Image
-                  src="/icons/music.png"
-                  alt="icon"
-                  width={20}
-                  height={20}
-                />
+                <Image src="/icons/tv.png" alt="icon" width={20} height={20} />
                 <span className="text-base">Music system</span>
               </div>
               <div className="flex items-center gap-2">
                 <Image
-                  src="/icons/sun-2.png"
+                  src="/icons/ride.png"
                   alt="icon"
                   width={20}
                   height={20}
@@ -116,7 +110,7 @@ function Activities() {
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="relative w-full h-64 md:h-[400px] lg:h-[400px] rounded-2xl overflow-hidden">
+          <div className="relative w-full h-84 rounded-2xl overflow-hidden">
             <Image
               src="/images/born-fire.jpg"
               alt="Bonfire"
@@ -126,16 +120,6 @@ function Activities() {
           </div>
         </div>
       </section>
-
-      {/* <Section
-        title="Safety First"
-        titleColor="var(--text-light)"
-        subtitle="Your safety is our priority. All activities are supervised by trained professionals."
-        subtitleColor="var(--text-light)"
-        bgColor="bg-dark"
-      >
-        <ActivitiesBottomcards />
-      </Section> */}
     </>
   );
 }

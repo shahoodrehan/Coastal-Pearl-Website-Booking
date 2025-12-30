@@ -36,7 +36,7 @@ const occasion: Occasioncards[] = [
 
 const OccasionCards: React.FC = () => {
   return (
-    <div className="flex flex-wrap justify-center gap-6">
+    <div className="flex flex-wrap justify-between gap-6">
       {occasion.map((card, idx) => (
         <div
           key={idx}
