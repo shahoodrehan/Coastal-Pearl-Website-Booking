@@ -1,5 +1,14 @@
 import Image from "next/image";
 
+// Helper function to get initials from a name
+const getInitials = (name: string): string => {
+  const names = name.trim().split(" ");
+  if (names.length === 1) {
+    return names[0].charAt(0).toUpperCase();
+  }
+  return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+};
+
 const testimonials = [
   {
     review:
@@ -71,13 +80,18 @@ function CommentCards() {
     <div className="flex flex-wrap gap-6 justify-start">
       {testimonials.map((card, idx) => (
         <div className="w-full sm:w-[48%] lg:w-[31%] bg-white p-6 rounded-xl shadow-md flex flex-col justify-between lg:h-[393px]">
-          {/* Testimonial Icon */}
+          {/* Testimonial Icon - Replaced with Name Initials */}
           <Image
             src="/icons/testimonial.png"
             alt="testimonial icon"
             width={40}
             height={40}
           />
+          {/* <div className="w-10 h-10 bg-[var(--bg-beige)] rounded-full flex items-center justify-center">
+            <span className="text-[var(--text-dark)] font-semibold text-lg">
+              {getInitials(card.name)}
+            </span>
+          </div> */}
 
           {/* Stars */}
           <div className="flex items-center gap-1">
@@ -101,13 +115,19 @@ function CommentCards() {
 
             {/* User Info */}
             <div className="flex items-center gap-3">
-              <Image
+              {/* User placeholder image - Replaced with Name Initials */}
+              {/* <Image
                 src="/images/user-placeholder.jpg"
                 alt={card.name}
                 width={48}
                 height={48}
                 className="rounded-full object-cover"
-              />
+              /> */}
+              <div className="w-12 h-12 bg-[var(--bg-beige)] rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-[var(--text-dark)] font-semibold text-xl">
+                  {getInitials(card.name)}
+                </span>
+              </div>
               <div>
                 <p className="text-base text-[var(--text-dark)] opacity-80 text-left">
                   {card.name}
