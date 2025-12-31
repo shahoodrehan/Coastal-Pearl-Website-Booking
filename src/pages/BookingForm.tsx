@@ -6,6 +6,9 @@ import { useRouter } from "next/router";
 import Hero from "@/components/home/Hero";
 import Section from "@/components/home/Section";
 
+import { GetServerSideProps } from "next";
+import { toast } from "sonner";
+
 const extraFacilitiesList = [
   { extraFacilitiesId: 1, facilityName: "Horse Riding" },
   { extraFacilitiesId: 2, facilityName: "Dinner" },
@@ -37,6 +40,27 @@ const floorLabels: Record<number, string> = {
   2: "First Floor",
   3: "Terrace",
   4: "Complete Resort",
+};
+const maxGuestByFloor: Record<number, number> = {
+  1: 160, // GroundFloor
+  2: 70, // FirstFloor
+  3: 100, // Terrace
+  4: 350, // Complete
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const allowBooking = ctx.req.cookies.allowBooking;
+
+  if (!allowBooking) {
+    return {
+      redirect: {
+        destination: "/?error=check-availability",
+        permanent: false,
+      },
+    };
+  }
+
+  return { props: {} };
 };
 
 const BookingForm = () => {
@@ -381,6 +405,7 @@ const BookingForm = () => {
                 name="noOfGuests"
                 placeholder="0"
                 min={1}
+                max={maxGuestByFloor[formik.values.floorPreference] ?? 0}
                 onChange={(e) => {
                   const value = parseInt(e.target.value);
                   if (!isNaN(value) && value >= 1) {

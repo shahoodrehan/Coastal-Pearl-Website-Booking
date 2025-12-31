@@ -76,6 +76,7 @@ const AvailabilityModal = () => {
             toast.warning("Slot not available! Check alternative slots.");
           }
 
+          document.cookie = "allowBooking=1; path=/; SameSite=Strict";
           router.push({
             pathname: "/BookingForm",
             query: {

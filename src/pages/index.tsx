@@ -14,6 +14,8 @@ import BottomSection from "@/components/home/BottomSection";
 import AvailabilityCheckForm from "@/components/Forms/AvaiblityForm";
 
 import { useAvailableSlotModal } from "@/context/AvailableSlotModalContext";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,6 +58,11 @@ export default function Home() {
     "/images/paradise-3.jpg",
   ];
   const { openModal } = useAvailableSlotModal();
+  useEffect(() => {
+    if (router.query.error === "check-availability") {
+      toast.error("Please check availability first");
+    }
+  }, [router.query.error]);
 
   return (
     <>

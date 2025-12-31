@@ -34,7 +34,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
                 <Link href="/admin/dashboard" className="block">
                   <div className="relative w-[100px] h-[80px]">
                     <Image
-                      src="/images/Logo.png"
+                      src="/images/logo.png"
                       alt="Logo"
                       fill
                       priority
