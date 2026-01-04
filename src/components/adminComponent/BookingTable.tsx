@@ -35,6 +35,7 @@ interface Booking {
   status: string; // "Pending" | "Confirmed"
   statusNum: number;
   createdOn: string;
+  isInvoiceGenerated: boolean;
   extraFacilities: ExtraFacility[];
   items: Booking[];
   totalCount: number;
@@ -157,7 +158,13 @@ export default function BookingTable() {
       if (responce.success) {
         toast.success("Email has sent!");
         setLoading(false)
-
+        setBookings((prev) =>
+          prev.map((b) =>
+            b.bookingRequestId === payload.bookingRequestsId
+              ? { ...b, isInvoiceGenerated: true }
+              : b
+          )
+        );
         closeModal();
       } else {
         toast.error("Failed to update booking: " + responce.error);
@@ -264,8 +271,8 @@ export default function BookingTable() {
                       <tr
                         key={booking.bookingRequestId}
                         className={`border-b ${idx % 2 === 0
-                            ? "bg-[var(--bg-beige2)]/10"
-                            : "bg-[var(--bg-beige)]"
+                          ? "bg-[var(--bg-beige2)]/10"
+                          : "bg-[var(--bg-beige)]"
                           } hover:bg-[var(--bg-beige2)]/30`}
                       >
                         <td className="p-3 p-3 whitespace-nowra">
@@ -327,9 +334,10 @@ export default function BookingTable() {
                         <td className="p-3">
                           <button
                             onClick={() => openModal(booking)}
+                            disabled={booking.isInvoiceGenerated}
                             className="px-3 py-1 rounded-lg bg-[var(--bg-dark)] text-white cursor-pointer"
                           >
-                            Invoice
+                            {booking.isInvoiceGenerated ? "Invoice Generated" : "Invoice"}
                           </button>
                         </td>
                       </tr>

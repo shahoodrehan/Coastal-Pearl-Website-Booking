@@ -9,7 +9,7 @@ import Section from "@/components/home/Section";
 import { GetServerSideProps } from "next";
 import { toast } from "sonner";
 import SuccessModal from "@/components/modal/successModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const extraFacilitiesList = [
   { extraFacilitiesId: 1, facilityName: "Horse Riding" },
@@ -36,6 +36,7 @@ interface Alternative {
   floor: number;
   start: string;
   end: string;
+  index: number;
 }
 const floorLabels: Record<number, string> = {
   1: "Ground Floor",
@@ -50,45 +51,70 @@ const maxGuestByFloor: Record<number, number> = {
   4: 350, // Complete
 };
 
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const allowBooking = ctx.req.cookies.allowBooking;
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const allowBooking = ctx.req.cookies.allowBooking;
 
-//   if (!allowBooking) {
-//     return {
-//       redirect: {
-//         destination: "/?error=check-availability",
-//         permanent: false,
-//       },
-//     };
-//   }
+  if (!allowBooking) {
+    return {
+      redirect: {
+        destination: "/?error=check-availability",
+        permanent: false,
+      },
+    };
+  }
 
-//   return { props: {} };
-// };
+  return { props: {} };
+};
+
 
 const BookingForm = () => {
   const router = useRouter();
   const now = new Date();
   const minDateTime = now.toISOString().slice(0, 16);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [selectedSlot, setSelectedSlot] = useState<Alternative | null>(null);
   const [successModalOpen, setSuccessModalOpen] = useState<{
-    userEmail: string,
-    userName: string,
-    contactNo: string,
-    startTime: string,
-    endTime: string,
+    userEmail: string;
+    userName: string;
+    contactNo: string;
+    startTime: string;
+    endTime: string;
   } | null>(null);
 
-  const { isAvailable, message, alternatives } = router.query;
+  const { isAvailable, message, alternatives, startDate, endDate } = router.query;
   const parsedAlternatives: Alternative[] = alternatives
     ? JSON.parse(alternatives as string)
     : [];
+  function convertToInputDateTime(value: string): string {
+    // Example: "01/14/2026 06:00 PM" (MM/DD/YYYY format from API)
+    const [datePart, timePart, meridian] = value.split(/[\s:]+/);
+
+    // FIX: API uses MM/DD/YYYY, not DD/MM/YYYY
+    const [month, day, year] = datePart.split("/");  // ← Swapped order!
+
+    const hour = parseInt(timePart, 10);
+    const minute = value.split(/[\s:]+/)[2];
+
+    let hour24 = hour;
+
+    if (meridian.toUpperCase() === "PM" && hour < 12) hour24 += 12;
+    if (meridian.toUpperCase() === "AM" && hour === 12) hour24 = 0;
+
+    const hourStr = String(hour24).padStart(2, "0");
+    const monthStr = month.padStart(2, "0");
+    const dayStr = day.padStart(2, "0");
+
+    return `${year}-${monthStr}-${dayStr}T${hourStr}:${minute}`;
+  }
+
+
   const formik = useFormik<BookingFormValues>({
     initialValues: {
       userEmail: "",
       userName: "",
       contactNo: "",
-      startTime: "",
-      endTime: "",
+      startTime: isAvailable === "true" ? startDate as string : "",
+      endTime: isAvailable === "true" ? endDate as string : "",
       noOfGuests: 0,
       floorPreference: 0,
       extraFacilitiesID: [],
@@ -97,8 +123,8 @@ const BookingForm = () => {
 
     onSubmit: async (values: BookingFormValues) => {
       try {
-        if (loading) return
-        setLoading(true)
+        if (loading) return;
+        setLoading(true);
         const payload = {
           userEmail: values.userEmail,
           userName: values.userName,
@@ -120,17 +146,43 @@ const BookingForm = () => {
             startTime: formatDateForUser(values.startTime),
             endTime: formatDateForUser(values.endTime),
           });
-          setLoading(false)
+          setLoading(false);
         } else {
-          setLoading(false)
+          setLoading(false);
           toast.error("Booking Failed");
         }
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         console.error("Availability check failed:", error);
       }
     },
-  });
+  }); console.log("Selected slot:", selectedSlot)
+
+
+  // Initialize form with query params when available
+  useEffect(() => {
+    if (isAvailable === "true" && startDate && endDate) {
+      formik.setFieldValue("startTime", startDate as string);
+      formik.setFieldValue("endTime", endDate as string);
+    }
+  }, [isAvailable, startDate, endDate]);
+
+  // Handle alternative slot selection
+  const handleSlotSelect = (index: number, slot: Alternative) => {
+    if (isAvailable === "true" && selectedSlot?.index === index) {
+      setSelectedSlot(null)
+      formik.setFieldValue("startTime", startDate as string);
+      formik.setFieldValue("endTime", endDate as string);
+      formik.setFieldValue("floorPreference", 0);
+      return;
+    } else {
+      setSelectedSlot({ ...slot, start: convertToInputDateTime(slot.start), end: convertToInputDateTime(slot.end), index });
+      formik.setFieldValue("startTime", convertToInputDateTime(slot.start));
+      formik.setFieldValue("endTime", convertToInputDateTime(slot.end));
+      formik.setFieldValue("floorPreference", slot.floor);
+    }
+  };
+
   function formatDateForUser(dateString: string) {
     const date = new Date(dateString);
 
@@ -146,22 +198,27 @@ const BookingForm = () => {
     return new Intl.DateTimeFormat("en-US", options).format(date);
   }
 
+  // Determine if date inputs should be disabled
+  const areDateInputsDisabled = true
+
   return (
     <>
-      {successModalOpen && <SuccessModal
-        isOpen={successModalOpen !== null}
-        onClose={() => router.push("/")}
-        title="Booking Successful!"
-        bookingDetails={[
-          { label: "Email", value: successModalOpen?.userEmail },
-          { label: "Name", value: successModalOpen?.userName },
-          { label: "Contact", value: successModalOpen?.contactNo },
-          { label: "Start Time", value: successModalOpen?.startTime },
-          { label: "End Time", value: successModalOpen?.endTime },
-        ]}
-        buttonText="Done"
-      />
-      }      <Hero
+      {successModalOpen && (
+        <SuccessModal
+          isOpen={successModalOpen !== null}
+          onClose={() => router.push("/")}
+          title="Booking Successful!"
+          bookingDetails={[
+            { label: "Email", value: successModalOpen?.userEmail },
+            { label: "Name", value: successModalOpen?.userName },
+            { label: "Contact", value: successModalOpen?.contactNo },
+            { label: "Start Time", value: successModalOpen?.startTime },
+            { label: "End Time", value: successModalOpen?.endTime },
+          ]}
+          buttonText="Done"
+        />
+      )}
+      <Hero
         title="Plan Your Visit"
         subtitle="View available timings and book"
         backgroundImage="/images/home-hero.jpg"
@@ -172,8 +229,8 @@ const BookingForm = () => {
           <div
             className="
     w-full
-    max-w-[1400px]   /* limit width on large screens */
-    mx-auto      /* center horizontally */
+    max-w-[1400px]
+    mx-auto
     mb-10
     sm-mb-2
     p-8
@@ -208,27 +265,61 @@ const BookingForm = () => {
             {parsedAlternatives.length > 0 && (
               <div className="mt-8">
                 {/* Show heading ONLY when not available */}
-                {isAvailable !== "true" && (
-                  <h2 className="text-lg font-semibold text-[#0A3D62] mb-18 sm:mb-2">
+
+                <>
+                  <h2 className={`text-lg font-semibold text-[#0A3D62] ${isAvailable !== "true" ? "mb-4" : "mb-8"}`}>
                     Alternative Slots
                   </h2>
-                )}
+                  {isAvailable !== "true" && <p className="text-sm text-gray-600 mb-6">
+                    Other booking slots are also available — check them out!
+                  </p>}
+                </>
+
 
                 {/* Grid for 3 slots per row */}
                 <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 justify-center">
                   {parsedAlternatives.map((item, index) => (
                     <div
                       key={index}
-                      className="
+                      onClick={() => handleSlotSelect(index, item)}
+                      className={`
             p-4
             bg-white
-            border border-[#f5efe7]
+            border-2
             shadow-sm
-            hover:shadow-md
+            hover:shadow-lg
             transition-all duration-200
             rounded-xl
-          "
+            cursor-pointer
+            ${selectedSlot?.index === index
+                          ? "border-[#0a3d62] bg-blue-50 ring-2 ring-[#0a3d62]"
+                          : "border-[#f5efe7] hover:border-[#0a3d62]"
+                        }
+          `}
                     >
+                      {/* Selection indicator */}
+                      {selectedSlot?.index === index && (
+                        <div className="flex justify-end mb-2">
+                          <div className="bg-[#0a3d62] text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={2}
+                              stroke="currentColor"
+                              className="w-3 h-3"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M4.5 12.75l6 6 9-13.5"
+                              />
+                            </svg>
+                            Selected
+                          </div>
+                        </div>
+                      )}
+
                       {/* HEADER - Centered */}
                       <div className="flex flex-col items-center mb-4">
                         <div className="w-10 h-10 rounded-md bg-[#0a3d62] flex items-center justify-center mb-2">
@@ -260,24 +351,18 @@ const BookingForm = () => {
                           </p>
                           <div className="space-y-1">
                             <span className="text-sm font-medium text-[#0a3d62] block">
-                              {new Date(item.start).toLocaleDateString(
-                                "en-US",
-                                {
-                                  month: "short",
-                                  day: "numeric",
-                                  year: "numeric",
-                                }
-                              )}
+                              {new Date(item.start).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                              })}
                             </span>
                             <span className="text-sm text-gray-600">
-                              {new Date(item.start).toLocaleTimeString(
-                                "en-US",
-                                {
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  hour12: true,
-                                }
-                              )}
+                              {new Date(item.start).toLocaleTimeString("en-US", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: true,
+                              })}
                             </span>
                           </div>
                         </div>
@@ -366,7 +451,7 @@ const BookingForm = () => {
               <input
                 type="text"
                 name="userName"
-                placeholder="You Name"
+                placeholder="Your Name"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.userName}
@@ -407,17 +492,24 @@ const BookingForm = () => {
             <div>
               <label className="block text-[#0A3D62] mb-2">
                 Start Time <span className="text-red-500">*</span>
+                {areDateInputsDisabled && (
+                  <span className="text-xs text-gray-500 ml-2">
+                    (Auto-filled from {isAvailable === "true" && !selectedSlot ? "availability check" : "selected slot"})
+                  </span>
+                )}
               </label>
               <input
                 type="datetime-local"
                 name="startTime"
                 min={minDateTime}
                 max={formik.values.endTime || undefined}
-                onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
+                onClick={(e) => !areDateInputsDisabled && (e.target as HTMLInputElement).showPicker?.()}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.startTime}
-                className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
+                value={selectedSlot ? selectedSlot.start : formik.values.startTime}
+                disabled={areDateInputsDisabled || selectedSlot !== null}
+                className={`w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none ${areDateInputsDisabled ? "opacity-60 cursor-not-allowed" : ""
+                  }`}
               />
               {formik.touched.startTime && formik.errors.startTime && (
                 <p className="text-red-500 text-sm mt-1">
@@ -430,17 +522,23 @@ const BookingForm = () => {
             <div>
               <label className="block text-[#0A3D62] mb-2">
                 End Time <span className="text-red-500">*</span>
+                {areDateInputsDisabled && (
+                  <span className="text-xs text-gray-500 ml-2">
+                    (Auto-filled from {isAvailable === "true" && !selectedSlot ? "availability check" : "selected slot"})
+                  </span>
+                )}
               </label>
               <input
                 type="datetime-local"
                 name="endTime"
                 min={formik.values.startTime || undefined}
-
-                onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
+                onClick={(e) => !areDateInputsDisabled && (e.target as HTMLInputElement).showPicker?.()}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.endTime}
-                className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
+                value={selectedSlot ? selectedSlot.end : formik.values.endTime}
+                disabled={areDateInputsDisabled || selectedSlot !== null}
+                className={`w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none ${areDateInputsDisabled ? "opacity-60 cursor-not-allowed" : ""
+                  }`}
               />
               {formik.touched.endTime && formik.errors.endTime && (
                 <p className="text-red-500 text-sm mt-1">
@@ -486,6 +584,7 @@ const BookingForm = () => {
             <div className="mb-5">
               <label className="block text-[#0A3D62] font-semibold mb-2">
                 Floor Preference <span className="text-red-500">*</span>
+
               </label>
               <div className="relative">
                 <select
@@ -493,7 +592,7 @@ const BookingForm = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.floorPreference}
-                  className="
+                  className={`
         w-full
         appearance-none
         px-4
@@ -508,7 +607,8 @@ const BookingForm = () => {
         hover:border-[#0A3D62]
         transition
         duration-200
-      "
+        ${selectedSlot !== null ? "opacity-60 cursor-not-allowed" : ""}
+      `}
                 >
                   <option value="0" disabled>
                     Select Floor
@@ -595,8 +695,10 @@ const BookingForm = () => {
 
               <button
                 type="submit"
+                disabled={loading}
                 className="w-1/2 py-3 bg-[#0A3D62] text-white rounded-xl 
-                   hover:bg-[#D1C1A7] hover:text-[#0A3D62] transition-all duration-300 shadow-md"
+                   hover:bg-[#D1C1A7] hover:text-[#0A3D62] transition-all duration-300 shadow-md
+                   disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Submitting..." : "Submit"}
               </button>

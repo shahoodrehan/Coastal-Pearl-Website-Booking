@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { toast } from "sonner";
 import * as Yup from "yup";
 import { availabilitySchema } from "@/schemas/avaiblityschema";
+import { useState } from "react";
 
 type AvailabilityFormValues = {
   startTime: string;
@@ -33,7 +34,7 @@ export default function AvailabilityCheckForm() {
   const now = new Date();
   const minDateTime = now.toISOString().slice(0, 16);
   const todayISO = new Date().toISOString().slice(0, 16);
-
+  const [loading, setLoading] = useState(false);
   const formik = useFormik<AvailabilityFormValues>({
     initialValues: {
       startTime: "",
@@ -44,6 +45,8 @@ export default function AvailabilityCheckForm() {
 
     onSubmit: async (values: AvailabilityFormValues) => {
       try {
+        if (loading) return
+        setLoading(true)
         const payload = {
           startTime: values.startTime,
           endTime: values.endTime,
@@ -62,19 +65,24 @@ export default function AvailabilityCheckForm() {
           } else {
             toast.warning("Slot not available! Check alternative slots.");
           }
+          setLoading(false);
           document.cookie = "allowBooking=1; path=/; SameSite=Strict";
           router.push({
             pathname: "/BookingForm",
             query: {
-              isAvailable: response.data?.isAvailable.toString(),
+              startDate: values.startTime,
+              endDate: values.endTime,
+              isAvailable: response.data?.isAvailable ? response.data?.isAvailable.toString() : "false",
               message: response.data?.message,
               alternatives: JSON.stringify(response.data?.alternatives),
             },
           });
         } else {
+          setLoading(false);
           toast.error("Failed to check availability. Please try again.");
         }
       } catch (error) {
+        setLoading(false);
         toast("Something went wrong!");
       }
     },
@@ -117,7 +125,7 @@ export default function AvailabilityCheckForm() {
           {/* Error placeholder (RESERVED SPACE) */}
           <div className="min-h-[20px]">
             {formik.touched.startTime && formik.errors.startTime && (
-              <p className="text-red-500 text-xs sm:text-sm">
+              <p className="text-white text-xs sm:text-sm">
                 {formik.errors.startTime}
               </p>
             )}
@@ -142,7 +150,7 @@ export default function AvailabilityCheckForm() {
           />
           <div className="min-h-[20px]">
             {formik.touched.endTime && formik.errors.endTime && (
-              <p className="text-red-500 text-xs sm:text-sm">
+              <p className="text-white text-xs sm:text-sm">
                 {formik.errors.endTime}
               </p>
             )}
@@ -170,7 +178,7 @@ export default function AvailabilityCheckForm() {
           {/* Reserve space so layout NEVER moves */}
           <div className="min-h-[20px]">
             {formik.touched.numberOfGuests && formik.errors.numberOfGuests && (
-              <p className="text-red-500 text-xs sm:text-sm">
+              <p className="text-white text-xs sm:text-sm">
                 {formik.errors.numberOfGuests}
               </p>
             )}
@@ -194,7 +202,7 @@ export default function AvailabilityCheckForm() {
       hover:bg-[#D1C1A7] hover:text-[#0A3D62]
       transition-all duration-300 shadow-md"
           >
-            <svg
+            {loading ? "Searching..." : <svg
               viewBox="0 0 32 32"
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 stroke-white"
@@ -204,7 +212,7 @@ export default function AvailabilityCheckForm() {
                 d="m24.0002 12.6668c0 6.2593-5.0741 11.3334-11.3334 11.3334-6.2592 0-11.3333-5.0741-11.3333-11.3334 0-6.2592 5.0741-11.3333 11.3333-11.3333 6.2593 0 11.3334 5.0741 11.3334 11.3333z"
                 fill="none"
               ></path>
-            </svg>
+            </svg>}
           </button>
 
           {/* Reserve SAME error space */}

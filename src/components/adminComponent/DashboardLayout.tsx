@@ -1,85 +1,56 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { removeAdminAuth } from "@/utils/auth";
-import { Menu } from "lucide-react";
+import { LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import router from "next/router";
 import { isAdminLoggedIn } from "@/utils/auth";
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true); // sidebar open/close
-
   const handleLogout = () => {
-    removeAdminAuth(router); // pass router to removeAdminAuth
+    removeAdminAuth(router);
   };
+
   useEffect(() => {
     if (!isAdminLoggedIn()) {
-      router.replace("/"); // redirect if not logged in
+      router.replace("/");
     }
   }, [router]);
 
   return (
-    <div className="h-screen flex bg-[var(--bg-beige)] overflow-hidden scrollbar-hide">
-      {/* Sidebar */}
-      <aside
-        className={`bg-[var(--bg-dark)] text-[var(--text-light)] flex flex-col justify-between transition-all duration-300 ${isOpen ? "w-64 p-6" : "w-16 p-2"
-          }`}
-      >
-        <div>
-          {/* Header: Logo + Toggle */}
-          <div className="flex items-center justify-between mb-6">
-            {isOpen && (
-              <div className="flex-shrink-0">
-                <Link href="/admin/dashboard" className="block">
-                  <div className="relative w-[100px] h-[80px]">
-                    <Image
-                      src="/images/logo.png"
-                      alt="Logo"
-                      fill
-                      priority
-                      sizes="100px"
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
-                </Link>
-              </div>
-            )}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-[var(--text-beige)] hover:text-white transition"
-            >
-              <Menu size={24} />
-            </button>
-          </div>
+    <div className="min-h-screen flex flex-col bg-[var(--bg-beige)]">
+      {/* Header */}
+      <header className="bg-[#fdf6e3] text-[var(--text-dark)] shadow-md">
+        <div className="px-6 py-4 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/admin/dashboard" className="flex-shrink-0">
+            <div className="relative w-[100px] h-[60px]">
+              <Image
+                src="/images/logo.png"
+                alt="Logo"
 
-          {/* Navigation */}
-          <nav className="flex flex-col gap-3">
-            <a
-              href="/admin/dashboard"
-              className={`mt-8 w-full py-2 rounded-lg text-center font-semibold transition ${isOpen
-                ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
-                : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
-                }`}
-            >
-              {isOpen ? "Show Bookings" : "📄"}
-            </a>
-          </nav>
+                priority
+                height={40}
+                width={70}
+                sizes="100px"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
+          </Link>
+
+          {/* Right Side: Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-6 py-2 bg-[var(--text-beige)] text-[var(--bg-dark)] rounded-lg font-semibold hover:bg-[#c5b48d] transition"
+          >
+            <LogOut size={18} />
+            <span>Logout</span>
+          </button>
         </div>
-
-        {/* Logout Button */}
-        <button
-          onClick={handleLogout}
-          className={`mt-8 w-full py-2 rounded-lg font-semibold transition ${isOpen
-            ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
-            : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
-            }`}
-        >
-          {isOpen ? "Logout" : "🚪"}
-        </button>
-      </aside>
+      </header>
 
       {/* Main Content */}
-      <main className="flex-1 p-8 overflow-auto scrollbar-hide">
+      <main className="flex-1 p-8 overflow-auto">
         {children}
       </main>
     </div>

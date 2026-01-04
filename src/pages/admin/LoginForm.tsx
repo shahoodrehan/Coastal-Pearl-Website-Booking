@@ -18,6 +18,7 @@ interface LoginFormValues {
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   useEffect(() => {
     if (isAdminLoggedIn()) {
@@ -28,6 +29,8 @@ export default function LoginForm() {
     initialValues: { userEmail: "", password: "" },
     onSubmit: async (values) => {
       try {
+        if (loading) return
+        setLoading(true);
         const payload = { email: values.userEmail, password: values.password };
         const response = await api.post(apiEndpoints.ADMIN_LOGIN, payload);
 
@@ -40,8 +43,10 @@ export default function LoginForm() {
         } else {
           console.error("Invalid credentials");
           toast.error("Invalid credentials");
+          setLoading(false)
         }
       } catch (err: any) {
+        setLoading(false)
         console.error(err);
 
         toast.error("Server error. Please try again later.");
@@ -113,9 +118,13 @@ export default function LoginForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-3 rounded-lg bg-[var(--bg-dark)] text-[var(--text-light)] font-medium text-lg hover:bg-opacity-90 transition"
+            className="w-full md:w-auto flex items-center justify-center
+      px-4 sm:px-6 py-2 sm:py-3 text-lg
+      bg-[#0A3D62] text-white rounded-lg cursor-pointer
+      hover:bg-[#D1C1A7] hover:text-[#0A3D62]
+      transition-all duration-300 shadow-md"
           >
-            Login
+            {loading ? "Logging In..." : "Login"}
           </button>
         </form>
       </div>

@@ -8,8 +8,8 @@ import GenericModal from "./GenericModal";
 export interface ExtraFacilityInput {
   extraFacilitiesId: number;
   facilityName: string;
-  noOfGuests: number;
-  price: number;
+  noOfGuests: string | number;
+  price: string | number;
   total: number;
 }
 
@@ -44,12 +44,12 @@ export default function BookingModal({
   // Initialize Formik
   const formik = useFormik({
     initialValues: {
-      floorPrice: 0,
+      floorPrice: "" as string | number,
       facilities: booking.extraFacilities.map((f) => ({
         extraFacilitiesId: f.extraFacilitiesId,
         facilityName: f.facilityName,
-        noOfGuests: 0,
-        price: 0,
+        noOfGuests: "" as string | number,
+        price: "" as string | number,
         total: 0,
       })),
     },
@@ -71,16 +71,16 @@ export default function BookingModal({
         return; // Prevent submission
       }
 
+      const floorPrice = typeof values.floorPrice === 'string' ? parseFloat(values.floorPrice) || 0 : values.floorPrice;
       const payload = {
         bookingRequestsId: booking.bookingRequestId,
         status: 1,
         totalPrice:
-          values.facilities.reduce((sum, f) => sum + f.total, 0) +
-          values.floorPrice,
+          values.facilities.reduce((sum, f) => sum + f.total, 0) + floorPrice,
         facilities: values.facilities.map((f) => ({
           extraFacilitiesId: f.extraFacilitiesId,
-          noOfGuests: f.noOfGuests,
-          price: f.price,
+          noOfGuests: typeof f.noOfGuests === 'string' ? parseFloat(f.noOfGuests) || 0 : f.noOfGuests,
+          price: typeof f.price === 'string' ? parseFloat(f.price) || 0 : f.price,
         })),
       };
       onSave(payload);
@@ -91,21 +91,33 @@ export default function BookingModal({
   const handleFacilityChange = (
     index: number,
     field: "noOfGuests" | "price",
-    value: number
+    value: string
   ) => {
     const updated = [...formik.values.facilities];
-    // Handle NaN values - set to 0 if NaN
-    updated[index][field] = isNaN(value) ? 0 : value;
-    updated[index].total = updated[index].noOfGuests * updated[index].price;
-    formik.setFieldValue("facilities", updated);
+    // Allow empty string or valid numbers
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      updated[index][field] = value;
+      // Calculate total with parsed numbers
+      const guests = typeof updated[index].noOfGuests === 'string'
+        ? parseFloat(updated[index].noOfGuests) || 0
+        : updated[index].noOfGuests;
+      const price = typeof updated[index].price === 'string'
+        ? parseFloat(updated[index].price) || 0
+        : updated[index].price;
+      updated[index].total = guests * price;
+      formik.setFieldValue("facilities", updated);
+    }
     // Touch the field to trigger validation
     formik.setFieldTouched(`facilities.${index}.${field}`, true);
   };
 
   const calculateTotalPrice = () => {
+    const floorPrice = typeof formik.values.floorPrice === 'string'
+      ? parseFloat(formik.values.floorPrice) || 0
+      : formik.values.floorPrice;
     return (
-      formik.values.floorPrice +
-      formik.values.facilities.reduce((sum, f) => sum + f.total, 0)
+      (floorPrice +
+        formik.values.facilities.reduce((sum, f) => sum + f.total, 0)).toLocaleString()
     );
   };
 
@@ -136,7 +148,7 @@ export default function BookingModal({
         Booking No. #{booking.bookingRequestId}
       </h2>
 
-      <form onSubmit={formik.handleSubmit} className="space-y-4">
+      <div className="space-y-4">
         {/* No of Guests */}
         <div>
           <label className="font-semibold">No. of Guests:</label>
@@ -163,22 +175,28 @@ export default function BookingModal({
         <div>
           <label className="font-semibold">Floor Price:</label>
           <input
-            type="number"
+            type="text"
             name="floorPrice"
             value={formik.values.floorPrice}
             onChange={(e) => {
-              const value = parseInt(e.target.value);
-              if (!isNaN(value) && value >= 0) {
-                formik.handleChange(e);
-              } else if (e.target.value === "") {
-                formik.setFieldValue("floorPrice", 0);
+              const value = e.target.value;
+              // Allow empty string or valid numbers (including decimals)
+              if (value === "" || /^\d*\.?\d*$/.test(value)) {
+                formik.setFieldValue("floorPrice", value);
               }
             }}
-            onBlur={formik.handleBlur}
-            onKeyDown={(e) => {
-              if (["-", "+", "e", "E"].includes(e.key)) e.preventDefault();
+            onBlur={(e) => {
+              formik.handleBlur(e);
+              // Convert to number on blur if not empty
+              if (e.target.value !== "") {
+                const numValue = parseFloat(e.target.value);
+                if (!isNaN(numValue)) {
+                  formik.setFieldValue("floorPrice", numValue);
+                }
+              }
             }}
-            className={`w-full border p-2 rounded no-spinner ${formik.touched.floorPrice && formik.errors.floorPrice
+            placeholder="0"
+            className={`w-full border p-2 rounded ${formik.touched.floorPrice && formik.errors.floorPrice
               ? "border-red-500"
               : ""
               }`}
@@ -213,19 +231,29 @@ export default function BookingModal({
                 <div className="flex flex-col">
                   <label className="text-sm font-medium mb-1">Guests</label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="0"
                     value={f.noOfGuests}
-                    min={0}
                     onChange={(e) =>
                       handleFacilityChange(
                         idx,
                         "noOfGuests",
-                        e.target.valueAsNumber
+                        e.target.value
                       )
                     }
-                    onBlur={() => formik.setFieldTouched(`facilities.${idx}.noOfGuests`, true)}
-                    className={`border p-2 rounded no-spinner ${formik.touched.facilities?.[idx]?.noOfGuests &&
+                    onBlur={(e) => {
+                      formik.setFieldTouched(`facilities.${idx}.noOfGuests`, true);
+                      // Convert to number on blur if not empty
+                      if (e.target.value !== "") {
+                        const numValue = parseFloat(e.target.value);
+                        if (!isNaN(numValue)) {
+                          const updated = [...formik.values.facilities];
+                          updated[idx].noOfGuests = numValue;
+                          formik.setFieldValue("facilities", updated);
+                        }
+                      }
+                    }}
+                    className={`border p-2 rounded ${formik.touched.facilities?.[idx]?.noOfGuests &&
                       (formik.errors.facilities?.[idx] as any)?.noOfGuests
                       ? "border-red-500"
                       : ""
@@ -243,19 +271,29 @@ export default function BookingModal({
                 <div className="flex flex-col">
                   <label className="text-sm font-medium mb-1">Price</label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="0"
-                    min={0}
-                    value={f.price ?? ""}
+                    value={f.price}
                     onChange={(e) =>
                       handleFacilityChange(
                         idx,
                         "price",
-                        e.target.valueAsNumber
+                        e.target.value
                       )
                     }
-                    onBlur={() => formik.setFieldTouched(`facilities.${idx}.price`, true)}
-                    className={`border p-2 rounded no-spinner ${formik.touched.facilities?.[idx]?.price &&
+                    onBlur={(e) => {
+                      formik.setFieldTouched(`facilities.${idx}.price`, true);
+                      // Convert to number on blur if not empty
+                      if (e.target.value !== "") {
+                        const numValue = parseFloat(e.target.value);
+                        if (!isNaN(numValue)) {
+                          const updated = [...formik.values.facilities];
+                          updated[idx].price = numValue;
+                          formik.setFieldValue("facilities", updated);
+                        }
+                      }
+                    }}
+                    className={`border p-2 rounded ${formik.touched.facilities?.[idx]?.price &&
                       (formik.errors.facilities?.[idx] as any)?.price
                       ? "border-red-500"
                       : ""
@@ -274,7 +312,7 @@ export default function BookingModal({
                   <label className="text-sm font-medium mb-1">Total</label>
                   <input
                     disabled
-                    value={f.total !== 0 ? "Rs. " + f.total : "..."}
+                    value={f.total !== 0 ? "Rs. " + f.total.toLocaleString() : "..."}
                     className="border p-2 rounded bg-gray-100"
                   />
                 </div>
@@ -288,19 +326,20 @@ export default function BookingModal({
           <label className="font-semibold">Total Price:</label>
           <input
             disabled
-            value={calculateTotalPrice() !== 0 ? "Rs. " + calculateTotalPrice() : "..."}
+            value={calculateTotalPrice() !== "0" ? "Rs. " + calculateTotalPrice() : "..."}
             className="w-full border p-2 rounded bg-gray-200"
           />
         </div>
 
         <button
-          type="submit"
+          type="button"
+          onClick={() => formik.handleSubmit()}
           disabled={loading}
           className="w-full bg-[var(--bg-dark)] text-[var(--text-light)] py-2 rounded mt-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? "Saving..." : "Save & Send"}
         </button>
-      </form>
+      </div>
     </GenericModal>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { availabilitySchema } from "@/schemas/avaiblityschema";
 import apiEndpoints from "@/constant/apiEndpoint";
@@ -33,7 +33,7 @@ interface AvailabilityResponse {
 
 const AvailabilityModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: (isOpen: boolean) => void }) => {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   // Close modal on Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -47,7 +47,6 @@ const AvailabilityModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
 
   const now = new Date();
   const minDateTime = now.toISOString().slice(0, 16);
-
   const formik = useFormik<AvailabilityFormValues>({
     initialValues: {
       startTime: "",
@@ -57,6 +56,8 @@ const AvailabilityModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
     validationSchema: availabilitySchema,
     onSubmit: async (values: AvailabilityFormValues) => {
       try {
+        if (loading) return
+        setLoading(true);
         const payload = {
           startTime: values.startTime,
           endTime: values.endTime,
@@ -75,19 +76,26 @@ const AvailabilityModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
             toast.warning("Slot not available! Check alternative slots.");
           }
           setIsOpen(false);
+          setLoading(false)
           document.cookie = "allowBooking=1; path=/; SameSite=Strict";
           router.push({
             pathname: "/BookingForm",
             query: {
+              startDate: values.startTime,
+              endDate: values.endTime,
               isAvailable: response.data?.isAvailable.toString(),
               message: response.data?.message,
               alternatives: JSON.stringify(response.data?.alternatives),
             },
           });
         } else {
+          setLoading(false)
+
           toast.error("Failed to check availability. Please try again.");
         }
       } catch (error) {
+        setLoading(false)
+
         toast.error("Something went wrong!");
       }
     },
@@ -170,7 +178,7 @@ const AvailabilityModal = ({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: 
           type="submit"
           className="w-full px-6 py-3 bg-[#0A3D62] text-white rounded-lg hover:bg-[#D1C1A7] hover:text-[#0A3D62] transition-all duration-300 shadow-md"
         >
-          Check Availability
+          {loading ? "Checking Availability..." : "Check Availability"}
         </button>
       </form>
 
