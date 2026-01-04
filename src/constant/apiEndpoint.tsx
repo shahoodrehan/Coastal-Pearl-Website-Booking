@@ -25,7 +25,7 @@ const apiEndpoints = {
   ADMIN_LOGIN: "/loginAdmin",
   FETCH_BOOKINGS: "/api/User/GetBookings",
   UPDATE_BOOKING_STATUS: "/api/User/UpdateBookinStatus",
-  STATUS_UPDATE: "api/User/UpdateBookingStatus",
+  STATUS_UPDATE: "/api/User/UpdateBookingStatus",
 };
 
 export default apiEndpoints;

@@ -8,6 +8,8 @@ import Section from "@/components/home/Section";
 
 import { GetServerSideProps } from "next";
 import { toast } from "sonner";
+import SuccessModal from "@/components/modal/successModal";
+import { useState } from "react";
 
 const extraFacilitiesList = [
   { extraFacilitiesId: 1, facilityName: "Horse Riding" },
@@ -48,25 +50,33 @@ const maxGuestByFloor: Record<number, number> = {
   4: 350, // Complete
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const allowBooking = ctx.req.cookies.allowBooking;
+// export const getServerSideProps: GetServerSideProps = async (ctx) => {
+//   const allowBooking = ctx.req.cookies.allowBooking;
 
-  if (!allowBooking) {
-    return {
-      redirect: {
-        destination: "/?error=check-availability",
-        permanent: false,
-      },
-    };
-  }
+//   if (!allowBooking) {
+//     return {
+//       redirect: {
+//         destination: "/?error=check-availability",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return { props: {} };
-};
+//   return { props: {} };
+// };
 
 const BookingForm = () => {
   const router = useRouter();
   const now = new Date();
   const minDateTime = now.toISOString().slice(0, 16);
+  const [loading, setLoading] = useState(false)
+  const [successModalOpen, setSuccessModalOpen] = useState<{
+    userEmail: string,
+    userName: string,
+    contactNo: string,
+    startTime: string,
+    endTime: string,
+  } | null>(null);
 
   const { isAvailable, message, alternatives } = router.query;
   const parsedAlternatives: Alternative[] = alternatives
@@ -87,10 +97,12 @@ const BookingForm = () => {
 
     onSubmit: async (values: BookingFormValues) => {
       try {
+        if (loading) return
+        setLoading(true)
         const payload = {
           userEmail: values.userEmail,
           userName: values.userName,
-          contactNo: values.contactNo,
+          contactNo: "+92" + values.contactNo,
           startTime: values.startTime,
           endTime: values.endTime,
           noOfGuests: values.noOfGuests,
@@ -101,19 +113,55 @@ const BookingForm = () => {
         console.log("Booking Response:", response);
 
         if (response.success) {
-          alert("Booking Successful");
+          setSuccessModalOpen({
+            userEmail: values.userEmail,
+            userName: values.userName,
+            contactNo: values.contactNo,
+            startTime: formatDateForUser(values.startTime),
+            endTime: formatDateForUser(values.endTime),
+          });
+          setLoading(false)
         } else {
-          alert("Booking Failed");
+          setLoading(false)
+          toast.error("Booking Failed");
         }
       } catch (error) {
+        setLoading(false)
         console.error("Availability check failed:", error);
       }
     },
   });
+  function formatDateForUser(dateString: string) {
+    const date = new Date(dateString);
+
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    };
+
+    return new Intl.DateTimeFormat("en-US", options).format(date);
+  }
 
   return (
     <>
-      <Hero
+      {successModalOpen && <SuccessModal
+        isOpen={successModalOpen !== null}
+        onClose={() => router.push("/")}
+        title="Booking Successful!"
+        bookingDetails={[
+          { label: "Email", value: successModalOpen?.userEmail },
+          { label: "Name", value: successModalOpen?.userName },
+          { label: "Contact", value: successModalOpen?.contactNo },
+          { label: "Start Time", value: successModalOpen?.startTime },
+          { label: "End Time", value: successModalOpen?.endTime },
+        ]}
+        buttonText="Done"
+      />
+      }      <Hero
         title="Plan Your Visit"
         subtitle="View available timings and book"
         backgroundImage="/images/home-hero.jpg"
@@ -146,11 +194,10 @@ const BookingForm = () => {
               <span
                 className={`
       text-sm font-semibold px-4 py-2 rounded-full shadow-sm
-      ${
-        isAvailable === "true"
-          ? "bg-green-100 text-green-800 border border-green-200"
-          : "bg-red-100 text-red-800 border border-red-200"
-      }
+      ${isAvailable === "true"
+                    ? "bg-green-100 text-green-800 border border-green-200"
+                    : "bg-red-100 text-red-800 border border-red-200"
+                  }
     `}
               >
                 {isAvailable === "true" ? "Available" : "Not Available"}
@@ -340,8 +387,11 @@ const BookingForm = () => {
               <input
                 type="text"
                 name="contactNo"
-                placeholder="+92 300 1234567"
-                onChange={formik.handleChange}
+                placeholder="03001234567"
+                maxLength={10}
+                onChange={(e) => {
+                  formik.setFieldValue("contactNo", e.target.value.replace(/[^0-9]/g, ""));
+                }}
                 onBlur={formik.handleBlur}
                 value={formik.values.contactNo}
                 className="w-full px-4 py-3 bg-[#F5EFE7] rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
@@ -362,6 +412,8 @@ const BookingForm = () => {
                 type="datetime-local"
                 name="startTime"
                 min={minDateTime}
+                max={formik.values.endTime || undefined}
+                onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.startTime}
@@ -382,7 +434,9 @@ const BookingForm = () => {
               <input
                 type="datetime-local"
                 name="endTime"
-                min={minDateTime}
+                min={formik.values.startTime || undefined}
+
+                onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.endTime}
@@ -544,7 +598,7 @@ const BookingForm = () => {
                 className="w-1/2 py-3 bg-[#0A3D62] text-white rounded-xl 
                    hover:bg-[#D1C1A7] hover:text-[#0A3D62] transition-all duration-300 shadow-md"
               >
-                Submit
+                {loading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>

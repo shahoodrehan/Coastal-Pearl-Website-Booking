@@ -3,10 +3,12 @@ import { useFormik } from "formik";
 import apiEndpoints from "@/constant/apiEndpoint";
 import api from "@/utils/api";
 import { setAdminAuth } from "@/utils/auth";
+import { isAdminLoggedIn } from "@/utils/auth";
+
 import { useRouter } from "next/router";
 import { toast } from "sonner";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 
 interface LoginFormValues {
@@ -16,8 +18,12 @@ interface LoginFormValues {
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-
   const router = useRouter();
+  useEffect(() => {
+    if (isAdminLoggedIn()) {
+      router.push("/admin/dashboard");
+    }
+  }, [router]);
   const formik = useFormik<LoginFormValues>({
     initialValues: { userEmail: "", password: "" },
     onSubmit: async (values) => {

@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+
 import type { AppProps } from "next/app";
 import { Toaster } from "sonner";
 
@@ -24,7 +25,7 @@ export default function App({
   return (
     <AvailableSlotModalProvider>
       {getLayout(<Component {...pageProps} />)}
-      <AvailabilityModal /> {/* Always mounted, controlled by context */}
+      {/* <AvailabilityModal /> Always mounted, controlled by context */}
       <Toaster position="top-right" />
     </AvailableSlotModalProvider>
   );

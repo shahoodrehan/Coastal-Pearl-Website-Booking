@@ -22,9 +22,8 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
     <div className="h-screen flex bg-[var(--bg-beige)] overflow-hidden scrollbar-hide">
       {/* Sidebar */}
       <aside
-        className={`bg-[var(--bg-dark)] text-[var(--text-light)] flex flex-col justify-between transition-all duration-300 ${
-          isOpen ? "w-64 p-6" : "w-16 p-2"
-        }`}
+        className={`bg-[var(--bg-dark)] text-[var(--text-light)] flex flex-col justify-between transition-all duration-300 ${isOpen ? "w-64 p-6" : "w-16 p-2"
+          }`}
       >
         <div>
           {/* Header: Logo + Toggle */}
@@ -57,11 +56,10 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
           <nav className="flex flex-col gap-3">
             <a
               href="/admin/dashboard"
-              className={`mt-8 w-full py-2 rounded-lg text-center font-semibold transition ${
-                isOpen
-                  ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
-                  : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
-              }`}
+              className={`mt-8 w-full py-2 rounded-lg text-center font-semibold transition ${isOpen
+                ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
+                : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
+                }`}
             >
               {isOpen ? "Show Bookings" : "📄"}
             </a>
@@ -71,11 +69,10 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
         {/* Logout Button */}
         <button
           onClick={handleLogout}
-          className={`mt-8 w-full py-2 rounded-lg font-semibold transition ${
-            isOpen
-              ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
-              : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
-          }`}
+          className={`mt-8 w-full py-2 rounded-lg font-semibold transition ${isOpen
+            ? "bg-[var(--text-beige)] text-[var(--bg-dark)] hover:bg-[#c5b48d]"
+            : "bg-transparent text-[var(--text-light)] hover:bg-[var(--bg-dark)]"
+            }`}
         >
           {isOpen ? "Logout" : "🚪"}
         </button>

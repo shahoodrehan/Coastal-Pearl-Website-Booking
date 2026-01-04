@@ -1,8 +1,9 @@
 import * as Yup from "yup";
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const BookingSchema = Yup.object().shape({
   userEmail: Yup.string()
-    .email("Invalid email format")
+    .matches(emailRegex, "Invalid email format")
     .required("Email is required"),
 
   userName: Yup.string()
@@ -10,8 +11,7 @@ const BookingSchema = Yup.object().shape({
     .required("User name is required"),
 
   contactNo: Yup.string()
-    .matches(/^\+92\d{10}$/, "Phone must be like +92XXXXXXXXXX")
-    .required("Phone number is required"),
+    .required("Phone number is required").min(10, "Phone number must be at least 10 characters"),
 
   startTime: Yup.string().required("Start time is required"),
   endTime: Yup.string()

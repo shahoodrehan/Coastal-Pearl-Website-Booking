@@ -10,7 +10,7 @@ const AdminBookingSchema = Yup.object().shape({
         .min(1, "At least 1 guest required")
         .required("Guests are required"),
       price: Yup.number()
-        .min(0, "Price cannot be negative")
+        .min(1, "Price cannot be less than 1")
         .required("Price is required"),
       total: Yup.number(),
       facilityName: Yup.string(),

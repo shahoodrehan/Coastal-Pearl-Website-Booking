@@ -144,6 +144,8 @@ export default function BookingTable() {
 
   // Save handler
   const handleSaveModal = async (payload: any) => {
+    if (loading) return
+    setLoading(true)
     console.log("API payload:", payload);
     // TODO: Call your API here
 
@@ -154,13 +156,16 @@ export default function BookingTable() {
       );
       if (responce.success) {
         toast.success("Email has sent!");
+        setLoading(false)
 
         closeModal();
       } else {
         toast.error("Failed to update booking: " + responce.error);
+        setLoading(false)
       }
     } catch (error) {
       toast.error("An error occurred while updating the booking.");
+      setLoading(false)
     }
   };
   const StatusUpdate = async (
@@ -174,12 +179,12 @@ export default function BookingTable() {
       prev.map((b) =>
         b.bookingRequestId === bookingRequestId
           ? {
-              ...b,
-              statusNum: newStatus,
-              status:
-                bookingStatusOptions.find((s) => s.value === newStatus)
-                  ?.label || b.status,
-            }
+            ...b,
+            statusNum: newStatus,
+            status:
+              bookingStatusOptions.find((s) => s.value === newStatus)
+                ?.label || b.status,
+          }
           : b
       )
     );
@@ -258,11 +263,10 @@ export default function BookingTable() {
                     {bookings.map((booking, idx) => (
                       <tr
                         key={booking.bookingRequestId}
-                        className={`border-b ${
-                          idx % 2 === 0
+                        className={`border-b ${idx % 2 === 0
                             ? "bg-[var(--bg-beige2)]/10"
                             : "bg-[var(--bg-beige)]"
-                        } hover:bg-[var(--bg-beige2)]/30`}
+                          } hover:bg-[var(--bg-beige2)]/30`}
                       >
                         <td className="p-3 p-3 whitespace-nowra">
                           {booking.bookingRequestId}
@@ -288,7 +292,7 @@ export default function BookingTable() {
                         <td className="p-3 p-3 whitespace-nowra">
                           {
                             FloorPreferenceLabels[
-                              booking.floorPreference as FloorPreference
+                            booking.floorPreference as FloorPreference
                             ]
                           }
                         </td>
@@ -365,6 +369,7 @@ export default function BookingTable() {
           booking={selectedBooking}
           onClose={() => setShowModal(false)}
           onSave={handleSaveModal}
+          loading={loading}
         />
       )}
     </>

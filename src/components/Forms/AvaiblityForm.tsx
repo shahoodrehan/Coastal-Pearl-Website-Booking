@@ -1,12 +1,12 @@
 "use client";
 
 import { useFormik } from "formik";
-import { availabilitySchema } from "@/schemas/avaiblityschema";
 import apiEndpoints from "@/constant/apiEndpoint";
 import api from "@/utils/api";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
-import { string } from "yup";
+import * as Yup from "yup";
+import { availabilitySchema } from "@/schemas/avaiblityschema";
 
 type AvailabilityFormValues = {
   startTime: string;
@@ -32,6 +32,7 @@ export default function AvailabilityCheckForm() {
   const router = useRouter();
   const now = new Date();
   const minDateTime = now.toISOString().slice(0, 16);
+  const todayISO = new Date().toISOString().slice(0, 16);
 
   const formik = useFormik<AvailabilityFormValues>({
     initialValues: {
@@ -39,7 +40,6 @@ export default function AvailabilityCheckForm() {
       endTime: "",
       numberOfGuests: "",
     },
-
     validationSchema: availabilitySchema,
 
     onSubmit: async (values: AvailabilityFormValues) => {
@@ -80,6 +80,7 @@ export default function AvailabilityCheckForm() {
     },
   });
 
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -107,11 +108,12 @@ export default function AvailabilityCheckForm() {
             type="datetime-local"
             name="startTime"
             min={minDateTime}
+            max={formik.values.endTime || undefined}
             value={formik.values.startTime}
             onChange={formik.handleChange}
+            onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
             className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-(--bg-beige) rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
           />
-
           {/* Error placeholder (RESERVED SPACE) */}
           <div className="min-h-[20px]">
             {formik.touched.startTime && formik.errors.startTime && (
@@ -131,12 +133,13 @@ export default function AvailabilityCheckForm() {
           <input
             type="datetime-local"
             name="endTime"
-            min={minDateTime}
+            min={formik.values.startTime}
+
             value={formik.values.endTime}
             onChange={formik.handleChange}
+            onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
             className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-(--bg-beige) rounded-xl border-2 border-transparent focus:border-[#0A3D62] outline-none"
           />
-
           <div className="min-h-[20px]">
             {formik.touched.endTime && formik.errors.endTime && (
               <p className="text-red-500 text-xs sm:text-sm">
